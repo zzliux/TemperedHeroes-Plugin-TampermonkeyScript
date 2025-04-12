@@ -302,6 +302,16 @@
     await delay(timeout);
   }
   _unsafeWindow.rectPress = rectPress;
+  async function nodeEventPress(node, timeout) {
+    timeout = timeout || random(100, 300);
+    const rect = getUIDomPosition(node);
+    updateDebugRect(rect, timeout);
+    node.emit(_unsafeWindow.cc.Node.EventType.TOUCH_START);
+    await delay(timeout);
+    node.emit(_unsafeWindow.cc.Node.EventType.TOUCH_END);
+    await delay(timeout);
+  }
+  _unsafeWindow.nodeEventPress = nodeEventPress;
   function ccFind(path, node) {
     if (!node) node = _unsafeWindow.cc.director.getScene();
     const parts = path.split("/");
