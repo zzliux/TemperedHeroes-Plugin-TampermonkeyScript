@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.9
+// @version      1.0.10
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -22,7 +22,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const o=document.createElement("style");o.textContent=t,document.head.append(o)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-a0461cf5]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-a0461cf5],.bet-card-log pre[data-v-a0461cf5]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-a0461cf5]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-e48b3bd3]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-5c98318e]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:1000}.zz-sub-btns[data-v-5c98318e]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content}.zz-sub-btns>button[data-v-5c98318e]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-5c98318e]{opacity:1;pointer-events:all}.zz-rotate[data-v-5c98318e]{transform:rotate(45deg)!important}.btn-group[data-v-5c98318e]{width:max-content;margin-bottom:4px;float:right} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const o=document.createElement("style");o.textContent=t,document.head.append(o)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-a0461cf5]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-a0461cf5],.bet-card-log pre[data-v-a0461cf5]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-a0461cf5]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-e48b3bd3]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-abd17d56]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:1000}.zz-sub-btns[data-v-abd17d56]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content}.zz-sub-btns>button[data-v-abd17d56]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-abd17d56]{opacity:1;pointer-events:all}.zz-rotate[data-v-abd17d56]{transform:rotate(45deg)!important}.btn-group[data-v-abd17d56]{width:max-content;margin-bottom:4px;float:right} ");
 
 (function (vue, ElementPlus, echarts) {
   'use strict';
@@ -656,6 +656,37 @@
     }
   }
   _unsafeWindow.backHome = backHome;
+  function findNodesWithEvent(root, eventType, result = []) {
+    if (root.hasEventListener(eventType)) {
+      result.push(root);
+    }
+    const children = root.children;
+    for (let i = 0; i < children.length; i++) {
+      findNodesWithEvent(children[i], eventType, result);
+    }
+    return result;
+  }
+  const getAllHasTouchEventNode = () => {
+    const nodesWithTouchEnd = findNodesWithEvent(_unsafeWindow.cc.director.getScene(), _unsafeWindow.cc.Node.EventType.TOUCH_END);
+    return nodesWithTouchEnd;
+  };
+  _unsafeWindow.getAllHasTouchEventNode = getAllHasTouchEventNode;
+  const printAllHasTouchEventNode = () => {
+    csl.log(getAllHasTouchEventNode().map((node) => getNodePath(node)).join("\n"));
+  };
+  _unsafeWindow.printAllHasTouchEventNode = printAllHasTouchEventNode;
+  const test = () => {
+  };
+  _unsafeWindow.test = test;
+  function getNodePath(node) {
+    let path = node.name;
+    let parent = node.parent;
+    while (parent) {
+      path = `${parent.name}/${path}`;
+      parent = parent.parent;
+    }
+    return path;
+  }
   const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseBossBtn",
     setup(__props) {
@@ -1609,8 +1640,25 @@
     }
   });
   const status = vue.ref(false);
-  const start = async () => {
+  const getBossPts = () => {
     var _a;
+    return (_a = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a.children.filter((ele) => {
+      var _a2, _b, _c;
+      if (/^Boss/i.test(ele.name)) {
+        const frameName = (_c = (_b = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
+        if (frameName && !/[\-_]Die/i.test(frameName)) {
+          return true;
+        }
+      }
+      return false;
+    }).map((ele) => {
+      return {
+        x: ele.position.x,
+        y: ele.position.y
+      };
+    });
+  };
+  const start = async () => {
     status.value = !status.value;
     csl.log(`F4打金币: ${status.value ? "开" : "关"}`);
     if (status.value) {
@@ -1635,35 +1683,26 @@
           await delay(200);
           if (!status.value) throw new Error("打金中断");
           await moveToXY(-10016, -3885);
-          const bossPts = (_a = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a.children.filter((ele) => {
-            var _a2, _b, _c;
-            if (/^Boss/i.test(ele.name)) {
-              const frameName = (_c = (_b = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
-              if (frameName && !/[\-_]Die/i.test(frameName)) {
-                return true;
-              }
-            }
-            return false;
-          }).map((ele) => {
-            return {
-              x: ele.position.x,
-              y: ele.position.y
-            };
-          });
+          let bossPts = getBossPts();
           if (!bossPts) throw new Error("boss位置获取失败");
-          const teamPosition = getTeamPosition();
+          let teamPosition = getTeamPosition();
           if (!teamPosition) throw new Error("队伍位置获取失败");
-          const path = planPath(teamPosition, bossPts);
-          for (let i = 0; i < path.length; i++) {
+          let path = planPath(teamPosition, bossPts);
+          while ((bossPts == null ? void 0 : bossPts.length) && path.length) {
             const t1 = Date.now();
             if (!status.value) throw new Error("打金中断");
-            await moveToXY(path[i].x, path[i].y);
+            await moveToXY(path[0].x, path[0].y);
             const t2 = Date.now();
             if (t2 - t1 > 300) {
               await delay(random(1e3, 1500));
             } else {
               await delay(random(200, 500));
             }
+            bossPts = getBossPts();
+            if (!bossPts) break;
+            teamPosition = getTeamPosition();
+            if (!teamPosition) throw new Error("队伍位置获取失败");
+            path = planPath(teamPosition, bossPts);
           }
           await delay(1e3);
         }
@@ -2346,7 +2385,7 @@
             vue.createVNode(_sfc_main$8),
             vue.createVNode(_sfc_main$7),
             vue.createVNode(_sfc_main$6),
-            vue.createVNode(_sfc_main$5),
+            !__props.isLite ? (vue.openBlock(), vue.createBlock(_sfc_main$5, { key: 1 })) : vue.createCommentVNode("", true),
             vue.createVNode(_sfc_main$4),
             vue.createVNode(ChestBtn),
             vue.createVNode(_sfc_main$2),
@@ -2356,7 +2395,7 @@
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-5c98318e"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-abd17d56"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus).mount(
     (() => {
       const app = document.createElement("div");
