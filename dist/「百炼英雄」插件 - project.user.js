@@ -1,20 +1,25 @@
 // ==UserScript==
-// @name       「百炼英雄」插件 - project
-// @namespace  zzliux/TemperedHeroes-Plugin
-// @version    1.0.8
-// @author     zzliux
-// @icon       https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
-// @match      https://mprogram.boomegg.cn/box/game/wx77200645d1c7f35f/h5?appid=wx77200645d1c7f35f&game_platform=h5
-// @require    https://registry.npmmirror.com/vue/3.5.13/files/dist/vue.global.prod.js
-// @require    data:application/javascript,%3Bwindow.Vue%3DVue%3B
-// @require    https://registry.npmmirror.com/element-plus/2.9.7/files/dist/index.full.min.js
-// @require    https://registry.npmmirror.com/echarts/5.6.0/files/dist/echarts.js
-// @resource   element-plus/dist/index.css  https://registry.npmmirror.com/element-plus/2.9.7/files/dist/index.css
-// @grant      GM_addStyle
-// @grant      GM_getResourceText
-// @grant      GM_getValue
-// @grant      GM_setValue
-// @grant      unsafeWindow
+// @name         「百炼英雄」插件 - project
+// @namespace    zzliux/TemperedHeroes-Plugin
+// @version      1.0.9
+// @author       zzliux
+// @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
+// @homepageURL  https://github.com/zzliux/TemperedHeroes-Plugin-TampermonkeyScript
+// @supportURL   https://github.com/zzliux/TemperedHeroes-Plugin-TampermonkeyScript/issues
+// @downloadURL  https://github.com/zzliux/TemperedHeroes-Plugin-TampermonkeyScript/raw/refs/heads/main/dist/%E3%80%8C%E7%99%BE%E7%82%BC%E8%8B%B1%E9%9B%84%E3%80%8D%E6%8F%92%E4%BB%B6%20-%20project.user.js
+// @updateURL    https://github.com/zzliux/TemperedHeroes-Plugin-TampermonkeyScript/raw/refs/heads/main/dist/%E3%80%8C%E7%99%BE%E7%82%BC%E8%8B%B1%E9%9B%84%E3%80%8D%E6%8F%92%E4%BB%B6%20-%20project.user.js
+// @match        https://mprogram.boomegg.cn/box/game/wx77200645d1c7f35f/h5?appid=wx77200645d1c7f35f&game_platform=h5
+// @require      https://registry.npmmirror.com/vue/3.5.13/files/dist/vue.global.prod.js
+// @require      data:application/javascript,%3Bwindow.Vue%3DVue%3B
+// @require      https://registry.npmmirror.com/element-plus/2.9.7/files/dist/index.full.min.js
+// @require      https://registry.npmmirror.com/echarts/5.6.0/files/dist/echarts.js
+// @resource     element-plus/dist/index.css  https://registry.npmmirror.com/element-plus/2.9.7/files/dist/index.css
+// @grant        GM_addStyle
+// @grant        GM_getResourceText
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        unsafeWindow
 // ==/UserScript==
 
 (t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const o=document.createElement("style");o.textContent=t,document.head.append(o)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-a0461cf5]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-a0461cf5],.bet-card-log pre[data-v-a0461cf5]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-a0461cf5]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-e48b3bd3]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-5c98318e]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:1000}.zz-sub-btns[data-v-5c98318e]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content}.zz-sub-btns>button[data-v-5c98318e]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-5c98318e]{opacity:1;pointer-events:all}.zz-rotate[data-v-5c98318e]{transform:rotate(45deg)!important}.btn-group[data-v-5c98318e]{width:max-content;margin-bottom:4px;float:right} ");
