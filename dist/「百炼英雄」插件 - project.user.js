@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.10
+// @version      1.0.11
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -186,6 +186,19 @@
     });
   }
   _unsafeWindow.copyToClipboard = copyToClipboard;
+  async function waitForDom(str, timeout) {
+    timeout = timeout || 3e4;
+    const stime = Date.now();
+    while (Date.now() <= stime + timeout) {
+      const dom = document.querySelector(str);
+      if (dom) {
+        return dom;
+      }
+      await delay(200);
+    }
+    return null;
+  }
+  _unsafeWindow.waitForDom = waitForDom;
   function getUIDomPosition(targetNode) {
     var _a;
     const uiTransform = targetNode.getComponent(_unsafeWindow.cc.UITransformComponent);
