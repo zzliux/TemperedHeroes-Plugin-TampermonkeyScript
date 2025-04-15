@@ -610,10 +610,11 @@
   }
   _unsafeWindow.waitForPositions = waitForPositions;
   function getNearestMagnifierRect() {
-    const gameCanvas = document.querySelector("#GameCanvas");
     const mapButtonView = ccFind("Root/GameScene/OperationCanvas/MapButtonView/");
     if (!mapButtonView) throw new Error("mapButtonView not found");
-    const arr = mapButtonView.children.map((ele) => {
+    const arr = mapButtonView.children.filter((ele) => {
+      return ele.active && ele.activeInHierarchy;
+    }).map((ele) => {
       const rect = getUIDomPosition(ele);
       rect.y -= rect.height / 2;
       return {
@@ -621,12 +622,6 @@
         distance: 999999999999,
         ...rect
       };
-    }).filter((rect) => {
-      const targetX = gameCanvas.clientWidth / 2 + rect.width / 2;
-      const targetY = gameCanvas.clientHeight / 2 - rect.height * 3 / 2;
-      const distance2 = Math.sqrt((rect.x - targetX) ** 2 + (rect.y - targetY) ** 2);
-      rect.distance = distance2;
-      return distance2 < 150;
     }).sort((a, b) => {
       return a.distance - b.distance;
     });
