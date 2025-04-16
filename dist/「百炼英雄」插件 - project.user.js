@@ -359,6 +359,10 @@
   }
   _unsafeWindow.ccFind = ccFind;
   function planPath(myPosition, monsters) {
+    return planPathWithReference(myPosition, monsters, []);
+  }
+  _unsafeWindow.planPath = planPath;
+  function planPathWithReference(myPosition, monsters, referencePath, maxDeviation = 300) {
     const clusters = clusterMonsters(monsters, 300);
     const centers = clusters.map((cluster) => {
       let sumX = 0, sumY = 0;
@@ -371,9 +375,35 @@
         y: sumY / cluster.length
       };
     });
-    return findShortestPath(myPosition, centers);
+    const refDirection = referencePath.length > 1 ? pathDirectionAnalysis(referencePath) : null;
+    return findShortestPath(myPosition, centers, referencePath, refDirection, maxDeviation);
   }
-  _unsafeWindow.planPath = planPath;
+  _unsafeWindow.planPathWithReference = planPathWithReference;
+  function pathDirectionAnalysis(path) {
+    if (path.length < 2) return null;
+    const start2 = path[0];
+    const end = path[path.length - 1];
+    const dx = end.x - start2.x;
+    const dy = end.y - start2.y;
+    const length = Math.sqrt(dx * dx + dy * dy);
+    return length > 0 ? {
+      x: dx / length,
+      y: dy / length
+    } : null;
+  }
+  function findNearestPathPoint(point, path) {
+    if (path.length === 0) return null;
+    let nearest = path[0];
+    let minDist = distance(point, nearest);
+    for (let i = 1; i < path.length; i++) {
+      const dist = distance(point, path[i]);
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = path[i];
+      }
+    }
+    return nearest;
+  }
   function clusterMonsters(monsters, radius) {
     if (monsters.length === 0) return [];
     const visited = new Array(monsters.length).fill(false);
@@ -400,23 +430,61 @@
   function distance(p1, p2) {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
   }
-  function findShortestPath(start2, points) {
+  function findShortestPath(start2, points, referencePath, refDirection, maxDeviation) {
     if (points.length === 0) return [];
     const path = [start2];
     const unvisited = [...points];
+    const keyReferencePoints = referencePath.length > 0 ? [referencePath[0], referencePath[referencePath.length - 1]] : [];
     while (unvisited.length > 0) {
       const last = path[path.length - 1];
-      let nearestIndex = 0;
-      let minDist = distance(last, unvisited[0]);
-      for (let i = 1; i < unvisited.length; i++) {
-        const dist = distance(last, unvisited[i]);
-        if (dist < minDist) {
-          minDist = dist;
-          nearestIndex = i;
+      let bestIndex = 0;
+      let bestScore = -Infinity;
+      for (let i = 0; i < unvisited.length; i++) {
+        const point = unvisited[i];
+        const dist = distance(last, point);
+        let directionScore = 0;
+        if (refDirection) {
+          const dx = point.x - last.x;
+          const dy = point.y - last.y;
+          const length = Math.sqrt(dx * dx + dy * dy);
+          if (length > 0) {
+            const dirX = dx / length;
+            const dirY = dy / length;
+            directionScore = dirX * refDirection.x + dirY * refDirection.y;
+          }
+        }
+        let refPathScore = 0;
+        if (referencePath.length > 0) {
+          const nearestRefPoint = findNearestPathPoint(point, referencePath);
+          if (nearestRefPoint) {
+            const refDist = distance(point, nearestRefPoint);
+            refPathScore = 1 - Math.min(refDist / maxDeviation, 1);
+          }
+        }
+        const score = 0.5 / (dist + 1) + 0.3 * directionScore + 0.2 * refPathScore;
+        if (score > bestScore) {
+          bestScore = score;
+          bestIndex = i;
         }
       }
-      path.push(unvisited[nearestIndex]);
-      unvisited.splice(nearestIndex, 1);
+      path.push(unvisited[bestIndex]);
+      unvisited.splice(bestIndex, 1);
+    }
+    if (keyReferencePoints.length > 0) {
+      for (const refPoint of keyReferencePoints) {
+        if (!path.some((p) => p.x === refPoint.x && p.y === refPoint.y)) {
+          let bestInsertIndex = 0;
+          let minAddedDistance = Infinity;
+          for (let i = 1; i < path.length; i++) {
+            const addedDist = distance(path[i - 1], refPoint) + distance(refPoint, path[i]) - distance(path[i - 1], path[i]);
+            if (addedDist < minAddedDistance) {
+              minAddedDistance = addedDist;
+              bestInsertIndex = i;
+            }
+          }
+          path.splice(bestInsertIndex, 0, refPoint);
+        }
+      }
     }
     return path.slice(1);
   }
