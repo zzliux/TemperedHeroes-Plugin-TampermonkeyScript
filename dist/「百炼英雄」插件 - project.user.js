@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.12
+// @version      1.0.13
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -612,7 +612,7 @@
     if (!currentPos) {
       throw new Error("无法获取当前位置");
     }
-    const { segmentIndex: closestSegmentIndex, minDistance } = getPathStartIndex(currentPos, path);
+    const { segmentIndex: closestSegmentIndex, minDistance: _ } = getPathStartIndex(currentPos, path);
     const startIndex = closestSegmentIndex + 1;
     for (let i = startIndex; i < path.length; i = isCircle ? (i + 1) % path.length : i + 1) {
       const t1 = Date.now();
@@ -626,6 +626,63 @@
     }
   }
   _unsafeWindow.movePath = movePath;
+  async function movePathWithMonster(path, statusRef, isCircle = false) {
+    if (path.length < 2) {
+      throw new Error("路径至少需要2个点");
+    }
+    while (statusRef.value) {
+      const newPath = path.map((pt) => ({ ...pt }));
+      const clusterPts = clusterMonsters(ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
+        var _a2, _b2, _c;
+        if (/^Monster|^Boss/i.test(ele.name)) {
+          const frameName = (_c = (_b2 = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+          if (frameName && !/[\-_]Die/i.test(frameName)) {
+            return true;
+          }
+        }
+        return false;
+      }).map((ele) => ele.position), 200);
+      csl.log("clusterPts", clusterPts);
+      clusterPts.forEach((pt) => {
+        const { segmentIndex, minDistance } = getPathStartIndex(pt, newPath);
+        if (minDistance < 1e3 && minDistance > 200) {
+          newPath.splice(segmentIndex + 1, 0, pt);
+        }
+      });
+      const currentPos = getTeamPosition();
+      const { segmentIndex: closestSegmentIndex } = getPathStartIndex(currentPos, newPath);
+      let startIndex;
+      if (isCircle && nearBy(currentPos.x, currentPos.y, newPath[0].x, newPath[0].y)) {
+        startIndex = 1;
+      } else {
+        startIndex = closestSegmentIndex + 1;
+        while (startIndex < newPath.length && nearBy(currentPos.x, currentPos.y, newPath[startIndex].x, newPath[startIndex].y)) {
+          startIndex++;
+        }
+        if (isCircle && startIndex >= newPath.length) {
+          startIndex = 0;
+        } else if (startIndex >= newPath.length) {
+          break;
+        }
+      }
+      csl.log("path", path);
+      csl.log("newPath", newPath);
+      csl.log("startIndex", startIndex);
+      csl.log("currentPos", currentPos);
+      csl.log("currentPosDistance", distance(currentPos, newPath[startIndex % newPath.length]));
+      csl.log("currentPosclosestSegmentIndexDistance", distance(currentPos, newPath[closestSegmentIndex % newPath.length]));
+      const t1 = Date.now();
+      await moveToXY(newPath[startIndex].x, newPath[startIndex].y);
+      const t2 = Date.now();
+      if (t2 - t1 > 300) {
+        await delay(random(1500, 2500));
+      } else {
+        await delay(random(200, 500));
+      }
+      await delay(200);
+    }
+  }
+  _unsafeWindow.movePathWithMonster = movePathWithMonster;
   function getPathStartIndex(currentPos, path) {
     let minDistance = Infinity;
     let closestSegmentIndex = -1;
@@ -636,9 +693,6 @@
         minDistance = dist;
         closestSegmentIndex = i;
       }
-    }
-    if (minDistance >= 1e3) {
-      throw new Error("当前位置距离路径太远");
     }
     return { segmentIndex: closestSegmentIndex, minDistance };
   }
@@ -1668,7 +1722,8 @@
         { x: 1837, y: 1706 }
       ];
       try {
-        await movePath(path, true);
+        await movePathWithMonster(path, status$1, true);
+        status$1.value = false;
       } catch (e) {
         csl.error(e);
         status$1.value = false;
