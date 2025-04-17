@@ -409,6 +409,32 @@
   function distance(p1, p2) {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
   }
+  function pointToLineDistance(point, lineStart, lineEnd) {
+    const A = point.x - lineStart.x;
+    const B = point.y - lineStart.y;
+    const C = lineEnd.x - lineStart.x;
+    const D = lineEnd.y - lineStart.y;
+    const dot = A * C + B * D;
+    const len_sq = C * C + D * D;
+    let param = -1;
+    if (len_sq !== 0) {
+      param = dot / len_sq;
+    }
+    let xx, yy;
+    if (param < 0) {
+      xx = lineStart.x;
+      yy = lineStart.y;
+    } else if (param > 1) {
+      xx = lineEnd.x;
+      yy = lineEnd.y;
+    } else {
+      xx = lineStart.x + param * C;
+      yy = lineStart.y + param * D;
+    }
+    const dx = point.x - xx;
+    const dy = point.y - yy;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
   function findShortestPath(start2, points) {
     if (points.length === 0) return [];
     const path = [start2];
@@ -578,8 +604,17 @@
     moveStatus = false;
   }
   _unsafeWindow.moveToXY = moveToXY;
-  async function movePath(path) {
-    for (let i = 0; i < path.length; i++) {
+  async function movePath(path, isCircle = false) {
+    if (path.length < 2) {
+      throw new Error("路径至少需要2个点");
+    }
+    const currentPos = getTeamPosition();
+    if (!currentPos) {
+      throw new Error("无法获取当前位置");
+    }
+    const { segmentIndex: closestSegmentIndex, minDistance } = getPathStartIndex(currentPos, path);
+    const startIndex = closestSegmentIndex + 1;
+    for (let i = startIndex; i < path.length; i = isCircle ? (i + 1) % path.length : i + 1) {
       const t1 = Date.now();
       await moveToXY(path[i].x, path[i].y);
       const t2 = Date.now();
@@ -591,6 +626,23 @@
     }
   }
   _unsafeWindow.movePath = movePath;
+  function getPathStartIndex(currentPos, path) {
+    let minDistance = Infinity;
+    let closestSegmentIndex = -1;
+    for (let i = 0; i < path.length - 1; i++) {
+      distance(path[i], path[i + 1]);
+      const dist = pointToLineDistance(currentPos, path[i], path[i + 1]);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestSegmentIndex = i;
+      }
+    }
+    if (minDistance >= 1e3) {
+      throw new Error("当前位置距离路径太远");
+    }
+    return { segmentIndex: closestSegmentIndex, minDistance };
+  }
+  _unsafeWindow.getPathStartIndex = getPathStartIndex;
   function setMoveInterrupt() {
     moveInterrupt = true;
     setTimeout(() => {
@@ -1616,16 +1668,7 @@
         { x: 1837, y: 1706 }
       ];
       try {
-        for (let i = 0; ; i = (i + 1) % path.length) {
-          const t1 = Date.now();
-          await moveToXY(path[i].x, path[i].y);
-          const t2 = Date.now();
-          if (t2 - t1 > 300) {
-            await delay(random(2e3, 3e3));
-          } else {
-            await delay(random(200, 500));
-          }
-        }
+        await movePath(path, true);
       } catch (e) {
         csl.error(e);
         status$1.value = false;
