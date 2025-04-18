@@ -24,7 +24,7 @@
 
 (t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-a0461cf5]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-a0461cf5],.bet-card-log pre[data-v-a0461cf5]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-a0461cf5]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-e48b3bd3]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-ecebe67f]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:1000;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-ecebe67f]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content}.zz-sub-btns>button[data-v-ecebe67f]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-ecebe67f]{opacity:1;pointer-events:all}.zz-rotate[data-v-ecebe67f]{transform:rotate(45deg)!important}.btn-group[data-v-ecebe67f]{width:max-content;margin-bottom:4px;float:right} ");
 
-(async function (vue, ElementPlus, echarts) {
+(function (vue, ElementPlus, echarts) {
   'use strict';
 
   function _interopNamespaceDefault(e) {
@@ -46,7 +46,6 @@
 
   const echarts__namespace = /*#__PURE__*/_interopNamespaceDefault(echarts);
 
-  var _a, _b;
   const cssLoader = (e) => {
     const t = GM_getResourceText(e);
     return GM_addStyle(t), t;
@@ -161,13 +160,16 @@
     csl = iframe.contentWindow.console;
   }
   _unsafeWindow.csl = csl;
-  if (/mobile.+safari/ig.test(navigator.userAgent)) {
-    const dom = await( waitForDom('img[src="https://ad-static.boomegg.cn/operation/image/IOS引导图.png"]'));
-    if (dom) {
-      csl.log("检测到引导图，移除引导图");
-      (_b = (_a = dom.parentElement) == null ? void 0 : _a.parentElement) == null ? void 0 : _b.remove();
+  (async () => {
+    var _a, _b;
+    if (/mobile.+safari/ig.test(navigator.userAgent)) {
+      const dom = await waitForDom('img[src="https://ad-static.boomegg.cn/operation/image/IOS引导图.png"]');
+      if (dom) {
+        csl.log("检测到引导图，移除引导图");
+        (_b = (_a = dom.parentElement) == null ? void 0 : _a.parentElement) == null ? void 0 : _b.remove();
+      }
     }
-  }
+  })();
   function copyToClipboard(text) {
     return new Promise((resolve, reject) => {
       const textarea = document.createElement("textarea");
@@ -208,7 +210,7 @@
   }
   _unsafeWindow.waitForDom = waitForDom;
   function getUIDomPosition(targetNode) {
-    var _a2;
+    var _a;
     const uiTransform = targetNode.getComponent(_unsafeWindow.cc.UITransformComponent);
     if (!uiTransform) throw new Error("uiTransform not found");
     const worldPos = targetNode.worldPosition;
@@ -217,7 +219,7 @@
     const halfHeight = height / 2;
     const topLeft = new _unsafeWindow.cc.Vec3(worldPos.x - halfWidth, worldPos.y + halfHeight, worldPos.z);
     const bottomRight = new _unsafeWindow.cc.Vec3(worldPos.x + halfWidth, worldPos.y - halfHeight, worldPos.z);
-    const camera = (_a2 = _unsafeWindow.cc.find("Root/UIScene/UICamera")) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Camera);
+    const camera = (_a = _unsafeWindow.cc.find("Root/UIScene/UICamera")) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Camera);
     if (!camera) throw new Error("camera not found");
     const screenTopLeft = camera.worldToScreen(topLeft);
     const screenBottomRight = camera.worldToScreen(bottomRight);
@@ -464,12 +466,12 @@
     animations.forEach((anim) => anim.resume());
   }
   function getBetCardHeroQuality() {
-    var _a2, _b2, _c, _d;
+    var _a, _b, _c, _d;
     const idName = heroesIdMap;
     const ret = [];
     for (let i = 1; i <= 3; i++) {
       const str = `Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/HeroBox/hero${i}/Panel/HeroBox/PubHeroNode/Animation/Sprite`;
-      const heroSpriteFrameName = (_c = (_b2 = (_a2 = ccFind(str)) == null ? void 0 : _a2.getComponents(_unsafeWindow.cc.Sprite)[0]) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+      const heroSpriteFrameName = (_c = (_b = (_a = ccFind(str)) == null ? void 0 : _a.getComponents(_unsafeWindow.cc.Sprite)[0]) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
       if (!heroSpriteFrameName) {
         ret.push({ id: "UNKOWN", name: "UNKOWN", quality: "UNKOWN" });
         continue;
@@ -633,9 +635,9 @@
     while (statusRef.value) {
       const newPath = path.map((pt) => ({ ...pt }));
       const clusterPts = clusterMonsters(ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
-        var _a2, _b2, _c;
+        var _a, _b, _c;
         if (/^Monster|^Boss/i.test(ele.name)) {
-          const frameName = (_c = (_b2 = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+          const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
           if (frameName && !/[\-_]Die/i.test(frameName)) {
             return true;
           }
@@ -830,10 +832,10 @@
           if (!unitLayer) return;
           const eles = unitLayer.children;
           eles.forEach((ele) => {
-            var _a2, _b2, _c;
+            var _a, _b, _c;
             if (/^boss/i.test(ele.name)) {
               if (status2.value) {
-                const frameName = (_c = (_b2 = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+                const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
                 if (frameName && !/[\-_]Die/i.test(frameName)) {
                   pauseAnimations(ele);
                 } else {
@@ -884,10 +886,10 @@
           if (!unitLayer) return;
           const eles = unitLayer.children;
           eles.forEach((ele) => {
-            var _a2, _b2, _c;
+            var _a, _b, _c;
             if (/^Monster/i.test(ele.name)) {
               if (status2.value) {
-                const frameName = (_c = (_b2 = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+                const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
                 if (frameName && !/[\-_]Die/i.test(frameName)) {
                   pauseAnimations(ele);
                 } else {
@@ -960,7 +962,7 @@
     return flag;
   };
   async function betCardOnce() {
-    var _a2;
+    var _a;
     let count = 1;
     while (count--) {
       try {
@@ -977,7 +979,7 @@
           await delay(200);
         }
         const betBtn = await waitForNodeActive("/Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/BigButtonHasProp", true);
-        const betBtnIconFrameSprite = (_a2 = ccFind("Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/BigButtonHasProp/Img/PropNode/Icon")) == null ? void 0 : _a2.getComponents(_unsafeWindow.cc.Sprite)[0];
+        const betBtnIconFrameSprite = (_a = ccFind("Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/BigButtonHasProp/Img/PropNode/Icon")) == null ? void 0 : _a.getComponents(_unsafeWindow.cc.Sprite)[0];
         const betBtnIconFramePath = betBtnIconFrameSprite.targetFramePath;
         let giveUpBtn = ccFind("/Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/LabelBox/GiveUpButton");
         if ("System/Currency/ResourceIcon/88/spriteFrame" === betBtnIconFramePath) {
@@ -1040,10 +1042,10 @@
     betCardAutoRecruitFlag = true;
   };
   const dealBetCardAutoRecruitResult = () => {
-    var _a2;
-    const str = (_a2 = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitDisplayView/Content/rewardBg/ScrollView/view/content")) == null ? void 0 : _a2.children.map((node) => {
-      var _a3, _b2;
-      const targetFramePath = (_b2 = (_a3 = ccFind("Content/propItem/content/propIcon", node)) == null ? void 0 : _a3.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.targetFramePath;
+    var _a;
+    const str = (_a = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitDisplayView/Content/rewardBg/ScrollView/view/content")) == null ? void 0 : _a.children.map((node) => {
+      var _a2, _b;
+      const targetFramePath = (_b = (_a2 = ccFind("Content/propItem/content/propIcon", node)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.targetFramePath;
       const result = targetFramePath == null ? void 0 : targetFramePath.match(/HeroIcon\/(\d+?)\//);
       return (result == null ? void 0 : result[1]) || "UNKNOWN";
     }).map((id) => {
@@ -1074,11 +1076,11 @@
     _GM_setValue("betCardLog", betCardLog);
   };
   const betCardAutoRecruitOnce = async () => {
-    var _a2, _b2, _c, _d, _e;
+    var _a, _b, _c, _d, _e;
     if (!betCardAutoRecruitFlag) return;
     while (true) {
       if (!status$2.value) return;
-      if ("符合筛选条件的英雄已经出现" === ((_b2 = (_a2 = ccFind("Root/UIScene/UICanvas/Top/ToastPopup/center/LabelToastItem/txt")) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _b2.string)) {
+      if ("符合筛选条件的英雄已经出现" === ((_b = (_a = ccFind("Root/UIScene/UICanvas/Top/ToastPopup/center/LabelToastItem/txt")) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _b.string)) {
         const closeTips = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/CloseTips");
         if (closeTips && closeTips.active && closeTips.activeInHierarchy) {
           if (!status$2.value) return;
@@ -1256,7 +1258,7 @@
       const statisticsRef1 = vue.ref();
       const statisticsRef2 = vue.ref();
       const showStatistics = async () => {
-        var _a2;
+        var _a;
         betCardStatisticsVisiable.value = true;
         await vue.nextTick();
         const chart1Instance = echarts__namespace.init(statisticsRef1.value);
@@ -1265,7 +1267,7 @@
         const logRows = logContent.value.split(/\r?\n/);
         for (let row of logRows) {
           const parts = row.split("	");
-          const result = (_a2 = parts == null ? void 0 : parts[2]) == null ? void 0 : _a2.match(/\[\d\]\[(.+?)\]\[(.+?)\]/);
+          const result = (_a = parts == null ? void 0 : parts[2]) == null ? void 0 : _a.match(/\[\d\]\[(.+?)\]\[(.+?)\]/);
           if (result) {
             const quality = result[1];
             if (qualitiesDataMap[quality]) {
@@ -1759,11 +1761,11 @@
   });
   const status = vue.ref(false);
   const getBossPts = () => {
-    var _a2;
-    return (_a2 = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a2.children.filter((ele) => {
-      var _a3, _b2, _c;
+    var _a;
+    return (_a = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a.children.filter((ele) => {
+      var _a2, _b, _c;
       if (/^Boss/i.test(ele.name)) {
-        const frameName = (_c = (_b2 = (_a3 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a3.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+        const frameName = (_c = (_b = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
         if (frameName && !/[\-_]Die/i.test(frameName)) {
           return true;
         }
@@ -1863,15 +1865,15 @@
     setup(__props) {
       const status2 = vue.ref(false);
       const btnClick = async () => {
-        var _a2;
+        var _a;
         status2.value = !status2.value;
         if (status2.value) {
           try {
             while (true) {
-              const monsterPts = (_a2 = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a2.children.filter((ele) => {
-                var _a3, _b2, _c;
+              const monsterPts = (_a = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a.children.filter((ele) => {
+                var _a2, _b, _c;
                 if (/^Monster|^Boss/i.test(ele.name)) {
-                  const frameName = (_c = (_b2 = (_a3 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a3.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b2.spriteFrame) == null ? void 0 : _c.name;
+                  const frameName = (_c = (_b = (_a2 = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a2.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
                   if (frameName && !/[\-_]Die/i.test(frameName)) {
                     return true;
                   }
@@ -2153,7 +2155,7 @@
         }
       };
       async function claimOnce() {
-        var _a2;
+        var _a;
         let count = 1;
         while (count--) {
           if (!status2.value) return;
@@ -2169,7 +2171,7 @@
           const textLeftCount = ccFind("Root/UIScene/UICanvas/Popup/FunctionChestPreviewView/Panel/TextLayout/TextLeftCount");
           if (textLeftCount && textLeftCount.active && textLeftCount.activeInHierarchy) {
             if (!status2.value) return;
-            const labelString = (_a2 = textLeftCount.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _a2.string;
+            const labelString = (_a = textLeftCount.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _a.string;
             if (!labelString || !labelString.includes("/")) throw new Error("获取剩余次数失败");
             const [leftCount, _totalCount] = labelString.split("/").map((str) => Number(str));
             if (leftCount > _GM_getValue("AUTOCHEST_LEFTCOUNT", 0)) {
@@ -2478,9 +2480,9 @@
       const btnContainer = vue.ref();
       const btn = vue.ref();
       const btnClick = () => {
-        var _a2, _b2;
-        (_a2 = btnContainer.value) == null ? void 0 : _a2.classList.toggle("zz-show");
-        (_b2 = btn.value) == null ? void 0 : _b2.classList.toggle("zz-rotate");
+        var _a, _b;
+        (_a = btnContainer.value) == null ? void 0 : _a.classList.toggle("zz-show");
+        (_b = btn.value) == null ? void 0 : _b.classList.toggle("zz-rotate");
       };
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("div", {
