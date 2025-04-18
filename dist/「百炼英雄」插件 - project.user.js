@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.13
+// @version      1.0.14
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -644,16 +644,16 @@
           }
         }
         return false;
-      }).map((ele) => ele.position), 200);
+      }).map((ele) => ele.position), 100);
       csl.log("clusterPts", clusterPts);
       clusterPts.forEach((pt) => {
         const { segmentIndex, minDistance } = getPathStartIndex(pt, newPath);
-        if (minDistance < 1e3 && minDistance > 200) {
+        if (minDistance < 1e3 && minDistance > 180) {
           newPath.splice(segmentIndex + 1, 0, pt);
-        } else if (minDistance <= 200 && segmentIndex < newPath.length - 1) {
+        } else if (minDistance <= 180 && segmentIndex < newPath.length - 1) {
           const d1 = distance(pt, newPath[segmentIndex]);
           const d2 = distance(pt, newPath[segmentIndex + 1]);
-          if (d1 >= 200 && d2 >= 200) {
+          if (d1 >= 180 && d2 >= 180) {
             newPath.splice(segmentIndex + 1, 0, pt);
           }
         }
@@ -680,13 +680,40 @@
       csl.log("currentPos", currentPos);
       csl.log("currentPosDistance", distance(currentPos, newPath[startIndex % newPath.length]));
       csl.log("currentPosclosestSegmentIndexDistance", distance(currentPos, newPath[closestSegmentIndex % newPath.length]));
-      const t1 = Date.now();
       await moveToXY(newPath[startIndex].x, newPath[startIndex].y);
-      const t2 = Date.now();
-      if (t2 - t1 > 300) {
-        await delay(random(1500, 2500));
-      } else {
-        await delay(random(200, 500));
+      const t1 = Date.now();
+      while (true) {
+        let clearStatus = false;
+        const tt1 = Date.now();
+        while (!clearStatus) {
+          const notIdleHeroCount = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
+            var _a, _b, _c;
+            if (/^HeroUnit/i.test(ele.name)) {
+              const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
+              if (!/Idle/i.test(frameName)) {
+                return true;
+              }
+            }
+            return false;
+          }).length;
+          if (notIdleHeroCount > 0) {
+            break;
+          }
+          if (Date.now() - tt1 > 500) {
+            clearStatus = true;
+            break;
+          }
+          await delay(100);
+        }
+        if (clearStatus) {
+          csl.log("附近怪物已清理完成");
+          break;
+        }
+        if (Date.now() - t1 > 15e3) {
+          csl.log("附近怪物未清理完成，超时跳过");
+          break;
+        }
+        await delay(100);
       }
       await delay(200);
     }
@@ -1731,7 +1758,7 @@
         { x: 1837, y: 1706 }
       ];
       try {
-        await movePathWithMonster(path, status$1, true);
+        await movePath(path, true);
         status$1.value = false;
       } catch (e) {
         csl.error(e);
@@ -2092,7 +2119,7 @@
                 try {
                   if (!status2.value) return;
                   csl.log(`开始副本第一层`);
-                  await movePath(ROAM_PATHS[pathId]);
+                  await movePathWithMonster(ROAM_PATHS[pathId], status2);
                   csl.log(`结束复本第一层`);
                   throw new Error(`通过报错进入副本第二层`);
                 } catch (e) {
@@ -2104,7 +2131,7 @@
                   if (!status2.value) return;
                   try {
                     csl.log(`开始副本第二层`);
-                    await movePath(ROAM_PATHS[pathId2]);
+                    await movePathWithMonster(ROAM_PATHS[pathId2], status2);
                   } catch (e2) {
                     if (e2 instanceof Error && (e2.message === "中断本次移动" || e2.message === "路线未找到")) throw e2;
                   }
