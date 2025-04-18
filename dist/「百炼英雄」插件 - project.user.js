@@ -494,12 +494,13 @@
   }
   _unsafeWindow.getTeamPosition = getTeamPosition;
   function nearBy(x, y, x2, y2) {
-    const currentPosition = getTeamPosition();
-    if (!currentPosition) throw new Error("getTeamPosition failed");
-    x2 = x2 || currentPosition.x;
-    y2 = y2 || currentPosition.y;
+    if (typeof x2 === "undefined" || typeof y2 === "undefined") {
+      const teamPosition = getTeamPosition();
+      x2 = teamPosition.x;
+      y2 = teamPosition.y;
+    }
     const distance2 = Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
-    if (distance2 < 60) return true;
+    if (distance2 < 30) return true;
     return false;
   }
   _unsafeWindow.nearBy = nearBy;
@@ -649,6 +650,12 @@
         const { segmentIndex, minDistance } = getPathStartIndex(pt, newPath);
         if (minDistance < 1e3 && minDistance > 200) {
           newPath.splice(segmentIndex + 1, 0, pt);
+        } else if (minDistance <= 200 && segmentIndex < newPath.length - 1) {
+          const d1 = distance(pt, newPath[segmentIndex]);
+          const d2 = distance(pt, newPath[segmentIndex + 1]);
+          if (d1 >= 200 && d2 >= 200) {
+            newPath.splice(segmentIndex + 1, 0, pt);
+          }
         }
       });
       const currentPos = getTeamPosition();
