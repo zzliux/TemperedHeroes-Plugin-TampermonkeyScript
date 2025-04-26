@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.zz-float-btn[data-v-d7815a8d]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-d7815a8d]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-d7815a8d]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-d7815a8d]{opacity:1;pointer-events:all}.zz-rotate[data-v-d7815a8d]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.group[data-v-6f2414f8]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-6f2414f8]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-6f2414f8]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-6f2414f8]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-6f2414f8]{opacity:1;pointer-events:all}.zz-rotate[data-v-6f2414f8]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -2815,6 +2815,7 @@
         (_a = buttonSettingRef.value) == null ? void 0 : _a.open();
       };
       return (_ctx, _cache) => {
+        const _component_el_button_group = vue.resolveComponent("el-button-group");
         return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
           vue.createElementVNode("div", {
             ref_key: "btnContainer",
@@ -2837,22 +2838,27 @@
                   })) : vue.createCommentVNode("", true)
                 ], 64);
               }), 256)),
-              vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                size: "small",
-                onClick: tempHide
-              }, {
-                default: vue.withCtx(() => _cache[1] || (_cache[1] = [
-                  vue.createTextVNode("临时隐藏")
-                ])),
-                _: 1
-              }),
-              vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                size: "small",
-                onClick: openSettings
-              }, {
-                default: vue.withCtx(() => _cache[2] || (_cache[2] = [
-                  vue.createTextVNode("按钮设置")
-                ])),
+              vue.createVNode(_component_el_button_group, { class: "group" }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                    size: "small",
+                    onClick: tempHide
+                  }, {
+                    default: vue.withCtx(() => _cache[1] || (_cache[1] = [
+                      vue.createTextVNode("临时隐藏")
+                    ])),
+                    _: 1
+                  }),
+                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                    size: "small",
+                    onClick: openSettings
+                  }, {
+                    default: vue.withCtx(() => _cache[2] || (_cache[2] = [
+                      vue.createTextVNode("按钮设置")
+                    ])),
+                    _: 1
+                  })
+                ]),
                 _: 1
               })
             ])
@@ -2867,7 +2873,7 @@
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d7815a8d"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6f2414f8"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus).mount(
     (() => {
       const app = document.createElement("div");
