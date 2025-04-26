@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.14
+// @version      1.0.15
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -22,7 +22,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-a0461cf5]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-a0461cf5],.bet-card-log pre[data-v-a0461cf5]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-a0461cf5]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-e48b3bd3]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-ecebe67f]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:1000;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-ecebe67f]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content}.zz-sub-btns>button[data-v-ecebe67f]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-ecebe67f]{opacity:1;pointer-events:all}.zz-rotate[data-v-ecebe67f]{transform:rotate(45deg)!important}.btn-group[data-v-ecebe67f]{width:max-content;margin-bottom:4px;float:right} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const o=document.createElement("style");o.textContent=t,document.head.append(o)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-a0461cf5]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-a0461cf5],.bet-card-log pre[data-v-a0461cf5]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-a0461cf5]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-e48b3bd3]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-534bf924]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-534bf924]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-534bf924]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-534bf924]{opacity:1;pointer-events:all}.zz-rotate[data-v-534bf924]{transform:rotate(45deg)!important}.btn-group[data-v-534bf924]{width:max-content;margin-bottom:4px;float:right} ");
 
 (function (vue, ElementPlus, echarts) {
   'use strict';
@@ -2518,7 +2518,17 @@
         (_a = btnContainer.value) == null ? void 0 : _a.classList.toggle("zz-show");
         (_b = btn.value) == null ? void 0 : _b.classList.toggle("zz-rotate");
       };
+      const tempHide = () => {
+        var _a, _b;
+        btn.value.style.display = "none";
+        (_a = btnContainer.value) == null ? void 0 : _a.classList.toggle("zz-show");
+        (_b = btn.value) == null ? void 0 : _b.classList.toggle("zz-rotate");
+        setTimeout(() => {
+          btn.value.style.display = "block";
+        }, 5e3);
+      };
       return (_ctx, _cache) => {
+        const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createElementBlock("div", {
           ref_key: "btnContainer",
           ref: btnContainer,
@@ -2545,13 +2555,22 @@
             vue.createVNode(_sfc_main$4),
             vue.createVNode(ChestBtn),
             vue.createVNode(_sfc_main$2),
-            vue.createVNode(_sfc_main$1)
+            vue.createVNode(_sfc_main$1),
+            vue.createVNode(_component_el_button, {
+              size: "small",
+              onClick: tempHide
+            }, {
+              default: vue.withCtx(() => _cache[0] || (_cache[0] = [
+                vue.createTextVNode("临时隐藏")
+              ])),
+              _: 1
+            })
           ])
         ], 512);
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ecebe67f"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-534bf924"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus).mount(
     (() => {
       const app = document.createElement("div");
