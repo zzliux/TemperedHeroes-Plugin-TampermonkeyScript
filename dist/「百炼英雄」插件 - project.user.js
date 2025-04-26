@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.zz-float-btn[data-v-a3adf13b]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-a3adf13b]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-a3adf13b]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-a3adf13b]{opacity:1;pointer-events:all}.zz-rotate[data-v-a3adf13b]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.zz-float-btn[data-v-d7815a8d]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-d7815a8d]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-d7815a8d]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-d7815a8d]{opacity:1;pointer-events:all}.zz-rotate[data-v-d7815a8d]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -2621,8 +2621,12 @@
   const _hoisted_4 = { class: "name-text" };
   const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
     __name: "ButtonSetting",
+    props: {
+      isLite: Boolean
+    },
     emits: ["saved"],
     setup(__props, { expose: __expose, emit: __emit }) {
+      const props = __props;
       const showSettings = vue.ref(false);
       const settings = vue.ref({});
       const isMobile = vue.ref(window.innerWidth <= 768);
@@ -2636,7 +2640,7 @@
         }
         console.log("funCommponents:", funCommponents);
         const config = getComponentsConfig();
-        funCommponents.forEach((comp) => {
+        funCommponents.filter((comp) => !props.isLite || !comp.hideInLite).forEach((comp) => {
           var _a, _b;
           settings.value[comp.id] = {
             visible: ((_a = config[comp.id]) == null ? void 0 : _a.visible) ?? true,
@@ -2726,7 +2730,7 @@
           default: vue.withCtx(() => [
             vue.createElementVNode("div", _hoisted_1$1, [
               vue.createElementVNode("div", _hoisted_2, [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(funCommponents), (comp) => {
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(funCommponents).filter((c) => __props.isLite && !c.hideInLite || !__props.isLite), (comp) => {
                   var _a;
                   return vue.openBlock(), vue.createElementBlock("div", {
                     key: comp.id,
@@ -2854,15 +2858,16 @@
             ])
           ], 512),
           vue.createVNode(_sfc_main$1, {
+            "is-lite": __props.isLite,
             ref_key: "buttonSettingRef",
             ref: buttonSettingRef,
             onSaved: _cache[0] || (_cache[0] = ($event) => components.value = vue.unref(getComponents)())
-          }, null, 512)
+          }, null, 8, ["is-lite"])
         ], 64);
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a3adf13b"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d7815a8d"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus).mount(
     (() => {
       const app = document.createElement("div");
