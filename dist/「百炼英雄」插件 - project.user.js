@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.group[data-v-6f2414f8]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-6f2414f8]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-6f2414f8]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-6f2414f8]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-6f2414f8]{opacity:1;pointer-events:all}.zz-rotate[data-v-6f2414f8]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.group[data-v-6e8b18d4]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-6e8b18d4]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-6e8b18d4]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-6e8b18d4]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-6e8b18d4]{opacity:1;pointer-events:all}.zz-rotate[data-v-6e8b18d4]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -850,7 +850,7 @@
     }
     return path;
   }
-  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseBossBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -904,7 +904,7 @@
       };
     }
   });
-  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseMonsterBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -958,7 +958,7 @@
       };
     }
   });
-  const status$2 = vue.ref(false);
+  const status$3 = vue.ref(false);
   const betCardLogVisiable = vue.ref(false);
   const logContent = vue.ref("");
   const logPreRef = vue.ref();
@@ -1004,12 +1004,12 @@
         const noTip = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/noTipToggle/Floor");
         const givenUpConfirmBtn = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
         if (noTip && noTip.active && noTip.activeInHierarchy) {
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(noTip);
           await delay(200);
         }
         if (givenUpConfirmBtn && givenUpConfirmBtn.active && givenUpConfirmBtn.activeInHierarchy) {
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(givenUpConfirmBtn);
           await delay(200);
         }
@@ -1027,7 +1027,7 @@
         }
         await delay(50);
         if (giveUpBtn && giveUpBtn.active && giveUpBtn.activeInHierarchy) {
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(giveUpBtn);
           csl.log("点击放弃");
           count++;
@@ -1035,15 +1035,15 @@
           const flag = canTripleBetCard();
           const hqs = getBetCardHeroQuality();
           if (flag) {
-            if (!status$2.value) return;
+            if (!status$3.value) return;
             const maxBtn = await waitForNodeActive("/Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/BetNode/maxButton", true);
-            if (!status$2.value) return;
+            if (!status$3.value) return;
             if (maxBtn) await nodePress(maxBtn);
             await delay(200);
-            if (!status$2.value) return;
+            if (!status$3.value) return;
             await nodePress(betBtn);
           } else {
-            if (!status$2.value) return;
+            if (!status$3.value) return;
             await nodePress(betBtn);
           }
           const index = await waitForBetCardOnceResult();
@@ -1114,11 +1114,11 @@
     var _a, _b, _c, _d, _e;
     if (!betCardAutoRecruitFlag) return;
     while (true) {
-      if (!status$2.value) return;
+      if (!status$3.value) return;
       if ("符合筛选条件的英雄已经出现" === ((_b = (_a = ccFind("Root/UIScene/UICanvas/Top/ToastPopup/center/LabelToastItem/txt")) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _b.string)) {
         const closeTips = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/CloseTips");
         if (closeTips && closeTips.active && closeTips.activeInHierarchy) {
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(closeTips);
           await delay(200);
           return;
@@ -1129,7 +1129,7 @@
       const BigButtonGreen = ccFind("Root/UIScene/UICanvas/Popup/ConfirmPopup/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
       if (BigButtonGreen && BigButtonGreen.active && BigButtonGreen.activeInHierarchy) {
         dealBetCardAutoRecruitResult();
-        if (!status$2.value) return;
+        if (!status$3.value) return;
         await nodePress(BigButtonGreen);
         await delay(200);
         return;
@@ -1139,7 +1139,7 @@
         const tipString = (_c = closeTip.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _c.string;
         if (tipString && tipString.includes("今日已达自动招募上限")) {
           dealBetCardAutoRecruitResult();
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(closeTip);
           await delay(200);
           betCardAutoRecruitFlag = false;
@@ -1147,7 +1147,7 @@
         }
         if (tipString && tipString.includes("当次招募次数已满，请再次操作招募。")) {
           dealBetCardAutoRecruitResult();
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(closeTip);
           await delay(500);
           continue;
@@ -1156,12 +1156,12 @@
       const noTip = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/noTipToggle/Floor");
       const tipsConfirmBtn = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
       if (noTip && noTip.active && noTip.activeInHierarchy) {
-        if (!status$2.value) return;
+        if (!status$3.value) return;
         await nodePress(noTip);
         await delay(200);
       }
       if (tipsConfirmBtn && tipsConfirmBtn.active && tipsConfirmBtn.activeInHierarchy) {
-        if (!status$2.value) return;
+        if (!status$3.value) return;
         await nodePress(tipsConfirmBtn);
         await delay(200);
         continue;
@@ -1170,7 +1170,7 @@
       if (giveUpBtn && giveUpBtn.active && giveUpBtn.activeInHierarchy) {
         const betBtn = await waitForNodeActive("/Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/BigButtonHasProp", true);
         if (betBtn) {
-          if (!status$2.value) return;
+          if (!status$3.value) return;
           await nodePress(giveUpBtn);
           await delay(200);
           continue;
@@ -1188,7 +1188,7 @@
           betCardAutoRecruitFlag = false;
           const closeTipsBtn = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/CloseTips");
           if (closeTipsBtn && closeTipsBtn.active && closeTipsBtn.activeInHierarchy) {
-            if (!status$2.value) return;
+            if (!status$3.value) return;
             await nodePress(closeTipsBtn);
             await delay(500);
           }
@@ -1197,14 +1197,14 @@
       }
       const recruitBeginBtn = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/BigButtonGreen/Img");
       if (recruitBeginBtn && recruitBeginBtn.active && recruitBeginBtn.activeInHierarchy) {
-        if (!status$2.value) return;
+        if (!status$3.value) return;
         await nodePress(recruitBeginBtn);
         await delay(500);
         continue;
       }
       const recruitSettingBtn = ccFind("Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/SettingBox/recruitSettingBtn");
       if (recruitSettingBtn && recruitSettingBtn.active && recruitSettingBtn.activeInHierarchy) {
-        if (!status$2.value) return;
+        if (!status$3.value) return;
         await nodePress(recruitSettingBtn);
         await delay(500);
         continue;
@@ -1217,15 +1217,15 @@
   const _hoisted_3$1 = { class: "statisticsContainer" };
   const _hoisted_4$1 = { class: "importLogContainer" };
   const _hoisted_5 = { class: "dialog-footer" };
-  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     __name: "BetCardBtn",
     setup(__props) {
       const btnClick = async () => {
-        status$2.value = !status$2.value;
-        csl.log(`自动抽卡: ${status$2.value ? "开" : "关"}`);
+        status$3.value = !status$3.value;
+        csl.log(`自动抽卡: ${status$3.value ? "开" : "关"}`);
         setCanBetCardAutoRecruit();
         try {
-          while (status$2.value) {
+          while (status$3.value) {
             if (_GM_getValue("betCardAutoRecruit")) {
               await betCardAutoRecruitOnce();
               await delay(500);
@@ -1235,7 +1235,7 @@
           }
         } catch (e) {
           csl.error(e);
-          status$2.value = false;
+          status$3.value = false;
         }
       };
       const copyLog = () => {
@@ -1251,7 +1251,7 @@
         logContent.value = "";
       };
       vue.onUnmounted(() => {
-        status$2.value = false;
+        status$3.value = false;
       });
       const settingDialogVisiable = vue.ref(false);
       const tripleList = vue.ref([]);
@@ -1464,12 +1464,12 @@
           vue.createVNode(_component_el_button_group, { class: "group" }, {
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_button, {
-                type: vue.unref(status$2) ? "primary" : "default",
+                type: vue.unref(status$3) ? "primary" : "default",
                 size: "small",
                 onClick: btnClick
               }, {
                 default: vue.withCtx(() => [
-                  vue.createTextVNode(" 抽卡: " + vue.toDisplayString(vue.unref(status$2) ? "开" : "关"), 1)
+                  vue.createTextVNode(" 抽卡: " + vue.toDisplayString(vue.unref(status$3) ? "开" : "关"), 1)
                 ]),
                 _: 1
               }, 8, ["type"]),
@@ -1736,12 +1736,12 @@
     }
     return target;
   };
-  const BetCardBtn = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-fbcb57d2"]]);
-  const status$1 = vue.ref(false);
-  const start$1 = async () => {
-    status$1.value = !status$1.value;
-    csl.log(`战神陵打肉: ${status$1.value ? "开" : "关"}`);
-    if (status$1.value) {
+  const BetCardBtn = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-fbcb57d2"]]);
+  const status$2 = vue.ref(false);
+  const start$2 = async () => {
+    status$2.value = !status$2.value;
+    csl.log(`战神陵打肉: ${status$2.value ? "开" : "关"}`);
+    if (status$2.value) {
       const path = [
         { x: 1533, y: 1390 },
         { x: 790, y: 1518 },
@@ -1760,41 +1760,41 @@
       ];
       try {
         await movePath(path, true);
-        status$1.value = false;
+        status$2.value = false;
       } catch (e) {
         csl.error(e);
-        status$1.value = false;
+        status$2.value = false;
       }
     } else {
       setMoveInterrupt();
     }
   };
-  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "CollectMeatZhanShenLingBtn",
     setup(__props) {
       const btnClick = () => {
-        start$1();
+        start$2();
       };
       vue.onUnmounted(() => {
-        status$1.value = false;
+        status$2.value = false;
         setMoveInterrupt();
       });
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: vue.unref(status$1) ? "primary" : "default",
+          type: vue.unref(status$2) ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode(" 战神陵打肉: " + vue.toDisplayString(vue.unref(status$1) ? "开" : "关"), 1)
+            vue.createTextVNode(" 战神陵打肉: " + vue.toDisplayString(vue.unref(status$2) ? "开" : "关"), 1)
           ]),
           _: 1
         }, 8, ["type"]);
       };
     }
   });
-  const status = vue.ref(false);
+  const status$1 = vue.ref(false);
   const getBossPts = () => {
     var _a;
     return (_a = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a.children.filter((ele) => {
@@ -1813,30 +1813,30 @@
       };
     });
   };
-  const start = async () => {
-    status.value = !status.value;
-    csl.log(`F4打金币: ${status.value ? "开" : "关"}`);
-    if (status.value) {
+  const start$1 = async () => {
+    status$1.value = !status$1.value;
+    csl.log(`F4打金币: ${status$1.value ? "开" : "关"}`);
+    if (status$1.value) {
       try {
         while (true) {
-          if (!status.value) throw new Error("打金中断");
+          if (!status$1.value) throw new Error("打金中断");
           await backHome();
           await delay(200);
           const manifierRect = getNearestMagnifierRect();
-          if (!status.value) throw new Error("打金中断");
+          if (!status$1.value) throw new Error("打金中断");
           await rectPress(manifierRect);
           const leftHSBLBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel1/PlaceScrollView/view/content/PlaceItemView[7]");
           await delay(200);
-          if (!status.value) throw new Error("打金中断");
+          if (!status$1.value) throw new Error("打金中断");
           await nodePress(leftHSBLBtn);
           const rightDTLDbtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel1/TeleportScrollView/view/content/TeleportSelectItemView[1]");
           await delay(500);
-          if (!status.value) throw new Error("打金中断");
+          if (!status$1.value) throw new Error("打金中断");
           await nodePress(rightDTLDbtn);
           await delay(1500);
           await waitForNodeActive("Root/GameScene/OperationCanvas/MapButtonView/BuildingButton01");
           await delay(200);
-          if (!status.value) throw new Error("打金中断");
+          if (!status$1.value) throw new Error("打金中断");
           await moveToXY(-10016, -3885);
           let bossPts = getBossPts();
           if (!bossPts) throw new Error("boss位置获取失败");
@@ -1845,7 +1845,7 @@
           let path = planPath(teamPosition, bossPts);
           while ((bossPts == null ? void 0 : bossPts.length) && path.length) {
             const t1 = Date.now();
-            if (!status.value) throw new Error("打金中断");
+            if (!status$1.value) throw new Error("打金中断");
             await moveToXY(path[0].x, path[0].y);
             const t2 = Date.now();
             if (t2 - t1 > 300) {
@@ -1863,39 +1863,39 @@
         }
       } catch (e) {
         csl.error(e);
-        status.value = false;
+        status$1.value = false;
       }
     } else {
-      status.value = false;
+      status$1.value = false;
       setMoveInterrupt();
     }
   };
-  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
     __name: "CollectGoldenF4Btn",
     setup(__props) {
       const btnClick = async () => {
-        start();
+        start$1();
       };
       vue.onUnmounted(() => {
-        status.value = false;
+        status$1.value = false;
         setMoveInterrupt();
       });
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: vue.unref(status) ? "primary" : "default",
+          type: vue.unref(status$1) ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode(" F4打金币: " + vue.toDisplayString(vue.unref(status) ? "开" : "关"), 1)
+            vue.createTextVNode(" F4打金币: " + vue.toDisplayString(vue.unref(status$1) ? "开" : "关"), 1)
           ]),
           _: 1
         }, 8, ["type"]);
       };
     }
   });
-  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
     __name: "RoamBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2031,7 +2031,7 @@
     // TODO 精英难度
     // TODO 噩梦难度
   ];
-  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
     __name: "RoamPathBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2080,7 +2080,7 @@
       };
     }
   });
-  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
     __name: "DungeonBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2169,7 +2169,7 @@
     }
   });
   const _hoisted_1$2 = { class: "dialog-footer" };
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
     __name: "ChestBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2377,37 +2377,37 @@
       };
     }
   });
-  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-25f73fae"]]);
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-25f73fae"]]);
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
     __name: "RedPackBtn",
     setup(__props) {
-      const status$22 = vue.ref(false);
+      const status2 = vue.ref(false);
       const btnClick = async () => {
-        status$22.value = !status$22.value;
-        if (status$22.value) {
+        status2.value = !status2.value;
+        if (status2.value) {
           while (true) {
             try {
               csl.log("新一轮等待红包");
               const redPackBtn = await waitForNodeActive("Root/UIScene/UICanvas/Menu/MenuView/SaveArea/DownLeft/RedPacketMenuIconView/Btn");
-              if (!status$22.value) return;
+              if (!status2.value) return;
               if (redPackBtn) {
-                if (status$1.value) {
+                if (status$2.value) {
                   csl.log("检查到正在打肉，20秒后恢复执行打肉");
                   setTimeout(() => {
-                    if (!status$1.value) {
+                    if (!status$2.value) {
                       csl.log("尝试恢复执行打肉");
-                      start$1();
+                      start$2();
                     } else {
                       csl.log("打肉正在执行，不恢复");
                     }
                   }, 2e4);
                 }
-                if (status.value) {
+                if (status$1.value) {
                   csl.log("检查到正在打金，20秒后恢复执行打金");
                   setTimeout(() => {
-                    if (!status.value) {
+                    if (!status$1.value) {
                       csl.log("尝试恢复执行打金");
-                      start();
+                      start$1();
                     } else {
                       csl.log("打金正在执行，不恢复");
                     }
@@ -2417,18 +2417,18 @@
                 await delay(500);
                 csl.log("抢红包");
                 const redPackOpenBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/packet/bg/openInfo/Hongbao_btn_open", true, 5e3);
-                if (!status$22.value) return;
+                if (!status2.value) return;
                 if (redPackOpenBtn) {
                   await nodePress(redPackOpenBtn);
                   csl.log("打开红包");
                   await delay(800);
                   const redPackCloseBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/CloseTip", false, 2e3);
-                  if (!status$22.value) return;
+                  if (!status2.value) return;
                   nodePress(redPackCloseBtn);
                 }
               }
               const isOver = ccFind("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/packet/bg/hasOpenInfo/status/over");
-              if (!status$22.value) return;
+              if (!status2.value) return;
               if (isOver && isOver.active) {
                 csl.log("红包领完了");
                 const closeTipBtn = ccFind("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/CloseTip");
@@ -2438,30 +2438,30 @@
             } catch (e) {
               csl.log(e);
               await delay(1e3);
-              if (!status$22.value) return;
+              if (!status2.value) return;
             }
           }
         }
       };
       vue.onUnmounted(() => {
-        status$22.value = false;
+        status2.value = false;
       });
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: status$22.value ? "primary" : "default",
+          type: status2.value ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode(" 自动抢红包: " + vue.toDisplayString(status$22.value ? "开" : "关"), 1)
+            vue.createTextVNode(" 自动抢红包: " + vue.toDisplayString(status2.value ? "开" : "关"), 1)
           ]),
           _: 1
         }, 8, ["type"]);
       };
     }
   });
-  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
     __name: "PositionBtn",
     setup(__props) {
       const x = vue.ref("?");
@@ -2469,7 +2469,7 @@
       const btnClick = async () => {
         const teamPosition = getTeamPosition();
         if (!teamPosition) throw new Error("队伍位置获取失败");
-        const str = `{ x: ${Math.floor(teamPosition.x)}, y: ${Math.floor(teamPosition.y)} }`;
+        const str = `{ "x": ${Math.floor(teamPosition.x)}, "y": ${Math.floor(teamPosition.y)} }`;
         await copyToClipboard(str);
         ElementPlus.ElMessage("复制成功：" + str);
       };
@@ -2505,15 +2505,15 @@
       };
     }
   });
-  const funCommponents = [{
+  const funComponents = [{
     id: "PauseBossBtn",
-    component: _sfc_main$c,
+    component: _sfc_main$d,
     name: "Boss暂停",
     description: "可以让Boss定身不打你",
     hideInLite: true
   }, {
     id: "PauseMonsterBtn",
-    component: _sfc_main$b,
+    component: _sfc_main$c,
     name: "小怪暂停",
     description: "可以让小怪定身不打你",
     hideInLite: true
@@ -2524,29 +2524,29 @@
     description: "可以进行自动抽卡"
   }, {
     id: "CollectMeatZhanShenLingBtn",
-    component: _sfc_main$9,
+    component: _sfc_main$a,
     name: "自动打肉（战神陵）",
     description: "在无尽深渊-熔火之境-战神陵绕圈打肉"
   }, {
     id: "CollectGoldenF4Btn",
-    component: _sfc_main$8,
+    component: _sfc_main$9,
     name: "自动打金币（F4）",
     description: "在英雄大陆-黑石堡垒-大厅楼道打4个boss获取金币、也可以在这里刷经验"
   }, {
     id: "RoamBtn",
-    component: _sfc_main$7,
+    component: _sfc_main$8,
     name: "智能寻怪",
     description: "实验性功能，查找附近的boss和小怪，并自动规划路线打怪，目前无法避障",
     hideInLite: true
   }, {
     id: "RoamPathBtn",
-    component: _sfc_main$6,
+    component: _sfc_main$7,
     name: "预定义路线",
     description: "实验性功能，启动时获取当前坐标与已知路线的起点比较，若匹配则以该路线进行行进",
     hideInLite: true
   }, {
     id: "DungeonBtn",
-    component: _sfc_main$5,
+    component: _sfc_main$6,
     name: "召唤副本",
     description: "打100级的召唤副本，打开召唤副本界面，选择好难度后运行可自动打副本，根据已知路线与附近怪物动动态实时规划路线，可保证任意阵容不漏怪打副本"
   }, {
@@ -2556,46 +2556,133 @@
     description: "原地自动领宝箱，一般用于挂机boss领宝箱"
   }, {
     id: "RedPackBtn",
-    component: _sfc_main$3,
+    component: _sfc_main$4,
     name: "自动抢红包",
     description: "实时查找左下角红包按钮，出现了就抢红包，不一定能抢到"
   }, {
     id: "PositionBtn",
-    component: _sfc_main$2,
+    component: _sfc_main$3,
     name: "坐标显示",
     description: "显示当前坐标，点击后可复制坐标，一般用于路线制作时的坐标获取"
   }];
-  const CONFIG_KEY = "component_config";
+  const status = vue.ref(false);
+  const start = async (config) => {
+    status.value = !status.value;
+    csl.log(`动态路线[${config.name}]: ${status.value ? "开" : "关"}`);
+    if (status.value) {
+      const path = config.path;
+      try {
+        if (config.dynamicMonster) {
+          await movePathWithMonster(path, status, config.isCircle);
+        } else {
+          await movePath(path, config.isCircle);
+        }
+        status.value = false;
+      } catch (e) {
+        csl.error(e);
+        status.value = false;
+      }
+    } else {
+      setMoveInterrupt();
+    }
+  };
+  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
+    __name: "DynamicPathBtn",
+    props: {
+      id: String
+    },
+    setup(__props, { expose: __expose }) {
+      const props = __props;
+      const componentConfig = vue.ref();
+      vue.onMounted(() => {
+        loadConfig();
+      });
+      vue.onUnmounted(() => {
+        status.value = false;
+        setMoveInterrupt();
+      });
+      const loadConfig = () => {
+        setMoveInterrupt();
+        if (!props.id) throw Error(`dynamic path btn id cannot be null`);
+        const config = getComponentConfig(props.id);
+        if (!config) throw Error(`dynamic path [${props.id}] cannot be resolved`);
+        componentConfig.value = config;
+      };
+      const btnClick = () => {
+        if (!componentConfig.value) throw Error(`dynamic path [${props.id}] cannot be resolved`);
+        start(componentConfig.value);
+      };
+      __expose({
+        loadConfig
+      });
+      return (_ctx, _cache) => {
+        const _component_el_button = vue.resolveComponent("el-button");
+        return vue.openBlock(), vue.createBlock(_component_el_button, {
+          type: vue.unref(status) ? "primary" : "default",
+          size: "small",
+          onClick: btnClick
+        }, {
+          default: vue.withCtx(() => {
+            var _a;
+            return [
+              vue.createTextVNode(vue.toDisplayString(((_a = componentConfig.value) == null ? void 0 : _a.name) || "动态按钮unkown") + ": " + vue.toDisplayString(vue.unref(status) ? "开" : "关"), 1)
+            ];
+          }),
+          _: 1
+        }, 8, ["type"]);
+      };
+    }
+  });
+  const CONFIG_KEY$1 = "component_config";
   function getDefaultConfig() {
-    return funCommponents.reduce((acc, comp) => {
-      acc[comp.id] = { visible: true, order: funCommponents.indexOf(comp) };
+    return funComponents.reduce((acc, comp) => {
+      acc[comp.id] = { visible: true, order: funComponents.indexOf(comp) };
       return acc;
     }, {});
   }
-  function getComponentsConfig() {
-    const savedConfig = _GM_getValue(CONFIG_KEY, null);
-    return savedConfig || getDefaultConfig();
+  function getComponentsConfig$1() {
+    let savedConfig = _GM_getValue(CONFIG_KEY$1, null);
+    if (!savedConfig) {
+      savedConfig = getDefaultConfig();
+      _GM_setValue(CONFIG_KEY$1, savedConfig);
+    }
+    csl.log("savedConfig", savedConfig);
+    return savedConfig;
   }
-  function setComponents(config) {
-    const currentConfig = getComponentsConfig();
+  function getComponentConfig(id) {
+    const config = getComponentsConfig$1();
+    return config[id] || null;
+  }
+  function setComponentsConfig(config) {
+    const currentConfig = getComponentsConfig$1();
     const newConfig = { ...currentConfig };
     for (const [id, cfg] of Object.entries(config)) {
       if (newConfig[id]) {
         newConfig[id] = { ...newConfig[id], ...cfg };
       }
     }
-    _GM_setValue(CONFIG_KEY, newConfig);
+    _GM_setValue(CONFIG_KEY$1, newConfig);
   }
-  function getComponents() {
-    const config = getComponentsConfig();
-    return funCommponents.filter((comp) => {
-      var _a;
-      return ((_a = config[comp.id]) == null ? void 0 : _a.visible) !== false;
-    }).sort((a, b) => {
-      var _a, _b;
-      const orderA = ((_a = config[a.id]) == null ? void 0 : _a.order) ?? 0;
-      const orderB = ((_b = config[b.id]) == null ? void 0 : _b.order) ?? 0;
-      return orderA - orderB;
+  function getButtonComponents(isLite = true) {
+    const config = getComponentsConfig$1();
+    return Object.keys(config).sort((id1, id2) => config[id1].order - config[id2].order).map((id) => {
+      const ComponentConfigSingle = config[id];
+      if (ComponentConfigSingle.path) {
+        return {
+          component: _sfc_main$2,
+          ...ComponentConfigSingle
+        };
+      } else {
+        const found = funComponents.find((funComponent) => funComponent.id === id);
+        if (!found) {
+          csl.warn(`Component ${id} not found in funComponents`);
+          return null;
+        }
+        return found;
+      }
+    }).filter((component) => {
+      if (!component) return false;
+      return !isLite || isLite && ("hideInLite" in component ? !component.hideInLite : true);
     });
   }
   /*! Element Plus Icons Vue v2.3.1 */
@@ -2615,6 +2702,54 @@
     }
   });
   var info_filled_default = info_filled_vue_vue_type_script_setup_true_lang_default;
+  const CONFIG_KEY = "component_config";
+  function setDynamicComponents(components) {
+    const config = getComponentsConfig();
+    csl.log("config", config);
+    let maxOrder = 0;
+    Object.keys(config).forEach((id) => {
+      const component = components.find((item) => item.id === id);
+      if (component) {
+        config[id] = { ...config[id], ...component };
+      } else if (config[id].path) {
+        delete config[id];
+      }
+      if (config[id] && maxOrder < config[id].order) {
+        maxOrder = config[id].order;
+      }
+    });
+    components.forEach((component) => {
+      if (!config[component.id]) {
+        config[component.id] = {
+          visible: true,
+          order: maxOrder + 1,
+          ...component
+        };
+      }
+    });
+    _GM_setValue(CONFIG_KEY, config);
+  }
+  function getDynamicComponents() {
+    const config = getComponentsConfig();
+    return Object.keys(config).filter((id) => {
+      var _a;
+      return (_a = config[id]) == null ? void 0 : _a.path;
+    }).map((id) => {
+      const comp = config[id];
+      return {
+        id: comp.id,
+        name: comp.name,
+        description: comp.description,
+        path: comp.path,
+        isCircle: comp.isCircle,
+        dynamicMonster: comp.dynamicMonster
+      };
+    });
+  }
+  function getComponentsConfig() {
+    const savedConfig = _GM_getValue(CONFIG_KEY, {});
+    return savedConfig;
+  }
   const _hoisted_1$1 = { class: "dialog-content" };
   const _hoisted_2 = { class: "settings-list" };
   const _hoisted_3 = ["data-id"];
@@ -2625,8 +2760,12 @@
       isLite: Boolean
     },
     emits: ["saved"],
-    setup(__props, { expose: __expose, emit: __emit }) {
+    setup(__props, { emit: __emit }) {
       const props = __props;
+      const allComponents = vue.ref([]);
+      const activeTab = vue.ref("buttons");
+      const dynamicPathsJson = vue.ref("[]");
+      const dynamicPaths = vue.ref([]);
       const showSettings = vue.ref(false);
       const settings = vue.ref({});
       const isMobile = vue.ref(window.innerWidth <= 768);
@@ -2634,26 +2773,51 @@
         isMobile.value = window.innerWidth <= 768;
       });
       const open = () => {
-        if (!funCommponents || funCommponents.length === 0) {
-          console.error("funCommponents未正确加载");
-          return;
-        }
-        console.log("funCommponents:", funCommponents);
-        const config = getComponentsConfig();
-        funCommponents.filter((comp) => !props.isLite || !comp.hideInLite).forEach((comp) => {
+        initData();
+        showSettings.value = true;
+      };
+      const initData = () => {
+        const config = getComponentsConfig$1();
+        allComponents.value = getButtonComponents(props.isLite);
+        dynamicPathsJson.value = JSON.stringify(getDynamicComponents(), null, 4);
+        allComponents.value.forEach((comp) => {
           var _a, _b;
           settings.value[comp.id] = {
             visible: ((_a = config[comp.id]) == null ? void 0 : _a.visible) ?? true,
-            order: ((_b = config[comp.id]) == null ? void 0 : _b.order) ?? funCommponents.indexOf(comp),
+            order: ((_b = config[comp.id]) == null ? void 0 : _b.order) ?? allComponents.value.indexOf(comp),
             name: comp.name,
             description: comp.description
           };
-          console.log(`Setting for ${comp.id}:`, settings.value[comp.id]);
         });
-        showSettings.value = true;
-        console.log("Final settings:", settings.value);
       };
       const emit = __emit;
+      const parseDynamicPaths = () => {
+        try {
+          dynamicPaths.value = JSON.parse(dynamicPathsJson.value);
+          const dynamicButtons = getDynamicPathButtons();
+          csl.log("Parsed dynamic paths:", dynamicButtons);
+          setDynamicComponents(dynamicButtons);
+          initData();
+          emit("saved");
+          ElementPlus.ElMessage("解析成功");
+        } catch (e) {
+          csl.error("动态路线JSON解析失败:", e);
+          ElementPlus.ElMessage({
+            type: "error",
+            message: "动态路线JSON解析失败"
+          });
+        }
+      };
+      const getDynamicPathButtons = () => {
+        return dynamicPaths.value.map((path, index) => ({
+          id: `dynamic_path_${index}`,
+          name: path.name || `动态路线${index + 1}`,
+          description: path.description || "",
+          path: path.path,
+          isCircle: path.isCircle || false,
+          dynamicMonster: path.dynamicMonster || false
+        }));
+      };
       const save = () => {
         const config = {};
         Object.entries(settings.value).forEach(([id, setting]) => {
@@ -2662,7 +2826,7 @@
             order: setting.order
           };
         });
-        setComponents(config);
+        setComponentsConfig(config);
         showSettings.value = false;
         emit("saved");
       };
@@ -2673,7 +2837,7 @@
             Sortable.create(el, {
               animation: 150,
               handle: ".drag-handle",
-              onEnd: (evt) => {
+              onEnd: (_evt) => {
                 const items = Array.from(el.children);
                 items.forEach((item, index) => {
                   const id = item.getAttribute("data-id");
@@ -2692,93 +2856,142 @@
           initSortable();
         }
       });
-      __expose({
-        open
-      });
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElDialog), {
-          modelValue: showSettings.value,
-          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => showSettings.value = $event),
-          title: "按钮设置",
-          width: "400px",
-          fullscreen: isMobile.value,
-          "z-index": 4001
-        }, {
-          footer: vue.withCtx(() => [
-            vue.createElementVNode("div", {
-              style: vue.normalizeStyle(isMobile.value ? "text-align: center" : "")
-            }, [
-              vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                onClick: _cache[0] || (_cache[0] = ($event) => showSettings.value = false)
-              }, {
-                default: vue.withCtx(() => _cache[3] || (_cache[3] = [
-                  vue.createTextVNode("取消")
-                ])),
-                _: 1
-              }),
-              vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                type: "primary",
-                onClick: save
-              }, {
-                default: vue.withCtx(() => _cache[4] || (_cache[4] = [
-                  vue.createTextVNode("保存")
-                ])),
-                _: 1
-              })
-            ], 4)
-          ]),
-          default: vue.withCtx(() => [
-            vue.createElementVNode("div", _hoisted_1$1, [
-              vue.createElementVNode("div", _hoisted_2, [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(funCommponents).filter((c) => __props.isLite && !c.hideInLite || !__props.isLite), (comp) => {
-                  var _a;
-                  return vue.openBlock(), vue.createElementBlock("div", {
-                    key: comp.id,
-                    class: "setting-item",
-                    "data-id": comp.id,
-                    style: vue.normalizeStyle({ opacity: ((_a = settings.value[comp.id]) == null ? void 0 : _a.visible) ? 1 : 0.6 })
-                  }, [
-                    _cache[2] || (_cache[2] = vue.createElementVNode("div", { class: "drag-handle" }, "≡", -1)),
-                    vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                      modelValue: settings.value[comp.id].visible,
-                      "onUpdate:modelValue": ($event) => settings.value[comp.id].visible = $event
-                    }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                    vue.createElementVNode("span", _hoisted_4, vue.toDisplayString(settings.value[comp.id].name || comp.id), 1),
-                    comp.description ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElPopover), {
-                      key: 0,
-                      placement: "top",
-                      width: 200,
-                      trigger: "hover",
-                      "popper-style": { zIndex: 5001 }
+        return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+          vue.createVNode(vue.unref(ElementPlus.ElButton), {
+            size: "small",
+            onClick: open
+          }, {
+            default: vue.withCtx(() => _cache[4] || (_cache[4] = [
+              vue.createTextVNode("按钮设置")
+            ])),
+            _: 1
+          }),
+          vue.createVNode(vue.unref(ElementPlus.ElDialog), {
+            modelValue: showSettings.value,
+            "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => showSettings.value = $event),
+            title: "按钮设置",
+            width: "500px",
+            fullscreen: isMobile.value,
+            "z-index": 4001
+          }, {
+            footer: vue.withCtx(() => [
+              vue.createElementVNode("div", {
+                style: vue.normalizeStyle(isMobile.value ? "text-align: center" : "")
+              }, [
+                vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                  onClick: _cache[2] || (_cache[2] = ($event) => showSettings.value = false)
+                }, {
+                  default: vue.withCtx(() => _cache[6] || (_cache[6] = [
+                    vue.createTextVNode("取消")
+                  ])),
+                  _: 1
+                }),
+                activeTab.value === "paths" ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElButton), {
+                  key: 0,
+                  type: "warning",
+                  onClick: parseDynamicPaths
+                }, {
+                  default: vue.withCtx(() => _cache[7] || (_cache[7] = [
+                    vue.createTextVNode("解析")
+                  ])),
+                  _: 1
+                })) : vue.createCommentVNode("", true),
+                vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                  type: "primary",
+                  onClick: save
+                }, {
+                  default: vue.withCtx(() => _cache[8] || (_cache[8] = [
+                    vue.createTextVNode("保存")
+                  ])),
+                  _: 1
+                })
+              ], 4)
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode("div", _hoisted_1$1, [
+                vue.createVNode(vue.unref(ElementPlus.ElTabs), {
+                  modelValue: activeTab.value,
+                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => activeTab.value = $event)
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
+                      label: "按钮选择",
+                      name: "buttons"
                     }, {
-                      reference: vue.withCtx(() => [
-                        vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                          size: "small",
-                          circle: ""
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createVNode(vue.unref(ElementPlus.ElIcon), null, {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(vue.unref(info_filled_default))
-                              ]),
-                              _: 1
-                            })
-                          ]),
-                          _: 1
-                        })
-                      ]),
                       default: vue.withCtx(() => [
-                        vue.createElementVNode("div", null, vue.toDisplayString(settings.value[comp.id].description), 1)
+                        vue.createElementVNode("div", _hoisted_2, [
+                          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(allComponents.value, (comp) => {
+                            var _a;
+                            return vue.openBlock(), vue.createElementBlock("div", {
+                              key: comp.id,
+                              class: "setting-item",
+                              "data-id": comp.id,
+                              style: vue.normalizeStyle({ opacity: ((_a = settings.value[comp.id]) == null ? void 0 : _a.visible) ? 1 : 0.6 })
+                            }, [
+                              _cache[5] || (_cache[5] = vue.createElementVNode("div", { class: "drag-handle" }, "≡", -1)),
+                              vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                modelValue: settings.value[comp.id].visible,
+                                "onUpdate:modelValue": ($event) => settings.value[comp.id].visible = $event
+                              }, null, 8, ["modelValue", "onUpdate:modelValue"]),
+                              vue.createElementVNode("span", _hoisted_4, vue.toDisplayString(settings.value[comp.id].name || comp.id), 1),
+                              comp.description ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElPopover), {
+                                key: 0,
+                                placement: "top",
+                                width: 200,
+                                trigger: "hover",
+                                "popper-style": { zIndex: 5001 }
+                              }, {
+                                reference: vue.withCtx(() => [
+                                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                    size: "small",
+                                    circle: ""
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(vue.unref(ElementPlus.ElIcon), null, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(vue.unref(info_filled_default))
+                                        ]),
+                                        _: 1
+                                      })
+                                    ]),
+                                    _: 1
+                                  })
+                                ]),
+                                default: vue.withCtx(() => [
+                                  vue.createElementVNode("div", null, vue.toDisplayString(settings.value[comp.id].description), 1)
+                                ]),
+                                _: 2
+                              }, 1024)) : vue.createCommentVNode("", true)
+                            ], 12, _hoisted_3);
+                          }), 128))
+                        ])
                       ]),
-                      _: 2
-                    }, 1024)) : vue.createCommentVNode("", true)
-                  ], 12, _hoisted_3);
-                }), 128))
+                      _: 1
+                    }),
+                    vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
+                      label: "动态路线",
+                      name: "paths"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                          modelValue: dynamicPathsJson.value,
+                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => dynamicPathsJson.value = $event),
+                          type: "textarea",
+                          rows: 10,
+                          placeholder: "请输入动态路线配置JSON"
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                }, 8, ["modelValue"])
               ])
-            ])
-          ]),
-          _: 1
-        }, 8, ["modelValue", "fullscreen"]);
+            ]),
+            _: 1
+          }, 8, ["modelValue", "fullscreen"])
+        ], 64);
       };
     }
   });
@@ -2792,9 +3005,10 @@
       const btnContainer = vue.ref();
       const btn = vue.ref();
       const components = vue.ref([]);
-      const buttonSettingRef = vue.ref();
+      const btnSetting = vue.ref({});
+      const dynamicPathBtnRefs = vue.ref({});
       vue.onMounted(() => {
-        components.value = getComponents();
+        setButton();
       });
       const btnClick = () => {
         var _a, _b;
@@ -2810,70 +3024,75 @@
           btn.value.style.display = "block";
         }, 5e3);
       };
-      const openSettings = () => {
-        var _a;
-        (_a = buttonSettingRef.value) == null ? void 0 : _a.open();
+      const setButton = () => {
+        dynamicPathBtnRefs.value = {};
+        components.value = getButtonComponents(props.isLite);
+        btnSetting.value = getComponentsConfig$1();
+        vue.nextTick(() => {
+          csl.log("dynamicPathBtnRefs.value", dynamicPathBtnRefs.value);
+          vue.nextTick(() => {
+            Object.values(dynamicPathBtnRefs.value).forEach((comp) => {
+              csl.log(comp);
+              comp == null ? void 0 : comp.loadConfig();
+            });
+          });
+        });
       };
+      const props = __props;
       return (_ctx, _cache) => {
         const _component_el_button_group = vue.resolveComponent("el-button-group");
-        return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+        return vue.openBlock(), vue.createElementBlock("div", {
+          ref_key: "btnContainer",
+          ref: btnContainer,
+          class: "zz-float-container"
+        }, [
           vue.createElementVNode("div", {
-            ref_key: "btnContainer",
-            ref: btnContainer,
-            class: "zz-float-container"
-          }, [
-            vue.createElementVNode("div", {
-              ref_key: "btn",
-              ref: btn,
-              onClick: btnClick,
-              class: "zz-float-btn",
-              role: "button",
-              tabindex: "0"
-            }, "+", 512),
-            vue.createElementVNode("div", _hoisted_1, [
-              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(components.value, (comp) => {
-                return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
-                  !__props.isLite || !comp.hideInLite ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(comp.component), {
-                    key: comp.id
-                  })) : vue.createCommentVNode("", true)
-                ], 64);
-              }), 256)),
-              vue.createVNode(_component_el_button_group, { class: "group" }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                    size: "small",
-                    onClick: tempHide
-                  }, {
-                    default: vue.withCtx(() => _cache[1] || (_cache[1] = [
-                      vue.createTextVNode("临时隐藏")
-                    ])),
-                    _: 1
-                  }),
-                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                    size: "small",
-                    onClick: openSettings
-                  }, {
-                    default: vue.withCtx(() => _cache[2] || (_cache[2] = [
-                      vue.createTextVNode("按钮设置")
-                    ])),
-                    _: 1
-                  })
-                ]),
-                _: 1
-              })
-            ])
-          ], 512),
-          vue.createVNode(_sfc_main$1, {
-            "is-lite": __props.isLite,
-            ref_key: "buttonSettingRef",
-            ref: buttonSettingRef,
-            onSaved: _cache[0] || (_cache[0] = ($event) => components.value = vue.unref(getComponents)())
-          }, null, 8, ["is-lite"])
-        ], 64);
+            ref_key: "btn",
+            ref: btn,
+            onClick: btnClick,
+            class: "zz-float-btn",
+            role: "button",
+            tabindex: "0"
+          }, "+", 512),
+          vue.createElementVNode("div", _hoisted_1, [
+            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(components.value, (comp) => {
+              var _a;
+              return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+                ((_a = btnSetting.value[comp.id]) == null ? void 0 : _a.visible) ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(comp.component), {
+                  key: comp.id,
+                  id: comp.id,
+                  ref_for: true,
+                  ref: (el) => {
+                    var _a2;
+                    if ((_a2 = btnSetting.value[comp.id]) == null ? void 0 : _a2.path) dynamicPathBtnRefs.value[comp.id] = el;
+                  }
+                }, null, 8, ["id"])) : vue.createCommentVNode("", true)
+              ], 64);
+            }), 256)),
+            vue.createVNode(_component_el_button_group, { class: "group" }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                  size: "small",
+                  onClick: tempHide
+                }, {
+                  default: vue.withCtx(() => _cache[0] || (_cache[0] = [
+                    vue.createTextVNode("临时隐藏")
+                  ])),
+                  _: 1
+                }),
+                vue.createVNode(_sfc_main$1, {
+                  "is-lite": __props.isLite,
+                  onSaved: setButton
+                }, null, 8, ["is-lite"])
+              ]),
+              _: 1
+            })
+          ])
+        ], 512);
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6f2414f8"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6e8b18d4"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus).mount(
     (() => {
       const app = document.createElement("div");
