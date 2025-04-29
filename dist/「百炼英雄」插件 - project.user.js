@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.16
+// @version      1.0.17
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -130,7 +130,8 @@
     { id: "85029", name: "莉莎", quality: "红" },
     { id: "85031", name: "闻仲", quality: "红" },
     { id: "85041", name: "嬴政", quality: "红" },
-    { id: "86001", name: "姜尚", quality: "白金" }
+    { id: "86001", name: "姜尚", quality: "白金" },
+    { id: "83029", name: "银发", quality: "橙" }
   ];
   const heroesIdMap = {};
   heroesList.forEach((hero) => heroesIdMap[hero.id] = hero);
