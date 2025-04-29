@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.17
+// @version      1.0.18
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -2873,8 +2873,7 @@
             "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => showSettings.value = $event),
             title: "按钮设置",
             width: "500px",
-            fullscreen: isMobile.value,
-            "z-index": 4001
+            fullscreen: isMobile.value
           }, {
             footer: vue.withCtx(() => [
               vue.createElementVNode("div", {
@@ -2940,8 +2939,7 @@
                                 key: 0,
                                 placement: "top",
                                 width: 200,
-                                trigger: "hover",
-                                "popper-style": { zIndex: 5001 }
+                                trigger: "hover"
                               }, {
                                 reference: vue.withCtx(() => [
                                   vue.createVNode(vue.unref(ElementPlus.ElButton), {
