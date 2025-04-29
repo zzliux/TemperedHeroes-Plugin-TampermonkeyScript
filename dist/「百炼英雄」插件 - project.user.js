@@ -3092,7 +3092,7 @@
     }
   });
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6e8b18d4"]]);
-  vue.createApp(App, { isLite: true }).use(ElementPlus).mount(
+  vue.createApp(App, { isLite: true }).use(ElementPlus, { zIndex: 4e3 }).mount(
     (() => {
       const app = document.createElement("div");
       document.body.append(app);
