@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.18
+// @version      1.0.19
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -851,6 +851,44 @@
     }
     return path;
   }
+  let arrowContainer = null;
+  function clearDirectAssists() {
+    if (arrowContainer) {
+      arrowContainer.innerHTML = "";
+    }
+  }
+  function setDirectAssists(points) {
+    if (!arrowContainer) {
+      arrowContainer = document.createElement("div");
+      arrowContainer.style.cssText = `
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+        `;
+      document.body.appendChild(arrowContainer);
+    }
+    clearDirectAssists();
+    points.forEach((point) => {
+      const arrow = document.createElement("div");
+      arrow.style.cssText = `
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 30px solid rgba(255, 94, 0, 0.95);
+            transform-origin: center bottom;
+        `;
+      const angle = Math.atan2(point.y, point.x) * 180 / Math.PI;
+      arrow.style.transform = `rotate(${angle}deg) translateY(-50px)`;
+      arrowContainer.appendChild(arrow);
+    });
+  }
+  _unsafeWindow.setDirectAssists = setDirectAssists;
+  _unsafeWindow.clearDirectAssists = clearDirectAssists;
   const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseBossBtn",
     setup(__props) {
@@ -2480,6 +2518,18 @@
           if (teamPosition) {
             x.value = Math.floor(teamPosition.x).toString();
             y.value = Math.floor(teamPosition.y).toString();
+            const dirPos = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((node) => {
+              var _a, _b, _c;
+              if (node.name.match(/MaterialUnit\d+_51122\d+/)) {
+                const sn = (_c = (_b = (_a = ccFind("Sprite", node)) == null ? void 0 : _a.getComponents(_unsafeWindow.cc.Sprite)[0]) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
+                return !!sn && !/die/i.test(sn || "");
+              }
+              return false;
+            }).map((node) => ({
+              y: node.position.x - teamPosition.x,
+              x: node.position.y - teamPosition.y
+            }));
+            setDirectAssists(dirPos);
           } else {
             x.value = "?";
             y.value = "?";
