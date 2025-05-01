@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.19
+// @version      1.0.20
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.group[data-v-6e8b18d4]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-6e8b18d4]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-6e8b18d4]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-6e8b18d4]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-6e8b18d4]{opacity:1;pointer-events:all}.zz-rotate[data-v-6e8b18d4]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.group[data-v-6e8b18d4]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-6e8b18d4]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-6e8b18d4]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-6e8b18d4]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-6e8b18d4]{opacity:1;pointer-events:all}.zz-rotate[data-v-6e8b18d4]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -509,7 +509,7 @@
   let canvasDom;
   let moveStatus = false;
   let moveInterrupt = false;
-  async function moveToXY(x, y) {
+  async function moveToXY(x, y, stuckRetryTimes = 0) {
     if (moveStatus) {
       throw new Error("正在移动，请勿重复调用");
     }
@@ -523,15 +523,11 @@
     const height = canvasDom.clientHeight;
     let centerX = width / 2 + random(-25, 25), centerY = height * 3 / 4 + random(-25, 25);
     await delay(10);
-    const eventDown = new MouseEvent("mousedown", {
-      clientX: centerX,
-      clientY: centerY
-    });
-    canvasDom.dispatchEvent(eventDown);
-    updateDebugRect({ x: centerX - 4, y: centerY - 4, width: 7, height: 7 }, 102);
+    eventDown();
     const maxR = random(60, 110);
     await new Promise((resolve, reject) => {
-      let lastPosition = null;
+      let lastPositions = [];
+      const POSITION_HISTORY_SIZE = 5;
       let stuckCount = 0;
       const t1 = Date.now();
       const tid = setInterval(() => {
@@ -539,6 +535,10 @@
           const currentPosition = getTeamPosition();
           const distance2 = Math.sqrt(Math.pow(currentPosition.x - x, 2) + Math.pow(currentPosition.y - y, 2));
           csl.log(`当前: (${Math.round(currentPosition.x)}, ${Math.round(currentPosition.y)}), 目标: (${Math.round(x)}, ${Math.round(y)}), 距离: ${Math.round(distance2)}`);
+          lastPositions.push({ x: Math.floor(currentPosition.x), y: Math.floor(currentPosition.y) });
+          if (lastPositions.length > POSITION_HISTORY_SIZE) {
+            lastPositions.shift();
+          }
           const offsetXOrigin = x - currentPosition.x;
           const offsetYOrigin = currentPosition.y - y;
           const rOrigion = Math.sqrt(offsetXOrigin * offsetXOrigin + offsetYOrigin * offsetYOrigin);
@@ -548,57 +548,44 @@
           const currentY = Math.round(centerY + offsetY);
           if (Date.now() - t1 > 10 * 1e3) {
             clearInterval(tid);
-            const eventUp = new MouseEvent("mouseup", {
-              clientX: currentX,
-              clientY: currentY
-            });
-            canvasDom.dispatchEvent(eventUp);
-            updateDebugRect({ x: currentX - 4, y: currentX - 4, width: 7, height: 7 }, 102);
+            eventUp(currentX, currentY);
             moveStatus = false;
             reject("moveToXY: 超时");
           }
           if (moveInterrupt) {
             clearInterval(tid);
-            const eventUp = new MouseEvent("mouseup", {
-              clientX: currentX,
-              clientY: currentY
-            });
-            canvasDom.dispatchEvent(eventUp);
-            updateDebugRect({ x: currentX - 4, y: currentY - 4, width: 7, height: 7 }, 102);
+            eventUp(currentX, currentY);
             moveInterrupt = false;
             moveStatus = false;
             reject("中断本次移动");
           }
-          const eventMove = new MouseEvent("mousemove", {
-            clientX: currentX,
-            clientY: currentY
-          });
-          canvasDom.dispatchEvent(eventMove);
-          updateDebugRect({ x: currentX - 4, y: currentY - 4, width: 7, height: 7 }, 102);
-          if (lastPosition && currentPosition.x === lastPosition.x && currentPosition.y === lastPosition.y) {
-            if (++stuckCount >= 3) {
+          eventMove(currentX, currentY);
+          if (lastPositions.length === POSITION_HISTORY_SIZE) {
+            const uniquePositions = new Set(lastPositions.map((p) => `${p.x},${p.y}`));
+            if (uniquePositions.size <= 2) {
+              stuckCount++;
+            } else {
+              stuckCount = 0;
+            }
+            if (stuckCount >= 5) {
               clearInterval(tid);
-              const eventUp = new MouseEvent("mouseup", {
-                clientX: currentX,
-                clientY: currentY
-              });
-              canvasDom.dispatchEvent(eventUp);
-              updateDebugRect({ x: currentX - 4, y: currentY - 4, width: 7, height: 7 }, 102);
+              eventUp(currentX, currentY);
               moveStatus = false;
-              reject("moveToXY: 卡住了，出不来");
+              if (stuckRetryTimes >= 3) {
+                reject("moveToXY: 卡住了，出不来");
+              } else {
+                csl.log(`moveToXY: 似乎卡住了，准备重试`);
+                setTimeout(() => {
+                  moveToXY(x, y, stuckRetryTimes + 1).then(resolve).catch(reject);
+                }, 800);
+              }
             }
           }
           if (nearBy(x, y)) {
             clearInterval(tid);
-            const eventUp = new MouseEvent("mouseup", {
-              clientX: currentX,
-              clientY: currentY
-            });
-            canvasDom.dispatchEvent(eventUp);
-            updateDebugRect({ x: currentX - 4, y: currentY - 4, width: 7, height: 7 }, 102);
+            eventUp(currentX, currentY);
             resolve();
           }
-          lastPosition = currentPosition;
         } catch (e) {
           clearInterval(tid);
           moveStatus = false;
@@ -607,6 +594,30 @@
       }, 100);
     });
     moveStatus = false;
+    function eventDown(x2, y2) {
+      const eventDown2 = new MouseEvent("mousedown", {
+        clientX: centerX,
+        clientY: centerY
+      });
+      canvasDom.dispatchEvent(eventDown2);
+      updateDebugRect({ x: centerX - 4, y: centerY - 4, width: 7, height: 7 }, 102);
+    }
+    function eventMove(x2, y2) {
+      const eventMove2 = new MouseEvent("mousemove", {
+        clientX: x2,
+        clientY: y2
+      });
+      canvasDom.dispatchEvent(eventMove2);
+      updateDebugRect({ x: x2 - 4, y: y2 - 4, width: 7, height: 7 }, 102);
+    }
+    function eventUp(x2, y2) {
+      const eventUp2 = new MouseEvent("mouseup", {
+        clientX: x2,
+        clientY: y2
+      });
+      canvasDom.dispatchEvent(eventUp2);
+      updateDebugRect({ x: x2 - 4, y: y2 - 4, width: 7, height: 7 }, 102);
+    }
   }
   _unsafeWindow.moveToXY = moveToXY;
   async function movePath(path, isCircle = false) {
@@ -650,7 +661,7 @@
       csl.log("clusterPts", clusterPts);
       clusterPts.forEach((pt) => {
         const { segmentIndex, minDistance } = getPathStartIndex(pt, newPath);
-        if (minDistance < 1e3 && minDistance > 180) {
+        if (minDistance < 510 && minDistance > 180) {
           newPath.splice(segmentIndex + 1, 0, pt);
         } else if (minDistance <= 180 && segmentIndex < newPath.length - 1) {
           const d1 = distance(pt, newPath[segmentIndex]);
@@ -692,7 +703,7 @@
             var _a, _b, _c;
             if (/^HeroUnit/i.test(ele.name)) {
               const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
-              if (!/Idle/i.test(frameName)) {
+              if (!/Idle|Gather|Move/i.test(frameName)) {
                 return true;
               }
             }
@@ -1255,7 +1266,7 @@
   const _hoisted_2$1 = { class: "dialog-footer" };
   const _hoisted_3$1 = { class: "statisticsContainer" };
   const _hoisted_4$1 = { class: "importLogContainer" };
-  const _hoisted_5 = { class: "dialog-footer" };
+  const _hoisted_5$1 = { class: "dialog-footer" };
   const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     __name: "BetCardBtn",
     setup(__props) {
@@ -1715,7 +1726,7 @@
             width: "calc(90vw)"
           }, {
             footer: vue.withCtx(() => [
-              vue.createElementVNode("div", _hoisted_5, [
+              vue.createElementVNode("div", _hoisted_5$1, [
                 vue.createVNode(_component_el_button, {
                   size: "small",
                   onClick: improtLogOverwrite,
@@ -2772,7 +2783,7 @@
     components.forEach((component) => {
       if (!config[component.id]) {
         config[component.id] = {
-          visible: true,
+          visible: false,
           order: maxOrder + 1,
           ...component
         };
@@ -2805,6 +2816,7 @@
   const _hoisted_2 = { class: "settings-list" };
   const _hoisted_3 = ["data-id"];
   const _hoisted_4 = { class: "name-text" };
+  const _hoisted_5 = { style: { "text-align": "right", "margin": "0" } };
   const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
     __name: "ButtonSetting",
     props: {
@@ -2815,13 +2827,15 @@
       const props = __props;
       const allComponents = vue.ref([]);
       const activeTab = vue.ref("buttons");
-      const dynamicPathsJson = vue.ref("[]");
       const dynamicPaths = vue.ref([]);
+      const editingPath = vue.ref(null);
+      const showPathDialog = vue.ref(false);
+      const deleteVisible = vue.ref([]);
       const showSettings = vue.ref(false);
       const settings = vue.ref({});
-      const isMobile = vue.ref(window.innerWidth <= 768);
+      const isMobile = vue.ref(window.innerWidth <= 450);
       window.addEventListener("resize", () => {
-        isMobile.value = window.innerWidth <= 768;
+        isMobile.value = window.innerWidth <= 450;
       });
       const open = () => {
         initData();
@@ -2830,7 +2844,8 @@
       const initData = () => {
         const config = getComponentsConfig$1();
         allComponents.value = getButtonComponents(props.isLite);
-        dynamicPathsJson.value = JSON.stringify(getDynamicComponents(), null, 4);
+        dynamicPaths.value = getDynamicComponents();
+        deleteVisible.value = new Array(dynamicPaths.value.length).fill(false);
         allComponents.value.forEach((comp) => {
           var _a, _b;
           settings.value[comp.id] = {
@@ -2842,32 +2857,65 @@
         });
       };
       const emit = __emit;
-      const parseDynamicPaths = () => {
+      const saveDynamicPaths = () => {
         try {
-          dynamicPaths.value = JSON.parse(dynamicPathsJson.value);
-          const dynamicButtons = getDynamicPathButtons();
-          csl.log("Parsed dynamic paths:", dynamicButtons);
-          setDynamicComponents(dynamicButtons);
+          setDynamicComponents(dynamicPaths.value);
           initData();
           emit("saved");
-          ElementPlus.ElMessage("解析成功");
+          ElementPlus.ElMessage.success("路线保存成功");
         } catch (e) {
-          csl.error("动态路线JSON解析失败:", e);
-          ElementPlus.ElMessage({
-            type: "error",
-            message: "动态路线JSON解析失败"
-          });
+          csl.error("动态路线保存失败:", e);
+          ElementPlus.ElMessage.error("动态路线保存失败");
         }
       };
-      const getDynamicPathButtons = () => {
-        return dynamicPaths.value.map((path, index) => ({
-          id: `dynamic_path_${index}`,
-          name: path.name || `动态路线${index + 1}`,
-          description: path.description || "",
-          path: path.path,
-          isCircle: path.isCircle || false,
-          dynamicMonster: path.dynamicMonster || false
-        }));
+      const addPath = () => {
+        editingPath.value = {
+          id: `dynamic_${Date.now()}`,
+          name: "",
+          description: "",
+          path: [],
+          pathStr: "[]",
+          isCircle: false,
+          dynamicMonster: false
+        };
+        showPathDialog.value = true;
+      };
+      const editPath = (index) => {
+        const path = JSON.parse(JSON.stringify(dynamicPaths.value[index]));
+        path._index = index;
+        path.pathStr = `[
+${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
+]`;
+        if (!path.id) {
+          path.id = `dynamic_${Date.now()}`;
+        }
+        editingPath.value = path;
+        showPathDialog.value = true;
+      };
+      const deletePath = (index) => {
+        dynamicPaths.value.splice(index, 1);
+        saveDynamicPaths();
+      };
+      const savePath = () => {
+        if (!editingPath.value) return;
+        try {
+          const path = { ...editingPath.value };
+          if (!path.id) {
+            path.id = `dynamic_${Date.now()}`;
+          }
+          path.path = JSON.parse(editingPath.value.pathStr || "[]");
+          delete path._index;
+          delete path.pathStr;
+          if (editingPath.value._index !== void 0) {
+            dynamicPaths.value[editingPath.value._index] = path;
+          } else {
+            dynamicPaths.value.push(path);
+          }
+          showPathDialog.value = false;
+          saveDynamicPaths();
+        } catch (e) {
+          ElementPlus.ElMessage.error("路线配置JSON格式错误");
+        }
       };
       const save = () => {
         const config = {};
@@ -2908,139 +2956,339 @@
         }
       });
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
-          vue.createVNode(vue.unref(ElementPlus.ElButton), {
-            size: "small",
-            onClick: open
-          }, {
-            default: vue.withCtx(() => _cache[4] || (_cache[4] = [
-              vue.createTextVNode("按钮设置")
-            ])),
-            _: 1
-          }),
-          vue.createVNode(vue.unref(ElementPlus.ElDialog), {
-            modelValue: showSettings.value,
-            "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => showSettings.value = $event),
-            title: "按钮设置",
-            width: "500px",
-            fullscreen: isMobile.value
-          }, {
-            footer: vue.withCtx(() => [
-              vue.createElementVNode("div", {
-                style: vue.normalizeStyle(isMobile.value ? "text-align: center" : "")
-              }, [
-                vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                  onClick: _cache[2] || (_cache[2] = ($event) => showSettings.value = false)
-                }, {
-                  default: vue.withCtx(() => _cache[6] || (_cache[6] = [
-                    vue.createTextVNode("取消")
-                  ])),
-                  _: 1
-                }),
-                activeTab.value === "paths" ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElButton), {
+        const _component_el_button_group = vue.resolveComponent("el-button-group");
+        return vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElButton), {
+          size: "small",
+          onClick: open
+        }, {
+          default: vue.withCtx(() => [
+            _cache[21] || (_cache[21] = vue.createTextVNode("按钮设置 ")),
+            vue.createVNode(vue.unref(ElementPlus.ElDialog), {
+              modelValue: showSettings.value,
+              "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => showSettings.value = $event),
+              title: "按钮设置",
+              width: "400px",
+              fullscreen: isMobile.value
+            }, {
+              footer: vue.withCtx(() => [
+                activeTab.value === "buttons" ? (vue.openBlock(), vue.createElementBlock("div", {
                   key: 0,
-                  type: "warning",
-                  onClick: parseDynamicPaths
-                }, {
-                  default: vue.withCtx(() => _cache[7] || (_cache[7] = [
-                    vue.createTextVNode("解析")
-                  ])),
-                  _: 1
-                })) : vue.createCommentVNode("", true),
-                vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                  type: "primary",
-                  onClick: save
-                }, {
-                  default: vue.withCtx(() => _cache[8] || (_cache[8] = [
-                    vue.createTextVNode("保存")
-                  ])),
-                  _: 1
-                })
-              ], 4)
-            ]),
-            default: vue.withCtx(() => [
-              vue.createElementVNode("div", _hoisted_1$1, [
-                vue.createVNode(vue.unref(ElementPlus.ElTabs), {
-                  modelValue: activeTab.value,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => activeTab.value = $event)
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
-                      label: "按钮选择",
-                      name: "buttons"
-                    }, {
-                      default: vue.withCtx(() => [
-                        vue.createElementVNode("div", _hoisted_2, [
-                          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(allComponents.value, (comp) => {
-                            var _a;
-                            return vue.openBlock(), vue.createElementBlock("div", {
-                              key: comp.id,
-                              class: "setting-item",
-                              "data-id": comp.id,
-                              style: vue.normalizeStyle({ opacity: ((_a = settings.value[comp.id]) == null ? void 0 : _a.visible) ? 1 : 0.6 })
-                            }, [
-                              _cache[5] || (_cache[5] = vue.createElementVNode("div", { class: "drag-handle" }, "≡", -1)),
-                              vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                                modelValue: settings.value[comp.id].visible,
-                                "onUpdate:modelValue": ($event) => settings.value[comp.id].visible = $event
-                              }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                              vue.createElementVNode("span", _hoisted_4, vue.toDisplayString(settings.value[comp.id].name || comp.id), 1),
-                              comp.description ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElPopover), {
-                                key: 0,
-                                placement: "top",
-                                width: 200,
-                                trigger: "hover"
+                  style: vue.normalizeStyle(isMobile.value ? "text-align: center" : "")
+                }, [
+                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                    onClick: _cache[8] || (_cache[8] = ($event) => showSettings.value = false)
+                  }, {
+                    default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                      vue.createTextVNode("取消")
+                    ])),
+                    _: 1
+                  }),
+                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                    type: "primary",
+                    onClick: save
+                  }, {
+                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                      vue.createTextVNode("保存")
+                    ])),
+                    _: 1
+                  })
+                ], 4)) : vue.createCommentVNode("", true)
+              ]),
+              default: vue.withCtx(() => [
+                vue.createElementVNode("div", _hoisted_1$1, [
+                  vue.createVNode(vue.unref(ElementPlus.ElTabs), {
+                    modelValue: activeTab.value,
+                    "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => activeTab.value = $event)
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
+                        label: "按钮选择",
+                        name: "buttons"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createElementVNode("div", _hoisted_2, [
+                            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(allComponents.value, (comp) => {
+                              var _a;
+                              return vue.openBlock(), vue.createElementBlock("div", {
+                                key: comp.id,
+                                class: "setting-item",
+                                "data-id": comp.id,
+                                style: vue.normalizeStyle({ opacity: ((_a = settings.value[comp.id]) == null ? void 0 : _a.visible) ? 1 : 0.6 })
+                              }, [
+                                _cache[10] || (_cache[10] = vue.createElementVNode("div", { class: "drag-handle" }, "≡", -1)),
+                                vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                  modelValue: settings.value[comp.id].visible,
+                                  "onUpdate:modelValue": ($event) => settings.value[comp.id].visible = $event
+                                }, null, 8, ["modelValue", "onUpdate:modelValue"]),
+                                vue.createElementVNode("span", _hoisted_4, vue.toDisplayString(settings.value[comp.id].name || comp.id), 1),
+                                comp.description ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElPopover), {
+                                  key: 0,
+                                  placement: "top",
+                                  width: 200,
+                                  trigger: "hover"
+                                }, {
+                                  reference: vue.withCtx(() => [
+                                    vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                      size: "small",
+                                      circle: ""
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(vue.unref(ElementPlus.ElIcon), null, {
+                                          default: vue.withCtx(() => [
+                                            vue.createVNode(vue.unref(info_filled_default))
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      _: 1
+                                    })
+                                  ]),
+                                  default: vue.withCtx(() => [
+                                    vue.createElementVNode("div", null, vue.toDisplayString(settings.value[comp.id].description), 1)
+                                  ]),
+                                  _: 2
+                                }, 1024)) : vue.createCommentVNode("", true)
+                              ], 12, _hoisted_3);
+                            }), 128))
+                          ])
+                        ]),
+                        _: 1
+                      }),
+                      vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
+                        label: "动态路线",
+                        name: "paths"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                            type: "primary",
+                            onClick: addPath,
+                            size: "small",
+                            style: { "float": "right", "margin-bottom": "5px" }
+                          }, {
+                            default: vue.withCtx(() => _cache[11] || (_cache[11] = [
+                              vue.createTextVNode("添加路线")
+                            ])),
+                            _: 1
+                          }),
+                          vue.createVNode(vue.unref(ElementPlus.ElTable), {
+                            data: dynamicPaths.value,
+                            border: ""
+                          }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                                prop: "name",
+                                label: "名称"
+                              }),
+                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                                prop: "isCircle",
+                                label: "循环",
+                                align: "center",
+                                width: "60"
                               }, {
-                                reference: vue.withCtx(() => [
-                                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                    size: "small",
-                                    circle: ""
+                                default: vue.withCtx(({ row }) => [
+                                  vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                    modelValue: row.isCircle,
+                                    "onUpdate:modelValue": ($event) => row.isCircle = $event,
+                                    disabled: ""
+                                  }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                                prop: "dynamicMonster",
+                                align: "center",
+                                label: "动态打怪",
+                                width: "60"
+                              }, {
+                                default: vue.withCtx(({ row }) => [
+                                  vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                    modelValue: row.dynamicMonster,
+                                    "onUpdate:modelValue": ($event) => row.dynamicMonster = $event,
+                                    disabled: ""
+                                  }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                                ]),
+                                _: 1
+                              }),
+                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                                label: "操作",
+                                align: "center",
+                                width: "120"
+                              }, {
+                                default: vue.withCtx(({ $index }) => [
+                                  vue.createVNode(_component_el_button_group, null, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                        size: "small",
+                                        onClick: ($event) => editPath($index)
+                                      }, {
+                                        default: vue.withCtx(() => _cache[12] || (_cache[12] = [
+                                          vue.createTextVNode("编辑")
+                                        ])),
+                                        _: 2
+                                      }, 1032, ["onClick"]),
+                                      vue.createVNode(vue.unref(ElementPlus.ElPopover), {
+                                        visible: deleteVisible.value[$index],
+                                        placement: "top",
+                                        width: "160"
+                                      }, {
+                                        reference: vue.withCtx(() => [
+                                          vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                            size: "small",
+                                            type: "danger",
+                                            onClick: ($event) => deleteVisible.value[$index] = true
+                                          }, {
+                                            default: vue.withCtx(() => _cache[13] || (_cache[13] = [
+                                              vue.createTextVNode(" 删除 ")
+                                            ])),
+                                            _: 2
+                                          }, 1032, ["onClick"])
+                                        ]),
+                                        default: vue.withCtx(() => [
+                                          _cache[16] || (_cache[16] = vue.createElementVNode("p", null, "是否删除？", -1)),
+                                          vue.createElementVNode("div", _hoisted_5, [
+                                            vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                              size: "small",
+                                              onClick: ($event) => deleteVisible.value[$index] = false
+                                            }, {
+                                              default: vue.withCtx(() => _cache[14] || (_cache[14] = [
+                                                vue.createTextVNode("取消")
+                                              ])),
+                                              _: 2
+                                            }, 1032, ["onClick"]),
+                                            vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                              size: "small",
+                                              type: "danger",
+                                              onClick: ($event) => {
+                                                deletePath($index);
+                                                deleteVisible.value[$index] = false;
+                                              }
+                                            }, {
+                                              default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                                vue.createTextVNode("确定")
+                                              ])),
+                                              _: 2
+                                            }, 1032, ["onClick"])
+                                          ])
+                                        ]),
+                                        _: 2
+                                      }, 1032, ["visible"])
+                                    ]),
+                                    _: 2
+                                  }, 1024)
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          }, 8, ["data"]),
+                          vue.createVNode(vue.unref(ElementPlus.ElDialog), {
+                            modelValue: showPathDialog.value,
+                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => showPathDialog.value = $event),
+                            title: "路线配置",
+                            width: "min(calc(90vw), 400px)"
+                          }, {
+                            footer: vue.withCtx(() => [
+                              vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                onClick: _cache[5] || (_cache[5] = ($event) => showPathDialog.value = false)
+                              }, {
+                                default: vue.withCtx(() => _cache[17] || (_cache[17] = [
+                                  vue.createTextVNode("取消")
+                                ])),
+                                _: 1
+                              }),
+                              vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                type: "primary",
+                                onClick: savePath
+                              }, {
+                                default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                                  vue.createTextVNode("保存")
+                                ])),
+                                _: 1
+                              })
+                            ]),
+                            default: vue.withCtx(() => [
+                              editingPath.value ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElForm), {
+                                key: 0,
+                                "label-width": "100px"
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                    class: "dynamic-btn-form-item",
+                                    label: "名称"
                                   }, {
                                     default: vue.withCtx(() => [
-                                      vue.createVNode(vue.unref(ElementPlus.ElIcon), null, {
-                                        default: vue.withCtx(() => [
-                                          vue.createVNode(vue.unref(info_filled_default))
-                                        ]),
-                                        _: 1
-                                      })
+                                      vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                                        modelValue: editingPath.value.name,
+                                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => editingPath.value.name = $event)
+                                      }, null, 8, ["modelValue"])
+                                    ]),
+                                    _: 1
+                                  }),
+                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                    class: "dynamic-btn-form-item",
+                                    label: "描述"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                                        modelValue: editingPath.value.description,
+                                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => editingPath.value.description = $event),
+                                        type: "textarea",
+                                        rows: 2
+                                      }, null, 8, ["modelValue"])
+                                    ]),
+                                    _: 1
+                                  }),
+                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                    class: "dynamic-btn-form-item",
+                                    label: "属性"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                        label: "是否循环",
+                                        modelValue: editingPath.value.isCircle,
+                                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => editingPath.value.isCircle = $event)
+                                      }, null, 8, ["modelValue"]),
+                                      vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                        label: "动态打怪",
+                                        modelValue: editingPath.value.dynamicMonster,
+                                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => editingPath.value.dynamicMonster = $event)
+                                      }, null, 8, ["modelValue"])
+                                    ]),
+                                    _: 1
+                                  }),
+                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                    class: "dynamic-btn-form-item",
+                                    label: "路线配置(JSON)"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                                        modelValue: editingPath.value.pathStr,
+                                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => editingPath.value.pathStr = $event),
+                                        type: "textarea",
+                                        rows: 8
+                                      }, null, 8, ["modelValue"])
                                     ]),
                                     _: 1
                                   })
                                 ]),
-                                default: vue.withCtx(() => [
-                                  vue.createElementVNode("div", null, vue.toDisplayString(settings.value[comp.id].description), 1)
-                                ]),
-                                _: 2
-                              }, 1024)) : vue.createCommentVNode("", true)
-                            ], 12, _hoisted_3);
-                          }), 128))
-                        ])
-                      ]),
-                      _: 1
-                    }),
-                    vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
-                      label: "动态路线",
-                      name: "paths"
-                    }, {
-                      default: vue.withCtx(() => [
-                        vue.createVNode(vue.unref(ElementPlus.ElInput), {
-                          modelValue: dynamicPathsJson.value,
-                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => dynamicPathsJson.value = $event),
-                          type: "textarea",
-                          rows: 10,
-                          placeholder: "请输入动态路线配置JSON"
-                        }, null, 8, ["modelValue"])
-                      ]),
-                      _: 1
-                    })
-                  ]),
-                  _: 1
-                }, 8, ["modelValue"])
-              ])
-            ]),
-            _: 1
-          }, 8, ["modelValue", "fullscreen"])
-        ], 64);
+                                _: 1
+                              })) : vue.createCommentVNode("", true)
+                            ]),
+                            _: 1
+                          }, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }, 8, ["modelValue"])
+                ])
+              ]),
+              _: 1
+            }, 8, ["modelValue", "fullscreen"])
+          ]),
+          _: 1
+        });
       };
     }
   });
