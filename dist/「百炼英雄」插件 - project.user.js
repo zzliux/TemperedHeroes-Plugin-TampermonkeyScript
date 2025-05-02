@@ -2849,7 +2849,7 @@
         allComponents.value.forEach((comp) => {
           var _a, _b;
           settings.value[comp.id] = {
-            visible: ((_a = config[comp.id]) == null ? void 0 : _a.visible) ?? true,
+            visible: ((_a = config[comp.id]) == null ? void 0 : _a.visible) ?? false,
             order: ((_b = config[comp.id]) == null ? void 0 : _b.order) ?? allComponents.value.indexOf(comp),
             name: comp.name,
             description: comp.description
@@ -2957,338 +2957,341 @@ ${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
       });
       return (_ctx, _cache) => {
         const _component_el_button_group = vue.resolveComponent("el-button-group");
-        return vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElButton), {
-          size: "small",
-          onClick: open
-        }, {
-          default: vue.withCtx(() => [
-            _cache[21] || (_cache[21] = vue.createTextVNode("按钮设置 ")),
-            vue.createVNode(vue.unref(ElementPlus.ElDialog), {
-              modelValue: showSettings.value,
-              "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => showSettings.value = $event),
-              title: "按钮设置",
-              width: "400px",
-              fullscreen: isMobile.value
-            }, {
-              footer: vue.withCtx(() => [
-                activeTab.value === "buttons" ? (vue.openBlock(), vue.createElementBlock("div", {
-                  key: 0,
-                  style: vue.normalizeStyle(isMobile.value ? "text-align: center" : "")
-                }, [
-                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                    onClick: _cache[8] || (_cache[8] = ($event) => showSettings.value = false)
-                  }, {
-                    default: vue.withCtx(() => _cache[19] || (_cache[19] = [
-                      vue.createTextVNode("取消")
-                    ])),
-                    _: 1
-                  }),
-                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                    type: "primary",
-                    onClick: save
-                  }, {
-                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
-                      vue.createTextVNode("保存")
-                    ])),
-                    _: 1
-                  })
-                ], 4)) : vue.createCommentVNode("", true)
-              ]),
-              default: vue.withCtx(() => [
-                vue.createElementVNode("div", _hoisted_1$1, [
-                  vue.createVNode(vue.unref(ElementPlus.ElTabs), {
-                    modelValue: activeTab.value,
-                    "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => activeTab.value = $event)
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
-                        label: "按钮选择",
-                        name: "buttons"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createElementVNode("div", _hoisted_2, [
-                            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(allComponents.value, (comp) => {
-                              var _a;
-                              return vue.openBlock(), vue.createElementBlock("div", {
-                                key: comp.id,
-                                class: "setting-item",
-                                "data-id": comp.id,
-                                style: vue.normalizeStyle({ opacity: ((_a = settings.value[comp.id]) == null ? void 0 : _a.visible) ? 1 : 0.6 })
-                              }, [
-                                _cache[10] || (_cache[10] = vue.createElementVNode("div", { class: "drag-handle" }, "≡", -1)),
-                                vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                                  modelValue: settings.value[comp.id].visible,
-                                  "onUpdate:modelValue": ($event) => settings.value[comp.id].visible = $event
-                                }, null, 8, ["modelValue", "onUpdate:modelValue"]),
-                                vue.createElementVNode("span", _hoisted_4, vue.toDisplayString(settings.value[comp.id].name || comp.id), 1),
-                                comp.description ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElPopover), {
-                                  key: 0,
-                                  placement: "top",
-                                  width: 200,
-                                  trigger: "hover"
-                                }, {
-                                  reference: vue.withCtx(() => [
-                                    vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                      size: "small",
-                                      circle: ""
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createVNode(vue.unref(ElementPlus.ElIcon), null, {
-                                          default: vue.withCtx(() => [
-                                            vue.createVNode(vue.unref(info_filled_default))
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      _: 1
-                                    })
-                                  ]),
-                                  default: vue.withCtx(() => [
-                                    vue.createElementVNode("div", null, vue.toDisplayString(settings.value[comp.id].description), 1)
-                                  ]),
-                                  _: 2
-                                }, 1024)) : vue.createCommentVNode("", true)
-                              ], 12, _hoisted_3);
-                            }), 128))
-                          ])
-                        ]),
-                        _: 1
-                      }),
-                      vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
-                        label: "动态路线",
-                        name: "paths"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                            type: "primary",
-                            onClick: addPath,
-                            size: "small",
-                            style: { "float": "right", "margin-bottom": "5px" }
-                          }, {
-                            default: vue.withCtx(() => _cache[11] || (_cache[11] = [
-                              vue.createTextVNode("添加路线")
-                            ])),
-                            _: 1
-                          }),
-                          vue.createVNode(vue.unref(ElementPlus.ElTable), {
-                            data: dynamicPaths.value,
-                            border: ""
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
-                                prop: "name",
-                                label: "名称"
-                              }),
-                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
-                                prop: "isCircle",
-                                label: "循环",
-                                align: "center",
-                                width: "60"
-                              }, {
-                                default: vue.withCtx(({ row }) => [
-                                  vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                                    modelValue: row.isCircle,
-                                    "onUpdate:modelValue": ($event) => row.isCircle = $event,
-                                    disabled: ""
-                                  }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                                ]),
-                                _: 1
-                              }),
-                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
-                                prop: "dynamicMonster",
-                                align: "center",
-                                label: "动态打怪",
-                                width: "60"
-                              }, {
-                                default: vue.withCtx(({ row }) => [
-                                  vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                                    modelValue: row.dynamicMonster,
-                                    "onUpdate:modelValue": ($event) => row.dynamicMonster = $event,
-                                    disabled: ""
-                                  }, null, 8, ["modelValue", "onUpdate:modelValue"])
-                                ]),
-                                _: 1
-                              }),
-                              vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
-                                label: "操作",
-                                align: "center",
-                                width: "120"
-                              }, {
-                                default: vue.withCtx(({ $index }) => [
-                                  vue.createVNode(_component_el_button_group, null, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                        size: "small",
-                                        onClick: ($event) => editPath($index)
-                                      }, {
-                                        default: vue.withCtx(() => _cache[12] || (_cache[12] = [
-                                          vue.createTextVNode("编辑")
-                                        ])),
-                                        _: 2
-                                      }, 1032, ["onClick"]),
-                                      vue.createVNode(vue.unref(ElementPlus.ElPopover), {
-                                        visible: deleteVisible.value[$index],
-                                        placement: "top",
-                                        width: "160"
-                                      }, {
-                                        reference: vue.withCtx(() => [
-                                          vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                            size: "small",
-                                            type: "danger",
-                                            onClick: ($event) => deleteVisible.value[$index] = true
-                                          }, {
-                                            default: vue.withCtx(() => _cache[13] || (_cache[13] = [
-                                              vue.createTextVNode(" 删除 ")
-                                            ])),
-                                            _: 2
-                                          }, 1032, ["onClick"])
-                                        ]),
-                                        default: vue.withCtx(() => [
-                                          _cache[16] || (_cache[16] = vue.createElementVNode("p", null, "是否删除？", -1)),
-                                          vue.createElementVNode("div", _hoisted_5, [
-                                            vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                              size: "small",
-                                              onClick: ($event) => deleteVisible.value[$index] = false
-                                            }, {
-                                              default: vue.withCtx(() => _cache[14] || (_cache[14] = [
-                                                vue.createTextVNode("取消")
-                                              ])),
-                                              _: 2
-                                            }, 1032, ["onClick"]),
-                                            vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                              size: "small",
-                                              type: "danger",
-                                              onClick: ($event) => {
-                                                deletePath($index);
-                                                deleteVisible.value[$index] = false;
-                                              }
-                                            }, {
-                                              default: vue.withCtx(() => _cache[15] || (_cache[15] = [
-                                                vue.createTextVNode("确定")
-                                              ])),
-                                              _: 2
-                                            }, 1032, ["onClick"])
-                                          ])
-                                        ]),
-                                        _: 2
-                                      }, 1032, ["visible"])
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          }, 8, ["data"]),
-                          vue.createVNode(vue.unref(ElementPlus.ElDialog), {
-                            modelValue: showPathDialog.value,
-                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => showPathDialog.value = $event),
-                            title: "路线配置",
-                            width: "min(calc(90vw), 400px)"
-                          }, {
-                            footer: vue.withCtx(() => [
-                              vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                onClick: _cache[5] || (_cache[5] = ($event) => showPathDialog.value = false)
-                              }, {
-                                default: vue.withCtx(() => _cache[17] || (_cache[17] = [
-                                  vue.createTextVNode("取消")
-                                ])),
-                                _: 1
-                              }),
-                              vue.createVNode(vue.unref(ElementPlus.ElButton), {
-                                type: "primary",
-                                onClick: savePath
-                              }, {
-                                default: vue.withCtx(() => _cache[18] || (_cache[18] = [
-                                  vue.createTextVNode("保存")
-                                ])),
-                                _: 1
-                              })
-                            ]),
-                            default: vue.withCtx(() => [
-                              editingPath.value ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElForm), {
+        return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+          vue.createVNode(vue.unref(ElementPlus.ElButton), {
+            size: "small",
+            onClick: open
+          }, {
+            default: vue.withCtx(() => _cache[10] || (_cache[10] = [
+              vue.createTextVNode("按钮设置")
+            ])),
+            _: 1
+          }),
+          vue.createVNode(vue.unref(ElementPlus.ElDialog), {
+            modelValue: showSettings.value,
+            "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => showSettings.value = $event),
+            title: "按钮设置",
+            width: "400px",
+            fullscreen: isMobile.value,
+            "append-to-body": ""
+          }, {
+            footer: vue.withCtx(() => [
+              activeTab.value === "buttons" ? (vue.openBlock(), vue.createElementBlock("div", {
+                key: 0,
+                style: vue.normalizeStyle(isMobile.value ? "text-align: center" : "")
+              }, [
+                vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                  onClick: _cache[8] || (_cache[8] = ($event) => showSettings.value = false)
+                }, {
+                  default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                    vue.createTextVNode("取消")
+                  ])),
+                  _: 1
+                }),
+                vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                  type: "primary",
+                  onClick: save
+                }, {
+                  default: vue.withCtx(() => _cache[21] || (_cache[21] = [
+                    vue.createTextVNode("保存")
+                  ])),
+                  _: 1
+                })
+              ], 4)) : vue.createCommentVNode("", true)
+            ]),
+            default: vue.withCtx(() => [
+              vue.createElementVNode("div", _hoisted_1$1, [
+                vue.createVNode(vue.unref(ElementPlus.ElTabs), {
+                  modelValue: activeTab.value,
+                  "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => activeTab.value = $event)
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
+                      label: "按钮选择",
+                      name: "buttons"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("div", _hoisted_2, [
+                          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(allComponents.value, (comp) => {
+                            var _a;
+                            return vue.openBlock(), vue.createElementBlock("div", {
+                              key: comp.id,
+                              class: "setting-item",
+                              "data-id": comp.id,
+                              style: vue.normalizeStyle({ opacity: ((_a = settings.value[comp.id]) == null ? void 0 : _a.visible) ? 1 : 0.6 })
+                            }, [
+                              _cache[11] || (_cache[11] = vue.createElementVNode("div", { class: "drag-handle" }, "≡", -1)),
+                              vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                modelValue: settings.value[comp.id].visible,
+                                "onUpdate:modelValue": ($event) => settings.value[comp.id].visible = $event
+                              }, null, 8, ["modelValue", "onUpdate:modelValue"]),
+                              vue.createElementVNode("span", _hoisted_4, vue.toDisplayString(settings.value[comp.id].name || comp.id), 1),
+                              comp.description ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElPopover), {
                                 key: 0,
-                                "label-width": "100px"
+                                placement: "top",
+                                width: 200,
+                                trigger: "hover"
                               }, {
-                                default: vue.withCtx(() => [
-                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
-                                    class: "dynamic-btn-form-item",
-                                    label: "名称"
+                                reference: vue.withCtx(() => [
+                                  vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                    size: "small",
+                                    circle: ""
                                   }, {
                                     default: vue.withCtx(() => [
-                                      vue.createVNode(vue.unref(ElementPlus.ElInput), {
-                                        modelValue: editingPath.value.name,
-                                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => editingPath.value.name = $event)
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
-                                    class: "dynamic-btn-form-item",
-                                    label: "描述"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(vue.unref(ElementPlus.ElInput), {
-                                        modelValue: editingPath.value.description,
-                                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => editingPath.value.description = $event),
-                                        type: "textarea",
-                                        rows: 2
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
-                                    class: "dynamic-btn-form-item",
-                                    label: "属性"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                                        label: "是否循环",
-                                        modelValue: editingPath.value.isCircle,
-                                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => editingPath.value.isCircle = $event)
-                                      }, null, 8, ["modelValue"]),
-                                      vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
-                                        label: "动态打怪",
-                                        modelValue: editingPath.value.dynamicMonster,
-                                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => editingPath.value.dynamicMonster = $event)
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
-                                    class: "dynamic-btn-form-item",
-                                    label: "路线配置(JSON)"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(vue.unref(ElementPlus.ElInput), {
-                                        modelValue: editingPath.value.pathStr,
-                                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => editingPath.value.pathStr = $event),
-                                        type: "textarea",
-                                        rows: 8
-                                      }, null, 8, ["modelValue"])
+                                      vue.createVNode(vue.unref(ElementPlus.ElIcon), null, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(vue.unref(info_filled_default))
+                                        ]),
+                                        _: 1
+                                      })
                                     ]),
                                     _: 1
                                   })
                                 ]),
-                                _: 1
-                              })) : vue.createCommentVNode("", true)
-                            ]),
-                            _: 1
-                          }, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }, 8, ["modelValue"])
-                ])
-              ]),
-              _: 1
-            }, 8, ["modelValue", "fullscreen"])
-          ]),
-          _: 1
-        });
+                                default: vue.withCtx(() => [
+                                  vue.createElementVNode("div", null, vue.toDisplayString(settings.value[comp.id].description), 1)
+                                ]),
+                                _: 2
+                              }, 1024)) : vue.createCommentVNode("", true)
+                            ], 12, _hoisted_3);
+                          }), 128))
+                        ])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(vue.unref(ElementPlus.ElTabPane), {
+                      label: "动态路线",
+                      name: "paths"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                          type: "primary",
+                          onClick: addPath,
+                          size: "small",
+                          style: { "float": "right", "margin-bottom": "5px" }
+                        }, {
+                          default: vue.withCtx(() => _cache[12] || (_cache[12] = [
+                            vue.createTextVNode("添加路线")
+                          ])),
+                          _: 1
+                        }),
+                        vue.createVNode(vue.unref(ElementPlus.ElTable), {
+                          data: dynamicPaths.value,
+                          border: ""
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                              prop: "name",
+                              label: "名称"
+                            }),
+                            vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                              prop: "isCircle",
+                              label: "循环",
+                              align: "center",
+                              width: "60"
+                            }, {
+                              default: vue.withCtx(({ row }) => [
+                                vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                  modelValue: row.isCircle,
+                                  "onUpdate:modelValue": ($event) => row.isCircle = $event,
+                                  disabled: ""
+                                }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                              prop: "dynamicMonster",
+                              align: "center",
+                              label: "动态打怪",
+                              width: "60"
+                            }, {
+                              default: vue.withCtx(({ row }) => [
+                                vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                  modelValue: row.dynamicMonster,
+                                  "onUpdate:modelValue": ($event) => row.dynamicMonster = $event,
+                                  disabled: ""
+                                }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(vue.unref(ElementPlus.ElTableColumn), {
+                              label: "操作",
+                              align: "center",
+                              width: "120"
+                            }, {
+                              default: vue.withCtx(({ $index }) => [
+                                vue.createVNode(_component_el_button_group, null, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                      size: "small",
+                                      onClick: ($event) => editPath($index)
+                                    }, {
+                                      default: vue.withCtx(() => _cache[13] || (_cache[13] = [
+                                        vue.createTextVNode("编辑")
+                                      ])),
+                                      _: 2
+                                    }, 1032, ["onClick"]),
+                                    vue.createVNode(vue.unref(ElementPlus.ElPopover), {
+                                      visible: deleteVisible.value[$index],
+                                      placement: "top",
+                                      width: "160"
+                                    }, {
+                                      reference: vue.withCtx(() => [
+                                        vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                          size: "small",
+                                          type: "danger",
+                                          onClick: ($event) => deleteVisible.value[$index] = true
+                                        }, {
+                                          default: vue.withCtx(() => _cache[14] || (_cache[14] = [
+                                            vue.createTextVNode(" 删除 ")
+                                          ])),
+                                          _: 2
+                                        }, 1032, ["onClick"])
+                                      ]),
+                                      default: vue.withCtx(() => [
+                                        _cache[17] || (_cache[17] = vue.createElementVNode("p", null, "是否删除？", -1)),
+                                        vue.createElementVNode("div", _hoisted_5, [
+                                          vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                            size: "small",
+                                            onClick: ($event) => deleteVisible.value[$index] = false
+                                          }, {
+                                            default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                              vue.createTextVNode("取消")
+                                            ])),
+                                            _: 2
+                                          }, 1032, ["onClick"]),
+                                          vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                                            size: "small",
+                                            type: "danger",
+                                            onClick: ($event) => {
+                                              deletePath($index);
+                                              deleteVisible.value[$index] = false;
+                                            }
+                                          }, {
+                                            default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                                              vue.createTextVNode("确定")
+                                            ])),
+                                            _: 2
+                                          }, 1032, ["onClick"])
+                                        ])
+                                      ]),
+                                      _: 2
+                                    }, 1032, ["visible"])
+                                  ]),
+                                  _: 2
+                                }, 1024)
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["data"]),
+                        vue.createVNode(vue.unref(ElementPlus.ElDialog), {
+                          modelValue: showPathDialog.value,
+                          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => showPathDialog.value = $event),
+                          title: "路线配置",
+                          width: "min(calc(90vw), 400px)"
+                        }, {
+                          footer: vue.withCtx(() => [
+                            vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                              onClick: _cache[5] || (_cache[5] = ($event) => showPathDialog.value = false)
+                            }, {
+                              default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                                vue.createTextVNode("取消")
+                              ])),
+                              _: 1
+                            }),
+                            vue.createVNode(vue.unref(ElementPlus.ElButton), {
+                              type: "primary",
+                              onClick: savePath
+                            }, {
+                              default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                                vue.createTextVNode("保存")
+                              ])),
+                              _: 1
+                            })
+                          ]),
+                          default: vue.withCtx(() => [
+                            editingPath.value ? (vue.openBlock(), vue.createBlock(vue.unref(ElementPlus.ElForm), {
+                              key: 0,
+                              "label-width": "100px"
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                  class: "dynamic-btn-form-item",
+                                  label: "名称"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                                      modelValue: editingPath.value.name,
+                                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => editingPath.value.name = $event)
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                  class: "dynamic-btn-form-item",
+                                  label: "描述"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                                      modelValue: editingPath.value.description,
+                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => editingPath.value.description = $event),
+                                      type: "textarea",
+                                      rows: 2
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                  class: "dynamic-btn-form-item",
+                                  label: "属性"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                      label: "是否循环",
+                                      modelValue: editingPath.value.isCircle,
+                                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => editingPath.value.isCircle = $event)
+                                    }, null, 8, ["modelValue"]),
+                                    vue.createVNode(vue.unref(ElementPlus.ElCheckbox), {
+                                      label: "动态打怪",
+                                      modelValue: editingPath.value.dynamicMonster,
+                                      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => editingPath.value.dynamicMonster = $event)
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(vue.unref(ElementPlus.ElFormItem), {
+                                  class: "dynamic-btn-form-item",
+                                  label: "路线配置(JSON)"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(vue.unref(ElementPlus.ElInput), {
+                                      modelValue: editingPath.value.pathStr,
+                                      "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => editingPath.value.pathStr = $event),
+                                      type: "textarea",
+                                      rows: 8
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })) : vue.createCommentVNode("", true)
+                          ]),
+                          _: 1
+                        }, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                }, 8, ["modelValue"])
+              ])
+            ]),
+            _: 1
+          }, 8, ["modelValue", "fullscreen"])
+        ], 64);
       };
     }
   });
