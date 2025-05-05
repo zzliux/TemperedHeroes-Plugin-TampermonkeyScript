@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.20
+// @version      1.0.21
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.group[data-v-6e8b18d4]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-6e8b18d4]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-6e8b18d4]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-6e8b18d4]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-6e8b18d4]{opacity:1;pointer-events:all}.zz-rotate[data-v-6e8b18d4]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.path-viewer.el-dialog{padding:0;margin-right:0;pointer-events:auto}.path-viewer .el-dialog__header,.path-viewer .el-dialog__footer{padding:0}.path-viewer .el-dialog__headerbtn{width:22.5px;height:22.5px}.path-viewer-modal{pointer-events:none}.group[data-v-29368ea8]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-29368ea8]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-29368ea8]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-29368ea8]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-29368ea8]{opacity:1;pointer-events:all}.zz-rotate[data-v-29368ea8]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -147,6 +147,175 @@
       })
     };
   });
+  function throttle(fn, delay2) {
+    let lastCall = 0;
+    let pendingCall = null;
+    let timeoutId2 = null;
+    return function(...args) {
+      const now = Date.now();
+      const elapsed = now - lastCall;
+      if (elapsed >= delay2) {
+        lastCall = now;
+        return fn.apply(this, args);
+      } else {
+        pendingCall = { args, thisArg: this };
+        if (!timeoutId2) {
+          timeoutId2 = window.setTimeout(() => {
+            if (pendingCall) {
+              lastCall = Date.now();
+              fn.apply(pendingCall.thisArg, pendingCall.args);
+              pendingCall = null;
+            }
+            timeoutId2 = null;
+          }, delay2 - elapsed);
+        }
+      }
+    };
+  }
+  const shown = vue.ref(false);
+  const echartsRef = vue.ref();
+  let instance = null;
+  const showPathViewer = async () => {
+    shown.value = true;
+    await vue.nextTick();
+    instance = echarts__namespace.init(echartsRef.value);
+    instance.setOption({
+      tooltip: {
+        trigger: "item",
+        formatter: function(params) {
+          if (params.seriesName === "路径") {
+            return `(${Math.floor(params.data[0])}, ${Math.floor(params.data[1])})`;
+          } else if (params.seriesName === "当前位置") {
+            return `(${Math.floor(params.data[0])}, ${Math.floor(params.data[1])})`;
+          }
+          return params.name;
+        }
+      },
+      xAxis: {
+        show: false,
+        min: "dataMin",
+        max: "dataMax"
+      },
+      yAxis: {
+        show: false,
+        min: "dataMin",
+        max: "dataMax"
+      },
+      grid: {
+        left: "10px",
+        top: "10px",
+        right: "10px",
+        bottom: "10px"
+      },
+      series: []
+    });
+  };
+  let cachedSeriesData = [];
+  const setPathViewerPositionRaw = async (position) => {
+    const id = cachedSeriesData.findIndex((s) => s.name === "当前位置");
+    if (id !== -1) {
+      cachedSeriesData[id].data = [[position.x, position.y]];
+    } else {
+      cachedSeriesData.push({
+        name: "当前位置",
+        type: "scatter",
+        data: [[position.x, position.y]],
+        symbol: "pin",
+        symbolSize: 50,
+        itemStyle: {
+          color: "#EE2222"
+        },
+        label: {
+          show: true,
+          formatter: "队",
+          position: "inside",
+          color: "white"
+        },
+        emphasis: {
+          disabled: true
+        }
+      });
+    }
+    instance == null ? void 0 : instance.setOption({
+      series: cachedSeriesData
+    });
+  };
+  const setPathViewerPosition = throttle(setPathViewerPositionRaw, 200);
+  const setPathViewerData = async (path2, position) => {
+    if (!shown.value) await showPathViewer();
+    if (!instance) throw Error(`echarts instance error`);
+    cachedSeriesData = [
+      {
+        name: "路径",
+        type: "line",
+        data: path2.map(({ x, y }) => [x, y]),
+        symbol: "circle",
+        symbolSize: 8
+      },
+      {
+        name: "起点",
+        type: "scatter",
+        data: [[path2[0].x, path2[0].y]],
+        symbol: "pin",
+        symbolSize: 50,
+        itemStyle: {
+          color: "green"
+        },
+        label: {
+          show: true,
+          formatter: "起",
+          position: "inside",
+          color: "white"
+        },
+        emphasis: {
+          disabled: true
+        }
+      },
+      {
+        name: "终点",
+        type: "scatter",
+        data: [[path2[path2.length - 1].x, path2[path2.length - 1].y]],
+        symbol: "pin",
+        symbolSize: 50,
+        itemStyle: {
+          color: "blue"
+        },
+        label: {
+          show: true,
+          formatter: "终",
+          position: "inside",
+          color: "white"
+        },
+        emphasis: {
+          disabled: true
+        }
+      }
+    ];
+    if (position) cachedSeriesData.push({
+      name: "当前位置",
+      type: "scatter",
+      data: [[position.x, position.y]],
+      symbol: "pin",
+      symbolSize: 50,
+      itemStyle: {
+        color: "#EE2222"
+      },
+      label: {
+        show: true,
+        formatter: "队",
+        position: "inside",
+        color: "white"
+      },
+      emphasis: {
+        disabled: true
+      }
+    });
+    instance.setOption({
+      series: cachedSeriesData
+    });
+  };
+  window.showPathViewer = showPathViewer;
+  window.setPathViewerData = setPathViewerData;
   let csl;
   let iframe = document.getElementById("zz-iframe-console");
   if (!iframe) {
@@ -535,6 +704,7 @@
           const currentPosition = getTeamPosition();
           const distance2 = Math.sqrt(Math.pow(currentPosition.x - x, 2) + Math.pow(currentPosition.y - y, 2));
           csl.log(`当前: (${Math.round(currentPosition.x)}, ${Math.round(currentPosition.y)}), 目标: (${Math.round(x)}, ${Math.round(y)}), 距离: ${Math.round(distance2)}`);
+          setPathViewerPosition(currentPosition);
           lastPositions.push({ x: Math.floor(currentPosition.x), y: Math.floor(currentPosition.y) });
           if (lastPositions.length > POSITION_HISTORY_SIZE) {
             lastPositions.shift();
@@ -630,6 +800,7 @@
     }
     const { segmentIndex: closestSegmentIndex, minDistance: _ } = getPathStartIndex(currentPos, path);
     const startIndex = closestSegmentIndex + 1;
+    setPathViewerData(path);
     for (let i = startIndex; i < path.length; i = isCircle ? (i + 1) % path.length : i + 1) {
       const t1 = Date.now();
       await moveToXY(path[i].x, path[i].y);
@@ -693,6 +864,7 @@
       csl.log("currentPos", currentPos);
       csl.log("currentPosDistance", distance(currentPos, newPath[startIndex % newPath.length]));
       csl.log("currentPosclosestSegmentIndexDistance", distance(currentPos, newPath[closestSegmentIndex % newPath.length]));
+      setPathViewerData(newPath);
       await moveToXY(newPath[startIndex].x, newPath[startIndex].y);
       const t1 = Date.now();
       while (true) {
@@ -900,7 +1072,7 @@
   }
   _unsafeWindow.setDirectAssists = setDirectAssists;
   _unsafeWindow.clearDirectAssists = clearDirectAssists;
-  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseBossBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -954,7 +1126,7 @@
       };
     }
   });
-  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseMonsterBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -1008,7 +1180,7 @@
       };
     }
   });
-  const status$3 = vue.ref(false);
+  const status$2 = vue.ref(false);
   const betCardLogVisiable = vue.ref(false);
   const logContent = vue.ref("");
   const logPreRef = vue.ref();
@@ -1054,12 +1226,12 @@
         const noTip = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/noTipToggle/Floor");
         const givenUpConfirmBtn = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
         if (noTip && noTip.active && noTip.activeInHierarchy) {
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(noTip);
           await delay(200);
         }
         if (givenUpConfirmBtn && givenUpConfirmBtn.active && givenUpConfirmBtn.activeInHierarchy) {
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(givenUpConfirmBtn);
           await delay(200);
         }
@@ -1077,7 +1249,7 @@
         }
         await delay(50);
         if (giveUpBtn && giveUpBtn.active && giveUpBtn.activeInHierarchy) {
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(giveUpBtn);
           csl.log("点击放弃");
           count++;
@@ -1085,15 +1257,15 @@
           const flag = canTripleBetCard();
           const hqs = getBetCardHeroQuality();
           if (flag) {
-            if (!status$3.value) return;
+            if (!status$2.value) return;
             const maxBtn = await waitForNodeActive("/Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/BetNode/maxButton", true);
-            if (!status$3.value) return;
+            if (!status$2.value) return;
             if (maxBtn) await nodePress(maxBtn);
             await delay(200);
-            if (!status$3.value) return;
+            if (!status$2.value) return;
             await nodePress(betBtn);
           } else {
-            if (!status$3.value) return;
+            if (!status$2.value) return;
             await nodePress(betBtn);
           }
           const index = await waitForBetCardOnceResult();
@@ -1164,11 +1336,11 @@
     var _a, _b, _c, _d, _e;
     if (!betCardAutoRecruitFlag) return;
     while (true) {
-      if (!status$3.value) return;
+      if (!status$2.value) return;
       if ("符合筛选条件的英雄已经出现" === ((_b = (_a = ccFind("Root/UIScene/UICanvas/Top/ToastPopup/center/LabelToastItem/txt")) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _b.string)) {
         const closeTips = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/CloseTips");
         if (closeTips && closeTips.active && closeTips.activeInHierarchy) {
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(closeTips);
           await delay(200);
           return;
@@ -1179,7 +1351,7 @@
       const BigButtonGreen = ccFind("Root/UIScene/UICanvas/Popup/ConfirmPopup/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
       if (BigButtonGreen && BigButtonGreen.active && BigButtonGreen.activeInHierarchy) {
         dealBetCardAutoRecruitResult();
-        if (!status$3.value) return;
+        if (!status$2.value) return;
         await nodePress(BigButtonGreen);
         await delay(200);
         return;
@@ -1189,7 +1361,7 @@
         const tipString = (_c = closeTip.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _c.string;
         if (tipString && tipString.includes("今日已达自动招募上限")) {
           dealBetCardAutoRecruitResult();
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(closeTip);
           await delay(200);
           betCardAutoRecruitFlag = false;
@@ -1197,7 +1369,7 @@
         }
         if (tipString && tipString.includes("当次招募次数已满，请再次操作招募。")) {
           dealBetCardAutoRecruitResult();
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(closeTip);
           await delay(500);
           continue;
@@ -1206,12 +1378,12 @@
       const noTip = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/noTipToggle/Floor");
       const tipsConfirmBtn = ccFind("Root/UIScene/UICanvas/Top/SystemConfirmPopupView/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
       if (noTip && noTip.active && noTip.activeInHierarchy) {
-        if (!status$3.value) return;
+        if (!status$2.value) return;
         await nodePress(noTip);
         await delay(200);
       }
       if (tipsConfirmBtn && tipsConfirmBtn.active && tipsConfirmBtn.activeInHierarchy) {
-        if (!status$3.value) return;
+        if (!status$2.value) return;
         await nodePress(tipsConfirmBtn);
         await delay(200);
         continue;
@@ -1220,7 +1392,7 @@
       if (giveUpBtn && giveUpBtn.active && giveUpBtn.activeInHierarchy) {
         const betBtn = await waitForNodeActive("/Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/BigButtonHasProp", true);
         if (betBtn) {
-          if (!status$3.value) return;
+          if (!status$2.value) return;
           await nodePress(giveUpBtn);
           await delay(200);
           continue;
@@ -1238,7 +1410,7 @@
           betCardAutoRecruitFlag = false;
           const closeTipsBtn = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/CloseTips");
           if (closeTipsBtn && closeTipsBtn.active && closeTipsBtn.activeInHierarchy) {
-            if (!status$3.value) return;
+            if (!status$2.value) return;
             await nodePress(closeTipsBtn);
             await delay(500);
           }
@@ -1247,14 +1419,14 @@
       }
       const recruitBeginBtn = ccFind("Root/UIScene/UICanvas/Popup/PubAutoRecruitSettingView/Content/Popup/Bottom/BigButtonGreen/Img");
       if (recruitBeginBtn && recruitBeginBtn.active && recruitBeginBtn.activeInHierarchy) {
-        if (!status$3.value) return;
+        if (!status$2.value) return;
         await nodePress(recruitBeginBtn);
         await delay(500);
         continue;
       }
       const recruitSettingBtn = ccFind("Root/UIScene/UICanvas/Content/PubMainView/Content/Panel/PubView/Content/Stage/BottomLayout/PubRecruitButtonView/ButtonBox/SettingBox/recruitSettingBtn");
       if (recruitSettingBtn && recruitSettingBtn.active && recruitSettingBtn.activeInHierarchy) {
-        if (!status$3.value) return;
+        if (!status$2.value) return;
         await nodePress(recruitSettingBtn);
         await delay(500);
         continue;
@@ -1267,15 +1439,15 @@
   const _hoisted_3$1 = { class: "statisticsContainer" };
   const _hoisted_4$1 = { class: "importLogContainer" };
   const _hoisted_5$1 = { class: "dialog-footer" };
-  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
     __name: "BetCardBtn",
     setup(__props) {
       const btnClick = async () => {
-        status$3.value = !status$3.value;
-        csl.log(`自动抽卡: ${status$3.value ? "开" : "关"}`);
+        status$2.value = !status$2.value;
+        csl.log(`自动抽卡: ${status$2.value ? "开" : "关"}`);
         setCanBetCardAutoRecruit();
         try {
-          while (status$3.value) {
+          while (status$2.value) {
             if (_GM_getValue("betCardAutoRecruit")) {
               await betCardAutoRecruitOnce();
               await delay(500);
@@ -1285,7 +1457,7 @@
           }
         } catch (e) {
           csl.error(e);
-          status$3.value = false;
+          status$2.value = false;
         }
       };
       const copyLog = () => {
@@ -1301,7 +1473,7 @@
         logContent.value = "";
       };
       vue.onUnmounted(() => {
-        status$3.value = false;
+        status$2.value = false;
       });
       const settingDialogVisiable = vue.ref(false);
       const tripleList = vue.ref([]);
@@ -1514,12 +1686,12 @@
           vue.createVNode(_component_el_button_group, { class: "group" }, {
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_button, {
-                type: vue.unref(status$3) ? "primary" : "default",
+                type: vue.unref(status$2) ? "primary" : "default",
                 size: "small",
                 onClick: btnClick
               }, {
                 default: vue.withCtx(() => [
-                  vue.createTextVNode(" 抽卡: " + vue.toDisplayString(vue.unref(status$3) ? "开" : "关"), 1)
+                  vue.createTextVNode(" 抽卡: " + vue.toDisplayString(vue.unref(status$2) ? "开" : "关"), 1)
                 ]),
                 _: 1
               }, 8, ["type"]),
@@ -1786,12 +1958,12 @@
     }
     return target;
   };
-  const BetCardBtn = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-fbcb57d2"]]);
-  const status$2 = vue.ref(false);
-  const start$2 = async () => {
-    status$2.value = !status$2.value;
-    csl.log(`战神陵打肉: ${status$2.value ? "开" : "关"}`);
-    if (status$2.value) {
+  const BetCardBtn = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-fbcb57d2"]]);
+  const status$1 = vue.ref(false);
+  const start$1 = async () => {
+    status$1.value = !status$1.value;
+    csl.log(`战神陵打肉: ${status$1.value ? "开" : "关"}`);
+    if (status$1.value) {
       const path = [
         { x: 1533, y: 1390 },
         { x: 790, y: 1518 },
@@ -1810,41 +1982,41 @@
       ];
       try {
         await movePath(path, true);
-        status$2.value = false;
+        status$1.value = false;
       } catch (e) {
         csl.error(e);
-        status$2.value = false;
+        status$1.value = false;
       }
     } else {
       setMoveInterrupt();
     }
   };
-  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     __name: "CollectMeatZhanShenLingBtn",
     setup(__props) {
       const btnClick = () => {
-        start$2();
+        start$1();
       };
       vue.onUnmounted(() => {
-        status$2.value = false;
+        status$1.value = false;
         setMoveInterrupt();
       });
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: vue.unref(status$2) ? "primary" : "default",
+          type: vue.unref(status$1) ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode(" 战神陵打肉: " + vue.toDisplayString(vue.unref(status$2) ? "开" : "关"), 1)
+            vue.createTextVNode(" 战神陵打肉: " + vue.toDisplayString(vue.unref(status$1) ? "开" : "关"), 1)
           ]),
           _: 1
         }, 8, ["type"]);
       };
     }
   });
-  const status$1 = vue.ref(false);
+  const status = vue.ref(false);
   const getBossPts = () => {
     var _a;
     return (_a = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer")) == null ? void 0 : _a.children.filter((ele) => {
@@ -1863,30 +2035,30 @@
       };
     });
   };
-  const start$1 = async () => {
-    status$1.value = !status$1.value;
-    csl.log(`F4打金币: ${status$1.value ? "开" : "关"}`);
-    if (status$1.value) {
+  const start = async () => {
+    status.value = !status.value;
+    csl.log(`F4打金币: ${status.value ? "开" : "关"}`);
+    if (status.value) {
       try {
         while (true) {
-          if (!status$1.value) throw new Error("打金中断");
+          if (!status.value) throw new Error("打金中断");
           await backHome();
           await delay(200);
           const manifierRect = getNearestMagnifierRect();
-          if (!status$1.value) throw new Error("打金中断");
+          if (!status.value) throw new Error("打金中断");
           await rectPress(manifierRect);
           const leftHSBLBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel1/PlaceScrollView/view/content/PlaceItemView[7]");
           await delay(200);
-          if (!status$1.value) throw new Error("打金中断");
+          if (!status.value) throw new Error("打金中断");
           await nodePress(leftHSBLBtn);
           const rightDTLDbtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel1/TeleportScrollView/view/content/TeleportSelectItemView[1]");
           await delay(500);
-          if (!status$1.value) throw new Error("打金中断");
+          if (!status.value) throw new Error("打金中断");
           await nodePress(rightDTLDbtn);
           await delay(1500);
           await waitForNodeActive("Root/GameScene/OperationCanvas/MapButtonView/BuildingButton01");
           await delay(200);
-          if (!status$1.value) throw new Error("打金中断");
+          if (!status.value) throw new Error("打金中断");
           await moveToXY(-10016, -3885);
           let bossPts = getBossPts();
           if (!bossPts) throw new Error("boss位置获取失败");
@@ -1895,7 +2067,7 @@
           let path = planPath(teamPosition, bossPts);
           while ((bossPts == null ? void 0 : bossPts.length) && path.length) {
             const t1 = Date.now();
-            if (!status$1.value) throw new Error("打金中断");
+            if (!status.value) throw new Error("打金中断");
             await moveToXY(path[0].x, path[0].y);
             const t2 = Date.now();
             if (t2 - t1 > 300) {
@@ -1913,39 +2085,39 @@
         }
       } catch (e) {
         csl.error(e);
-        status$1.value = false;
+        status.value = false;
       }
     } else {
-      status$1.value = false;
+      status.value = false;
       setMoveInterrupt();
     }
   };
-  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "CollectGoldenF4Btn",
     setup(__props) {
       const btnClick = async () => {
-        start$1();
+        start();
       };
       vue.onUnmounted(() => {
-        status$1.value = false;
+        status.value = false;
         setMoveInterrupt();
       });
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: vue.unref(status$1) ? "primary" : "default",
+          type: vue.unref(status) ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode(" F4打金币: " + vue.toDisplayString(vue.unref(status$1) ? "开" : "关"), 1)
+            vue.createTextVNode(" F4打金币: " + vue.toDisplayString(vue.unref(status) ? "开" : "关"), 1)
           ]),
           _: 1
         }, 8, ["type"]);
       };
     }
   });
-  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
     __name: "RoamBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2081,7 +2253,7 @@
     // TODO 精英难度
     // TODO 噩梦难度
   ];
-  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
     __name: "RoamPathBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2130,7 +2302,7 @@
       };
     }
   });
-  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
     __name: "DungeonBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2219,7 +2391,7 @@
     }
   });
   const _hoisted_1$2 = { class: "dialog-footer" };
-  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
     __name: "ChestBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2427,37 +2599,37 @@
       };
     }
   });
-  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-25f73fae"]]);
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-25f73fae"]]);
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
     __name: "RedPackBtn",
     setup(__props) {
-      const status2 = vue.ref(false);
+      const status$22 = vue.ref(false);
       const btnClick = async () => {
-        status2.value = !status2.value;
-        if (status2.value) {
+        status$22.value = !status$22.value;
+        if (status$22.value) {
           while (true) {
             try {
               csl.log("新一轮等待红包");
               const redPackBtn = await waitForNodeActive("Root/UIScene/UICanvas/Menu/MenuView/SaveArea/DownLeft/RedPacketMenuIconView/Btn");
-              if (!status2.value) return;
+              if (!status$22.value) return;
               if (redPackBtn) {
-                if (status$2.value) {
+                if (status$1.value) {
                   csl.log("检查到正在打肉，20秒后恢复执行打肉");
                   setTimeout(() => {
-                    if (!status$2.value) {
+                    if (!status$1.value) {
                       csl.log("尝试恢复执行打肉");
-                      start$2();
+                      start$1();
                     } else {
                       csl.log("打肉正在执行，不恢复");
                     }
                   }, 2e4);
                 }
-                if (status$1.value) {
+                if (status.value) {
                   csl.log("检查到正在打金，20秒后恢复执行打金");
                   setTimeout(() => {
-                    if (!status$1.value) {
+                    if (!status.value) {
                       csl.log("尝试恢复执行打金");
-                      start$1();
+                      start();
                     } else {
                       csl.log("打金正在执行，不恢复");
                     }
@@ -2467,18 +2639,18 @@
                 await delay(500);
                 csl.log("抢红包");
                 const redPackOpenBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/packet/bg/openInfo/Hongbao_btn_open", true, 5e3);
-                if (!status2.value) return;
+                if (!status$22.value) return;
                 if (redPackOpenBtn) {
                   await nodePress(redPackOpenBtn);
                   csl.log("打开红包");
                   await delay(800);
                   const redPackCloseBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/CloseTip", false, 2e3);
-                  if (!status2.value) return;
+                  if (!status$22.value) return;
                   nodePress(redPackCloseBtn);
                 }
               }
               const isOver = ccFind("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/packet/bg/hasOpenInfo/status/over");
-              if (!status2.value) return;
+              if (!status$22.value) return;
               if (isOver && isOver.active) {
                 csl.log("红包领完了");
                 const closeTipBtn = ccFind("Root/UIScene/UICanvas/Popup/ActivityRedPacketOpenView/CommonBG2/CloseTip");
@@ -2488,30 +2660,30 @@
             } catch (e) {
               csl.log(e);
               await delay(1e3);
-              if (!status2.value) return;
+              if (!status$22.value) return;
             }
           }
         }
       };
       vue.onUnmounted(() => {
-        status2.value = false;
+        status$22.value = false;
       });
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: status2.value ? "primary" : "default",
+          type: status$22.value ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => [
-            vue.createTextVNode(" 自动抢红包: " + vue.toDisplayString(status2.value ? "开" : "关"), 1)
+            vue.createTextVNode(" 自动抢红包: " + vue.toDisplayString(status$22.value ? "开" : "关"), 1)
           ]),
           _: 1
         }, 8, ["type"]);
       };
     }
   });
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
     __name: "PositionBtn",
     setup(__props) {
       const x = vue.ref("?");
@@ -2569,13 +2741,13 @@
   });
   const funComponents = [{
     id: "PauseBossBtn",
-    component: _sfc_main$d,
+    component: _sfc_main$e,
     name: "Boss暂停",
     description: "可以让Boss定身不打你",
     hideInLite: true
   }, {
     id: "PauseMonsterBtn",
-    component: _sfc_main$c,
+    component: _sfc_main$d,
     name: "小怪暂停",
     description: "可以让小怪定身不打你",
     hideInLite: true
@@ -2586,29 +2758,29 @@
     description: "可以进行自动抽卡"
   }, {
     id: "CollectMeatZhanShenLingBtn",
-    component: _sfc_main$a,
+    component: _sfc_main$b,
     name: "自动打肉（战神陵）",
     description: "在无尽深渊-熔火之境-战神陵绕圈打肉"
   }, {
     id: "CollectGoldenF4Btn",
-    component: _sfc_main$9,
+    component: _sfc_main$a,
     name: "自动打金币（F4）",
     description: "在英雄大陆-黑石堡垒-大厅楼道打4个boss获取金币、也可以在这里刷经验"
   }, {
     id: "RoamBtn",
-    component: _sfc_main$8,
+    component: _sfc_main$9,
     name: "智能寻怪",
     description: "实验性功能，查找附近的boss和小怪，并自动规划路线打怪，目前无法避障",
     hideInLite: true
   }, {
     id: "RoamPathBtn",
-    component: _sfc_main$7,
+    component: _sfc_main$8,
     name: "预定义路线",
     description: "实验性功能，启动时获取当前坐标与已知路线的起点比较，若匹配则以该路线进行行进",
     hideInLite: true
   }, {
     id: "DungeonBtn",
-    component: _sfc_main$6,
+    component: _sfc_main$7,
     name: "召唤副本",
     description: "打100级的召唤副本，打开召唤副本界面，选择好难度后运行可自动打副本，根据已知路线与附近怪物动动态实时规划路线，可保证任意阵容不漏怪打副本"
   }, {
@@ -2618,49 +2790,56 @@
     description: "原地自动领宝箱，一般用于挂机boss领宝箱"
   }, {
     id: "RedPackBtn",
-    component: _sfc_main$4,
+    component: _sfc_main$5,
     name: "自动抢红包",
     description: "实时查找左下角红包按钮，出现了就抢红包，不一定能抢到"
   }, {
     id: "PositionBtn",
-    component: _sfc_main$3,
+    component: _sfc_main$4,
     name: "坐标显示",
     description: "显示当前坐标，点击后可复制坐标，一般用于路线制作时的坐标获取"
   }];
-  const status = vue.ref(false);
-  const start = async (config) => {
-    status.value = !status.value;
-    csl.log(`动态路线[${config.name}]: ${status.value ? "开" : "关"}`);
-    if (status.value) {
-      const path = config.path;
-      try {
-        if (config.dynamicMonster) {
-          await movePathWithMonster(path, status, config.isCircle);
-        } else {
-          await movePath(path, config.isCircle);
+  const useDynamicPathTool = () => {
+    const status2 = vue.ref(false);
+    const start2 = async (config) => {
+      status2.value = !status2.value;
+      csl.log(`动态路线[${config.name}]: ${status2.value ? "开" : "关"}`);
+      if (status2.value) {
+        const path = config.path;
+        try {
+          if (config.dynamicMonster) {
+            await movePathWithMonster(path, status2, config.isCircle);
+          } else {
+            await movePath(path, config.isCircle);
+          }
+          status2.value = false;
+        } catch (e) {
+          csl.error(e);
+          status2.value = false;
         }
-        status.value = false;
-      } catch (e) {
-        csl.error(e);
-        status.value = false;
+      } else {
+        setMoveInterrupt();
       }
-    } else {
-      setMoveInterrupt();
-    }
+    };
+    return {
+      status: status2,
+      start: start2
+    };
   };
-  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
     __name: "DynamicPathBtn",
     props: {
       id: String
     },
     setup(__props, { expose: __expose }) {
+      const { start: start2, status: status2 } = useDynamicPathTool();
       const props = __props;
       const componentConfig = vue.ref();
       vue.onMounted(() => {
         loadConfig();
       });
       vue.onUnmounted(() => {
-        status.value = false;
+        status2.value = false;
         setMoveInterrupt();
       });
       const loadConfig = () => {
@@ -2672,7 +2851,8 @@
       };
       const btnClick = () => {
         if (!componentConfig.value) throw Error(`dynamic path [${props.id}] cannot be resolved`);
-        start(componentConfig.value);
+        csl.log(`dynamic path config: `, componentConfig.value);
+        start2(componentConfig.value);
       };
       __expose({
         loadConfig
@@ -2680,14 +2860,14 @@
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         return vue.openBlock(), vue.createBlock(_component_el_button, {
-          type: vue.unref(status) ? "primary" : "default",
+          type: vue.unref(status2) ? "primary" : "default",
           size: "small",
           onClick: btnClick
         }, {
           default: vue.withCtx(() => {
             var _a;
             return [
-              vue.createTextVNode(vue.toDisplayString(((_a = componentConfig.value) == null ? void 0 : _a.name) || "动态按钮unkown") + ": " + vue.toDisplayString(vue.unref(status) ? "开" : "关"), 1)
+              vue.createTextVNode(vue.toDisplayString(((_a = componentConfig.value) == null ? void 0 : _a.name) || "动态按钮unkown") + ": " + vue.toDisplayString(vue.unref(status2) ? "开" : "关"), 1)
             ];
           }),
           _: 1
@@ -2731,7 +2911,7 @@
       const ComponentConfigSingle = config[id];
       if (ComponentConfigSingle.path) {
         return {
-          component: _sfc_main$2,
+          component: _sfc_main$3,
           ...ComponentConfigSingle
         };
       } else {
@@ -2817,7 +2997,7 @@
   const _hoisted_3 = ["data-id"];
   const _hoisted_4 = { class: "name-text" };
   const _hoisted_5 = { style: { "text-align": "right", "margin": "0" } };
-  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
     __name: "ButtonSetting",
     props: {
       isLite: Boolean
@@ -3295,6 +3475,40 @@ ${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
       };
     }
   });
+  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+    __name: "PathViewer",
+    setup(__props) {
+      return (_ctx, _cache) => {
+        const _component_el_dialog = vue.resolveComponent("el-dialog");
+        return vue.openBlock(), vue.createBlock(_component_el_dialog, {
+          class: "path-viewer",
+          "modal-class": "path-viewer-modal",
+          top: "0px",
+          modelValue: vue.unref(shown),
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(shown) ? shown.value = $event : null),
+          modal: false,
+          "show-close": true,
+          draggable: "",
+          width: "200px",
+          "destroy-on-close": "",
+          "close-on-click-modal": false
+        }, {
+          header: vue.withCtx(() => _cache[1] || (_cache[1] = [
+            vue.createElementVNode("span", null, "线路图", -1)
+          ])),
+          footer: vue.withCtx(() => _cache[2] || (_cache[2] = [])),
+          default: vue.withCtx(() => [
+            vue.createElementVNode("div", {
+              ref_key: "echartsRef",
+              ref: echartsRef,
+              style: { "width": "200px", "height": "200px" }
+            }, "echarts显示区域", 512)
+          ]),
+          _: 1
+        }, 8, ["modelValue"]);
+      };
+    }
+  });
   const _hoisted_1 = { class: "zz-sub-btns" };
   const _sfc_main = /* @__PURE__ */ vue.defineComponent({
     __name: "App",
@@ -3304,7 +3518,7 @@ ${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
     setup(__props) {
       const btnContainer = vue.ref();
       const btn = vue.ref();
-      const components = vue.ref([]);
+      const components = vue.shallowRef([]);
       const btnSetting = vue.ref({});
       const dynamicPathBtnRefs = vue.ref({});
       vue.onMounted(() => {
@@ -3380,19 +3594,20 @@ ${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
                   ])),
                   _: 1
                 }),
-                vue.createVNode(_sfc_main$1, {
+                vue.createVNode(_sfc_main$2, {
                   "is-lite": __props.isLite,
                   onSaved: setButton
                 }, null, 8, ["is-lite"])
               ]),
               _: 1
             })
-          ])
+          ]),
+          vue.createVNode(_sfc_main$1)
         ], 512);
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6e8b18d4"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-29368ea8"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus, { zIndex: 4e3 }).mount(
     (() => {
       const app = document.createElement("div");
