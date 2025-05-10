@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.0.21
+// @version      1.1.0
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.path-viewer.el-dialog{padding:0;margin-right:0;pointer-events:auto}.path-viewer .el-dialog__header,.path-viewer .el-dialog__footer{padding:0}.path-viewer .el-dialog__headerbtn{width:22.5px;height:22.5px}.path-viewer-modal{pointer-events:none}.group[data-v-29368ea8]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-29368ea8]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-29368ea8]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-29368ea8]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-29368ea8]{opacity:1;pointer-events:all}.zz-rotate[data-v-29368ea8]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.path-viewer.el-dialog{padding:0;margin-right:0;pointer-events:auto}.path-viewer .el-dialog__header,.path-viewer .el-dialog__footer{padding:0}.path-viewer .el-dialog__headerbtn{width:22.5px;height:22.5px}.path-viewer-modal{pointer-events:none}.group[data-v-ee34aa69]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-ee34aa69]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-ee34aa69]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-ee34aa69]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-ee34aa69]{opacity:1;pointer-events:all}.zz-rotate[data-v-ee34aa69]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -147,6 +147,9 @@
       })
     };
   });
+  function isBasicPathNode(node) {
+    return !("type" in node);
+  }
   function throttle(fn, delay2) {
     let lastCall = 0;
     let pendingCall = null;
@@ -241,21 +244,22 @@
     });
   };
   const setPathViewerPosition = throttle(setPathViewerPositionRaw, 200);
-  const setPathViewerData = async (path2, position) => {
+  const setPathViewerData = async (pathIn, position) => {
     if (!shown.value) await showPathViewer();
     if (!instance) throw Error(`echarts instance error`);
+    const path = pathIn.filter(isBasicPathNode);
     cachedSeriesData = [
       {
         name: "路径",
         type: "line",
-        data: path2.map(({ x, y }) => [x, y]),
+        data: path.map(({ x, y }) => [x, y]),
         symbol: "circle",
         symbolSize: 8
       },
       {
         name: "起点",
         type: "scatter",
-        data: [[path2[0].x, path2[0].y]],
+        data: [[path[0].x, path[0].y]],
         symbol: "pin",
         symbolSize: 50,
         itemStyle: {
@@ -274,7 +278,7 @@
       {
         name: "终点",
         type: "scatter",
-        data: [[path2[path2.length - 1].x, path2[path2.length - 1].y]],
+        data: [[path[path.length - 1].x, path[path.length - 1].y]],
         symbol: "pin",
         symbolSize: 50,
         itemStyle: {
@@ -486,18 +490,18 @@
     updateDebugRect(rect, timeout);
     const x = random(rect.x + rect.width / 4, rect.x + rect.width * 3 / 4);
     const y = random(rect.y + rect.height / 4, rect.y + rect.height * 3 / 4);
-    const eventDown = new MouseEvent("mousedown", {
+    const eventDown2 = new MouseEvent("mousedown", {
       clientX: x,
       clientY: y
     });
     const canvasDom2 = document.querySelector("#GameCanvas");
-    canvasDom2 == null ? void 0 : canvasDom2.dispatchEvent(eventDown);
+    canvasDom2 == null ? void 0 : canvasDom2.dispatchEvent(eventDown2);
     await delay(timeout);
-    const eventUp = new MouseEvent("mouseup", {
+    const eventUp2 = new MouseEvent("mouseup", {
       clientX: x,
       clientY: y
     });
-    canvasDom2 == null ? void 0 : canvasDom2.dispatchEvent(eventUp);
+    canvasDom2 == null ? void 0 : canvasDom2.dispatchEvent(eventUp2);
     await delay(timeout);
   }
   _unsafeWindow.rectPress = rectPress;
@@ -676,6 +680,12 @@
   }
   _unsafeWindow.nearBy = nearBy;
   let canvasDom;
+  function initCanvasDomIfNeeded() {
+    if (!canvasDom) {
+      canvasDom = document.querySelector("#GameCanvas");
+      if (!canvasDom) throw new Error("canvasDom not found");
+    }
+  }
   let moveStatus = false;
   let moveInterrupt = false;
   async function moveToXY(x, y, stuckRetryTimes = 0) {
@@ -684,15 +694,13 @@
     }
     if (nearBy(x, y)) return;
     moveStatus = true;
-    if (!canvasDom) {
-      canvasDom = document.querySelector("#GameCanvas");
-      if (!canvasDom) throw new Error("canvasDom not found");
-    }
+    initCanvasDomIfNeeded();
     const width = canvasDom.clientWidth;
     const height = canvasDom.clientHeight;
     let centerX = width / 2 + random(-25, 25), centerY = height * 3 / 4 + random(-25, 25);
     await delay(10);
-    eventDown();
+    eventDown(centerX, centerY);
+    await delay(10);
     const maxR = random(60, 110);
     await new Promise((resolve, reject) => {
       let lastPositions = [];
@@ -764,32 +772,158 @@
       }, 100);
     });
     moveStatus = false;
-    function eventDown(x2, y2) {
-      const eventDown2 = new MouseEvent("mousedown", {
-        clientX: centerX,
-        clientY: centerY
-      });
-      canvasDom.dispatchEvent(eventDown2);
-      updateDebugRect({ x: centerX - 4, y: centerY - 4, width: 7, height: 7 }, 102);
-    }
-    function eventMove(x2, y2) {
-      const eventMove2 = new MouseEvent("mousemove", {
-        clientX: x2,
-        clientY: y2
-      });
-      canvasDom.dispatchEvent(eventMove2);
-      updateDebugRect({ x: x2 - 4, y: y2 - 4, width: 7, height: 7 }, 102);
-    }
-    function eventUp(x2, y2) {
-      const eventUp2 = new MouseEvent("mouseup", {
-        clientX: x2,
-        clientY: y2
-      });
-      canvasDom.dispatchEvent(eventUp2);
-      updateDebugRect({ x: x2 - 4, y: y2 - 4, width: 7, height: 7 }, 102);
-    }
+  }
+  function eventDown(x, y) {
+    initCanvasDomIfNeeded();
+    const eventDown2 = new MouseEvent("mousedown", {
+      clientX: x,
+      clientY: y
+    });
+    canvasDom.dispatchEvent(eventDown2);
+    updateDebugRect({ x: x - 4, y: y - 4, width: 7, height: 7 }, 102);
+    csl.log(`按下：${x}, ${y}`);
+  }
+  function eventMove(x, y) {
+    initCanvasDomIfNeeded();
+    const eventMove2 = new MouseEvent("mousemove", {
+      clientX: x,
+      clientY: y
+    });
+    canvasDom.dispatchEvent(eventMove2);
+    updateDebugRect({ x: x - 4, y: y - 4, width: 7, height: 7 }, 102);
+    csl.log(`移动：${x}, ${y}`);
+  }
+  function eventUp(x, y) {
+    initCanvasDomIfNeeded();
+    const eventUp2 = new MouseEvent("mouseup", {
+      clientX: x,
+      clientY: y
+    });
+    canvasDom.dispatchEvent(eventUp2);
+    updateDebugRect({ x: x - 4, y: y - 4, width: 7, height: 7 }, 102);
+    csl.log(`抬起：${x}, ${y}`);
   }
   _unsafeWindow.moveToXY = moveToXY;
+  async function teleport(info) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+    const rect = getNearestMagnifierRect();
+    await rectPress(rect);
+    let step1Str = null;
+    if (info.target[0] === "英雄大陆") {
+      step1Str = `Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/TabPanel/TabPageBtn1`;
+    } else if (info.target[0] === "无尽深渊") {
+      step1Str = `Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/TabPanel/TabPageBtn2`;
+    }
+    if (!step1Str) throw Error(`${info.target[0]} is not valid value`);
+    await delay(200);
+    const step1Node = await waitForNodeActive(step1Str, true, 3e3);
+    await nodePress(step1Node);
+    let step2ContainerStr = null;
+    if (info.target[0] === "英雄大陆") {
+      step2ContainerStr = "Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel1/PlaceScrollView/view/content";
+    } else if (info.target[0] === "无尽深渊") {
+      step2ContainerStr = "Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel2/PlaceScrollView/view/content";
+    }
+    let step2Node = (_a = ccFind(step2ContainerStr)) == null ? void 0 : _a.children.find((node) => {
+      const labelNode = ccFind("PlaceName", node);
+      if (!labelNode) return false;
+      const labelName = labelNode.getComponent(_unsafeWindow.cc.Label).string;
+      return labelName === info.target[1];
+    });
+    if (info.target[0] === "无尽深渊" && !step2Node) {
+      const items = (_b = ccFind(step2ContainerStr)) == null ? void 0 : _b.children;
+      const rect2 = getUIDomPosition(items[items.length - 2]);
+      const p = {
+        x: rect2.x + rect2.width / 2,
+        y: rect2.y + rect2.height / 2
+      };
+      eventDown(p.x, p.y);
+      await delay(200);
+      eventMove(p.x, Math.max(p.y - 500, 1));
+      await delay(500);
+      eventUp(p.x, Math.max(p.y - 500, 1));
+      await delay(500);
+      step2Node = (_c = ccFind(step2ContainerStr)) == null ? void 0 : _c.children.find((node) => {
+        const labelNode = ccFind("PlaceName", node);
+        if (!labelNode) return false;
+        const labelName = labelNode.getComponent(_unsafeWindow.cc.Label).string;
+        return labelName === info.target[1];
+      });
+    }
+    if (!step2Node) throw Error(`${info.target[1]} is not valid value`);
+    await nodeEventPress(step2Node);
+    await delay(500);
+    let step3ContainerStr = null;
+    if (info.target[0] === "英雄大陆") {
+      step3ContainerStr = "Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel1/TeleportScrollView/view/content";
+    } else if (info.target[0] === "无尽深渊") {
+      step3ContainerStr = "Root/UIScene/UICanvas/Popup/TeleportSelectView/TabPagePanel/Bg/Panel/Panel2/TeleportScrollView/view/content";
+    }
+    let step3items = (_d = ccFind(step3ContainerStr)) == null ? void 0 : _d.children.sort((a, b) => b.worldPosition.y - a.worldPosition.y);
+    if (!step3items) throw Error(`${info.target[2]} is not valid value[1]`);
+    let step3Node = step3items.find((node) => {
+      const labelNode = ccFind("Name", node);
+      const labelName = labelNode == null ? void 0 : labelNode.getComponent(_unsafeWindow.cc.Label).string;
+      return labelName === info.target[2];
+    });
+    if (!step3Node) {
+      if (step3items.length < 6) throw Error(`${info.target[2]} is not valid value[2]`);
+      let flag = true;
+      while (flag) {
+        const rectStart = getUIDomPosition(step3items[step3items.length - 2]);
+        const p1 = {
+          x: Math.floor(rectStart.x + rectStart.width / 2),
+          y: Math.floor(rectStart.y + rectStart.height / 2)
+        };
+        const rectEnd = getUIDomPosition(step3items[0]);
+        const p2 = {
+          x: rectEnd.x + rectEnd.width / 2,
+          y: rectEnd.y + rectEnd.height / 2
+        };
+        csl.log(`右侧翻页`);
+        eventDown(p1.x, p1.y);
+        await delay(500);
+        eventMove(p2.x, p2.y);
+        await delay(500);
+        eventUp(p2.x, p2.y);
+        await delay(500);
+        const lastLabelName = (_f = (_e = ccFind("Name", step3items[step3items.length - 1])) == null ? void 0 : _e.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _f.string;
+        step3items = (_g = ccFind(step3ContainerStr)) == null ? void 0 : _g.children.sort((a, b) => b.worldPosition.y - a.worldPosition.y);
+        step3Node = step3items.find((node) => {
+          const labelNode = ccFind("Name", node);
+          const labelName = labelNode == null ? void 0 : labelNode.getComponent(_unsafeWindow.cc.Label).string;
+          return labelName === info.target[2];
+        });
+        if (step3Node) break;
+        const lastLabelNameNew = (_i = (_h = ccFind("Name", step3items[step3items.length - 1])) == null ? void 0 : _h.getComponent(_unsafeWindow.cc.Label)) == null ? void 0 : _i.string;
+        if (lastLabelName === lastLabelNameNew) {
+          flag = false;
+          csl.error("翻到最后了，没有找到");
+          break;
+        }
+      }
+    }
+    if (!step3Node) throw Error(`${info.target[2]} is not valid value[3]`);
+    let lastPosition = getTeamPosition();
+    lastPosition.x = Math.floor(lastPosition.x);
+    lastPosition.y = Math.floor(lastPosition.y);
+    await nodeEventPress(step3Node);
+    await delay(500);
+    const t1 = Date.now();
+    while (Date.now() - t1 > 3e4) {
+      await delay(500);
+      const newPosition = getTeamPosition();
+      if (!newPosition) continue;
+      newPosition.x = Math.floor(newPosition.x);
+      newPosition.y = Math.floor(newPosition.y);
+      if (newPosition.x !== lastPosition.x || newPosition.y !== lastPosition.y) {
+        break;
+      }
+    }
+    await waitForNodeActive("Root/GameScene/OperationCanvas/MapButtonView/BuildingButton01");
+    await delay(200);
+  }
+  _unsafeWindow.teleport = teleport;
   async function movePath(path, isCircle = false) {
     if (path.length < 2) {
       throw new Error("路径至少需要2个点");
@@ -798,12 +932,20 @@
     if (!currentPos) {
       throw new Error("无法获取当前位置");
     }
-    const { segmentIndex: closestSegmentIndex, minDistance: _ } = getPathStartIndex(currentPos, path);
-    const startIndex = closestSegmentIndex + 1;
+    const { segmentIndex: closestSegmentIndex, minDistance } = getPathStartIndex(currentPos, path);
+    let startIndex = closestSegmentIndex + 1;
+    if (minDistance > 3e3) startIndex = 0;
     setPathViewerData(path);
     for (let i = startIndex; i < path.length; i = isCircle ? (i + 1) % path.length : i + 1) {
       const t1 = Date.now();
-      await moveToXY(path[i].x, path[i].y);
+      const node = path[i];
+      if (isBasicPathNode(node)) {
+        await moveToXY(node.x, node.y);
+      } else if (node.type === "backHome") {
+        await backHome();
+      } else if (node.type === "teleport") {
+        await teleport(node);
+      }
       const t2 = Date.now();
       if (t2 - t1 > 300) {
         await delay(random(2e3, 3e3));
@@ -819,7 +961,7 @@
     }
     while (statusRef.value) {
       const newPath = path.map((pt) => ({ ...pt }));
-      const clusterPts = clusterMonsters(ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
+      const monsterPositions = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
         var _a, _b, _c;
         if (/^Monster|^Boss/i.test(ele.name)) {
           const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
@@ -828,28 +970,40 @@
           }
         }
         return false;
-      }).map((ele) => ele.position), 100);
+      }).map((ele) => ({ x: ele.position.x, y: ele.position.y }));
+      const clusterPts = clusterMonsters(monsterPositions, 100);
       csl.log("clusterPts", clusterPts);
       clusterPts.forEach((pt) => {
-        const { segmentIndex, minDistance } = getPathStartIndex(pt, newPath);
-        if (minDistance < 510 && minDistance > 180) {
+        const { segmentIndex, minDistance: minDistance2 } = getPathStartIndex(pt, newPath);
+        if (minDistance2 < 510 && minDistance2 > 180) {
           newPath.splice(segmentIndex + 1, 0, pt);
-        } else if (minDistance <= 180 && segmentIndex < newPath.length - 1) {
-          const d1 = distance(pt, newPath[segmentIndex]);
-          const d2 = distance(pt, newPath[segmentIndex + 1]);
+        } else if (minDistance2 <= 180 && segmentIndex < newPath.length - 1) {
+          const node1 = newPath[segmentIndex];
+          const node2 = newPath[segmentIndex + 1];
+          if (!isBasicPathNode(node1) || !isBasicPathNode(node2)) return;
+          const d1 = distance(pt, node1);
+          const d2 = distance(pt, node2);
           if (d1 >= 180 && d2 >= 180) {
             newPath.splice(segmentIndex + 1, 0, pt);
           }
         }
       });
       const currentPos = getTeamPosition();
-      const { segmentIndex: closestSegmentIndex } = getPathStartIndex(currentPos, newPath);
+      const { segmentIndex: closestSegmentIndex, minDistance } = getPathStartIndex(currentPos, newPath);
       let startIndex;
-      if (isCircle && nearBy(currentPos.x, currentPos.y, newPath[0].x, newPath[0].y)) {
+      const firstNode = newPath[0];
+      if (isCircle && isBasicPathNode(firstNode) && nearBy(currentPos.x, currentPos.y, firstNode.x, firstNode.y)) {
         startIndex = 1;
       } else {
-        startIndex = closestSegmentIndex + 1;
-        while (startIndex < newPath.length && nearBy(currentPos.x, currentPos.y, newPath[startIndex].x, newPath[startIndex].y)) {
+        if (minDistance >= 3e3) {
+          startIndex = 0;
+        } else {
+          startIndex = closestSegmentIndex + 1;
+        }
+        while (startIndex < newPath.length) {
+          const currentNode = newPath[startIndex];
+          if (!isBasicPathNode(currentNode)) break;
+          if (!nearBy(currentPos.x, currentPos.y, currentNode.x, currentNode.y)) break;
           startIndex++;
         }
         if (isCircle && startIndex >= newPath.length) {
@@ -862,10 +1016,19 @@
       csl.log("newPath", newPath);
       csl.log("startIndex", startIndex);
       csl.log("currentPos", currentPos);
-      csl.log("currentPosDistance", distance(currentPos, newPath[startIndex % newPath.length]));
-      csl.log("currentPosclosestSegmentIndexDistance", distance(currentPos, newPath[closestSegmentIndex % newPath.length]));
+      csl.log("nextPos", newPath[startIndex]);
       setPathViewerData(newPath);
-      await moveToXY(newPath[startIndex].x, newPath[startIndex].y);
+      const node = newPath[startIndex];
+      if (isBasicPathNode(node)) {
+        await moveToXY(node.x, node.y);
+      } else if (node.type === "backHome") {
+        await backHome();
+      } else if (node.type === "teleport") {
+        await teleport(node);
+      }
+      if (!isCircle && !isBasicPathNode(node) && startIndex === newPath.length - 1) {
+        break;
+      }
       const t1 = Date.now();
       while (true) {
         let clearStatus = false;
@@ -908,8 +1071,11 @@
     let minDistance = Infinity;
     let closestSegmentIndex = -1;
     for (let i = 0; i < path.length - 1; i++) {
-      distance(path[i], path[i + 1]);
-      const dist = pointToLineDistance(currentPos, path[i], path[i + 1]);
+      const node1 = path[i];
+      const node2 = path[i + 1];
+      if (!isBasicPathNode(node1) || !isBasicPathNode(node2)) continue;
+      distance(node1, node2);
+      const dist = pointToLineDistance(currentPos, node1, node2);
       if (dist < minDistance) {
         minDistance = dist;
         closestSegmentIndex = i;
@@ -987,10 +1153,14 @@
     const backHomeBtn = ccFind("Root/UIScene/UICanvas/Menu/MenuView/SaveArea/DownRight/BackHomeMenuIconView");
     if (backHomeBtn && backHomeBtn.active) {
       await nodePress(backHomeBtn);
-      const confirmBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ConfirmPopup/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen");
-      await delay(200);
-      await nodePress(confirmBtn);
-      await delay(200);
+      try {
+        const confirmBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ConfirmPopup/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen", true, 3e3);
+        await delay(200);
+        await nodePress(confirmBtn);
+        await delay(200);
+      } catch (e) {
+        csl.error(`未找到确认按钮，可能无需确认就直接回城了`);
+      }
       await waitForPosition(-7089, -5605);
       await waitForNodeActive("Root/GameScene/OperationCanvas/MapButtonView/BuildingButton01");
     } else {
@@ -3064,7 +3234,7 @@
         const path = JSON.parse(JSON.stringify(dynamicPaths.value[index]));
         path._index = index;
         path.pathStr = `[
-${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
+${path.path.map((pathNode) => `	${JSON.stringify(pathNode)}`).join(",\n")}
 ]`;
         if (!path.id) {
           path.id = `dynamic_${Date.now()}`;
@@ -3607,7 +3777,7 @@ ${path.path.map(({ x, y }) => `	{ "x": ${x}, "y": ${y} }`).join(",\n")}
       };
     }
   });
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-29368ea8"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ee34aa69"]]);
   vue.createApp(App, { isLite: true }).use(ElementPlus, { zIndex: 4e3 }).mount(
     (() => {
       const app = document.createElement("div");
