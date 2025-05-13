@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.1.1
+// @version      1.1.2
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -2910,25 +2910,45 @@
     __name: "FullScreenBtn",
     setup(__props) {
       const status2 = vue.ref(false);
+      const getFullscreenElement = () => {
+        const doc = document;
+        return doc.fullscreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement;
+      };
+      const requestFullscreen = (el) => {
+        const element = el;
+        if (element.requestFullscreen) return element.requestFullscreen();
+        if (element.webkitRequestFullscreen) return element.webkitRequestFullscreen();
+        if (element.msRequestFullscreen) return element.msRequestFullscreen();
+        return Promise.reject("不支持全屏API");
+      };
+      const exitFullscreen = () => {
+        const doc = document;
+        if (doc.exitFullscreen) return doc.exitFullscreen();
+        if (doc.webkitExitFullscreen) return doc.webkitExitFullscreen();
+        if (doc.msExitFullscreen) return doc.msExitFullscreen();
+        return Promise.reject("不支持退出全屏API");
+      };
       const updateFullscreenStatus = () => {
-        status2.value = !!document.fullscreenElement;
+        status2.value = !!getFullscreenElement();
       };
       vue.onMounted(() => {
         document.addEventListener("fullscreenchange", updateFullscreenStatus);
+        document.addEventListener("webkitfullscreenchange", updateFullscreenStatus);
+        document.addEventListener("MSFullscreenChange", updateFullscreenStatus);
       });
       vue.onUnmounted(() => {
         document.removeEventListener("fullscreenchange", updateFullscreenStatus);
+        document.removeEventListener("webkitfullscreenchange", updateFullscreenStatus);
+        document.removeEventListener("MSFullscreenChange", updateFullscreenStatus);
       });
       const btnClick = async () => {
         try {
-          if (!document.fullscreenElement) {
-            await document.documentElement.requestFullscreen();
+          if (!getFullscreenElement()) {
+            await requestFullscreen(document.documentElement);
             status2.value = true;
           } else {
-            if (document.exitFullscreen) {
-              await document.exitFullscreen();
-              status2.value = false;
-            }
+            await exitFullscreen();
+            status2.value = false;
           }
         } catch (err) {
           console.error("全屏错误:", err);
