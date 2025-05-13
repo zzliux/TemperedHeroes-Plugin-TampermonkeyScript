@@ -2910,6 +2910,15 @@
     __name: "FullScreenBtn",
     setup(__props) {
       const status2 = vue.ref(false);
+      const updateFullscreenStatus = () => {
+        status2.value = !!document.fullscreenElement;
+      };
+      vue.onMounted(() => {
+        document.addEventListener("fullscreenchange", updateFullscreenStatus);
+      });
+      vue.onUnmounted(() => {
+        document.removeEventListener("fullscreenchange", updateFullscreenStatus);
+      });
       const btnClick = async () => {
         try {
           if (!document.fullscreenElement) {
