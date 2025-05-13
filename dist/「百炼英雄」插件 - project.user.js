@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.1.0
+// @version      1.1.1
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -781,7 +781,6 @@
     });
     canvasDom.dispatchEvent(eventDown2);
     updateDebugRect({ x: x - 4, y: y - 4, width: 7, height: 7 }, 102);
-    csl.log(`按下：${x}, ${y}`);
   }
   function eventMove(x, y) {
     initCanvasDomIfNeeded();
@@ -791,7 +790,6 @@
     });
     canvasDom.dispatchEvent(eventMove2);
     updateDebugRect({ x: x - 4, y: y - 4, width: 7, height: 7 }, 102);
-    csl.log(`移动：${x}, ${y}`);
   }
   function eventUp(x, y) {
     initCanvasDomIfNeeded();
@@ -801,7 +799,6 @@
     });
     canvasDom.dispatchEvent(eventUp2);
     updateDebugRect({ x: x - 4, y: y - 4, width: 7, height: 7 }, 102);
-    csl.log(`抬起：${x}, ${y}`);
   }
   _unsafeWindow.moveToXY = moveToXY;
   async function teleport(info) {
@@ -1242,7 +1239,7 @@
   }
   _unsafeWindow.setDirectAssists = setDirectAssists;
   _unsafeWindow.clearDirectAssists = clearDirectAssists;
-  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$f = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseBossBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -1296,7 +1293,7 @@
       };
     }
   });
-  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
     __name: "PauseMonsterBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -1609,7 +1606,7 @@
   const _hoisted_3$1 = { class: "statisticsContainer" };
   const _hoisted_4$1 = { class: "importLogContainer" };
   const _hoisted_5$1 = { class: "dialog-footer" };
-  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
     __name: "BetCardBtn",
     setup(__props) {
       const btnClick = async () => {
@@ -2128,7 +2125,7 @@
     }
     return target;
   };
-  const BetCardBtn = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-fbcb57d2"]]);
+  const BetCardBtn = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-fbcb57d2"]]);
   const status$1 = vue.ref(false);
   const start$1 = async () => {
     status$1.value = !status$1.value;
@@ -2161,7 +2158,7 @@
       setMoveInterrupt();
     }
   };
-  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
     __name: "CollectMeatZhanShenLingBtn",
     setup(__props) {
       const btnClick = () => {
@@ -2262,7 +2259,7 @@
       setMoveInterrupt();
     }
   };
-  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     __name: "CollectGoldenF4Btn",
     setup(__props) {
       const btnClick = async () => {
@@ -2287,7 +2284,7 @@
       };
     }
   });
-  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "RoamBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2423,7 +2420,7 @@
     // TODO 精英难度
     // TODO 噩梦难度
   ];
-  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
     __name: "RoamPathBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2472,7 +2469,7 @@
       };
     }
   });
-  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
     __name: "DungeonBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2561,7 +2558,7 @@
     }
   });
   const _hoisted_1$2 = { class: "dialog-footer" };
-  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
     __name: "ChestBtn",
     setup(__props) {
       const status2 = vue.ref(false);
@@ -2769,8 +2766,8 @@
       };
     }
   });
-  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-25f73fae"]]);
-  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-25f73fae"]]);
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
     __name: "RedPackBtn",
     setup(__props) {
       const status$22 = vue.ref(false);
@@ -2853,7 +2850,7 @@
       };
     }
   });
-  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
     __name: "PositionBtn",
     setup(__props) {
       const x = vue.ref("?");
@@ -2909,15 +2906,50 @@
       };
     }
   });
+  const _sfc_main$4 = /* @__PURE__ */ vue.defineComponent({
+    __name: "FullScreenBtn",
+    setup(__props) {
+      const status2 = vue.ref(false);
+      const btnClick = async () => {
+        try {
+          if (!document.fullscreenElement) {
+            await document.documentElement.requestFullscreen();
+            status2.value = true;
+          } else {
+            if (document.exitFullscreen) {
+              await document.exitFullscreen();
+              status2.value = false;
+            }
+          }
+        } catch (err) {
+          console.error("全屏错误:", err);
+          ElementPlus.ElMessage.error(`全屏错误：${err}`);
+        }
+      };
+      return (_ctx, _cache) => {
+        const _component_el_button = vue.resolveComponent("el-button");
+        return vue.openBlock(), vue.createBlock(_component_el_button, {
+          type: status2.value ? "primary" : "default",
+          size: "small",
+          onClick: btnClick
+        }, {
+          default: vue.withCtx(() => [
+            vue.createTextVNode(" 全屏: " + vue.toDisplayString(status2.value ? "开" : "关"), 1)
+          ]),
+          _: 1
+        }, 8, ["type"]);
+      };
+    }
+  });
   const funComponents = [{
     id: "PauseBossBtn",
-    component: _sfc_main$e,
+    component: _sfc_main$f,
     name: "Boss暂停",
     description: "可以让Boss定身不打你",
     hideInLite: true
   }, {
     id: "PauseMonsterBtn",
-    component: _sfc_main$d,
+    component: _sfc_main$e,
     name: "小怪暂停",
     description: "可以让小怪定身不打你",
     hideInLite: true
@@ -2928,29 +2960,29 @@
     description: "可以进行自动抽卡"
   }, {
     id: "CollectMeatZhanShenLingBtn",
-    component: _sfc_main$b,
+    component: _sfc_main$c,
     name: "自动打肉（战神陵）",
     description: "在无尽深渊-熔火之境-战神陵绕圈打肉"
   }, {
     id: "CollectGoldenF4Btn",
-    component: _sfc_main$a,
+    component: _sfc_main$b,
     name: "自动打金币（F4）",
     description: "在英雄大陆-黑石堡垒-大厅楼道打4个boss获取金币、也可以在这里刷经验"
   }, {
     id: "RoamBtn",
-    component: _sfc_main$9,
+    component: _sfc_main$a,
     name: "智能寻怪",
     description: "实验性功能，查找附近的boss和小怪，并自动规划路线打怪，目前无法避障",
     hideInLite: true
   }, {
     id: "RoamPathBtn",
-    component: _sfc_main$8,
+    component: _sfc_main$9,
     name: "预定义路线",
     description: "实验性功能，启动时获取当前坐标与已知路线的起点比较，若匹配则以该路线进行行进",
     hideInLite: true
   }, {
     id: "DungeonBtn",
-    component: _sfc_main$7,
+    component: _sfc_main$8,
     name: "召唤副本",
     description: "打100级的召唤副本，打开召唤副本界面，选择好难度后运行可自动打副本，根据已知路线与附近怪物动动态实时规划路线，可保证任意阵容不漏怪打副本"
   }, {
@@ -2960,12 +2992,17 @@
     description: "原地自动领宝箱，一般用于挂机boss领宝箱"
   }, {
     id: "RedPackBtn",
-    component: _sfc_main$5,
+    component: _sfc_main$6,
     name: "自动抢红包",
     description: "实时查找左下角红包按钮，出现了就抢红包，不一定能抢到"
   }, {
-    id: "PositionBtn",
+    id: "FullScreenBtn",
     component: _sfc_main$4,
+    name: "全屏",
+    description: "点击后申请全屏，以便移动端可以全屏游玩"
+  }, {
+    id: "PositionBtn",
+    component: _sfc_main$5,
     name: "坐标显示",
     description: "显示当前坐标，点击后可复制坐标，一般用于路线制作时的坐标获取"
   }];
@@ -3053,11 +3090,14 @@
     }, {});
   }
   function getComponentsConfig$1() {
+    let defaultConfig = getDefaultConfig();
+    csl.log("defaultConfig", defaultConfig);
     let savedConfig = _GM_getValue(CONFIG_KEY$1, null);
     if (!savedConfig) {
-      savedConfig = getDefaultConfig();
+      savedConfig = defaultConfig;
       _GM_setValue(CONFIG_KEY$1, savedConfig);
     }
+    savedConfig = { ...defaultConfig, ...savedConfig };
     csl.log("savedConfig", savedConfig);
     return savedConfig;
   }
