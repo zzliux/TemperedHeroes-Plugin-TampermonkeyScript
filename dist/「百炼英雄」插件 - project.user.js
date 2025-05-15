@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.1.2
+// @version      1.1.3
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -23,7 +23,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-25f73fae]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.path-viewer.el-dialog{padding:0;margin-right:0;pointer-events:auto}.path-viewer .el-dialog__header,.path-viewer .el-dialog__footer{padding:0}.path-viewer .el-dialog__headerbtn{width:22.5px;height:22.5px}.path-viewer-modal{pointer-events:none}.group[data-v-ee34aa69]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-ee34aa69]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-ee34aa69]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-ee34aa69]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-ee34aa69]{opacity:1;pointer-events:all}.zz-rotate[data-v-ee34aa69]{transform:rotate(45deg)!important} ");
+(t=>{if(typeof GM_addStyle=="function"){GM_addStyle(t);return}const e=document.createElement("style");e.textContent=t,document.head.append(e)})(" .bet-card-log .el-dialog__footer,.bet-card-log .el-dialog__header{padding-top:0!important;padding-bottom:0!important}.setting-dialog-select .el-select-dropdown__item{text-align:left!important}.importLogContainer .el-textarea__inner{height:100%}.group[data-v-fbcb57d2]{width:max-content;margin-bottom:4px;float:right}.importLogContainer[data-v-fbcb57d2],.bet-card-log pre[data-v-fbcb57d2]{overflow:auto;height:calc(85vh - 260px);text-align:left;font-size:12px}.statisticsContainer[data-v-fbcb57d2]{overflow-x:hidden;height:calc(85vh - 214px);text-align:left}.setting-dialog .el-dialog__footer{padding-top:0!important;padding-bottom:0!important}.group[data-v-ff7011a8]{width:max-content;margin-bottom:4px;float:right}.dialog-content{display:flex;flex-direction:column;max-height:60vh}.settings-list{overflow-y:auto;flex:1;padding-right:8px}.setting-item{display:flex;align-items:center;margin-bottom:1px;padding:2px;background:#f5f7fa;border-radius:4px}.drag-handle{cursor:move;margin-right:10px;padding:0 8px;color:#909399}.name-text{margin:0 10px;text-align:left}.dynamic-btn-form-item{margin-bottom:10px}@media (max-width: 768px){.dialog-content{max-height:calc(100vh - 120px)}.setting-item{flex-wrap:wrap}}.path-viewer.el-dialog{padding:0;margin-right:0;pointer-events:auto}.path-viewer .el-dialog__header,.path-viewer .el-dialog__footer{padding:0}.path-viewer .el-dialog__headerbtn{width:22.5px;height:22.5px}.path-viewer-modal{pointer-events:none}.group[data-v-ee34aa69]{width:max-content;margin-bottom:4px;float:right}.zz-float-btn[data-v-ee34aa69]{position:fixed;bottom:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#ff4757;color:#fff;border:0;cursor:pointer;font-size:18px;box-shadow:0 4px 12px #0003;transition:.3s;z-index:3001;outline:none;-webkit-user-select:none;user-select:none;align-items:center;justify-content:center;line-height:27px}.zz-sub-btns[data-v-ee34aa69]{position:fixed;bottom:40px;right:10px;opacity:0;transition:.3s;pointer-events:none;display:block;width:min-content;z-index:3001}.zz-sub-btns>button[data-v-ee34aa69]{margin-bottom:4px;float:right}.zz-show .zz-sub-btns[data-v-ee34aa69]{opacity:1;pointer-events:all}.zz-rotate[data-v-ee34aa69]{transform:rotate(45deg)!important} ");
 
 (function (vue, ElementPlus, echarts, Sortable) {
   'use strict';
@@ -804,6 +804,10 @@
   async function teleport(info) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i;
     const rect = getNearestMagnifierRect();
+    if (moveInterrupt) {
+      moveInterrupt = false;
+      throw Error(`点击中断`);
+    }
     await rectPress(rect);
     let step1Str = null;
     if (info.target[0] === "英雄大陆") {
@@ -814,6 +818,10 @@
     if (!step1Str) throw Error(`${info.target[0]} is not valid value`);
     await delay(200);
     const step1Node = await waitForNodeActive(step1Str, true, 3e3);
+    if (moveInterrupt) {
+      moveInterrupt = false;
+      throw Error(`点击中断`);
+    }
     await nodePress(step1Node);
     let step2ContainerStr = null;
     if (info.target[0] === "英雄大陆") {
@@ -834,6 +842,10 @@
         x: rect2.x + rect2.width / 2,
         y: rect2.y + rect2.height / 2
       };
+      if (moveInterrupt) {
+        moveInterrupt = false;
+        throw Error(`点击中断`);
+      }
       eventDown(p.x, p.y);
       await delay(200);
       eventMove(p.x, Math.max(p.y - 500, 1));
@@ -848,6 +860,10 @@
       });
     }
     if (!step2Node) throw Error(`${info.target[1]} is not valid value`);
+    if (moveInterrupt) {
+      moveInterrupt = false;
+      throw Error(`点击中断`);
+    }
     await nodeEventPress(step2Node);
     await delay(500);
     let step3ContainerStr = null;
@@ -878,6 +894,10 @@
           y: rectEnd.y + rectEnd.height / 2
         };
         csl.log(`右侧翻页`);
+        if (moveInterrupt) {
+          moveInterrupt = false;
+          throw Error(`点击中断`);
+        }
         eventDown(p1.x, p1.y);
         await delay(500);
         eventMove(p2.x, p2.y);
@@ -904,6 +924,10 @@
     let lastPosition = getTeamPosition();
     lastPosition.x = Math.floor(lastPosition.x);
     lastPosition.y = Math.floor(lastPosition.y);
+    if (moveInterrupt) {
+      moveInterrupt = false;
+      throw Error(`点击中断`);
+    }
     await nodeEventPress(step3Node);
     await delay(500);
     const t1 = Date.now();
@@ -916,6 +940,10 @@
       if (newPosition.x !== lastPosition.x || newPosition.y !== lastPosition.y) {
         break;
       }
+    }
+    if (moveInterrupt) {
+      moveInterrupt = false;
+      throw Error(`点击中断`);
     }
     await waitForNodeActive("Root/GameScene/OperationCanvas/MapButtonView/BuildingButton01");
     await delay(200);
@@ -934,7 +962,6 @@
     if (minDistance > 3e3) startIndex = 0;
     setPathViewerData(path);
     for (let i = startIndex; i < path.length; i = isCircle ? (i + 1) % path.length : i + 1) {
-      const t1 = Date.now();
       const node = path[i];
       if (isBasicPathNode(node)) {
         await moveToXY(node.x, node.y);
@@ -943,12 +970,8 @@
       } else if (node.type === "teleport") {
         await teleport(node);
       }
-      const t2 = Date.now();
-      if (t2 - t1 > 300) {
-        await delay(random(2e3, 3e3));
-      } else {
-        await delay(random(200, 500));
-      }
+      await waitForHerosStatus(["Idle", "Gather", "Move"]);
+      await delay(200);
     }
   }
   _unsafeWindow.movePath = movePath;
@@ -1026,44 +1049,50 @@
       if (!isCircle && !isBasicPathNode(node) && startIndex === newPath.length - 1) {
         break;
       }
-      const t1 = Date.now();
-      while (true) {
-        let clearStatus = false;
-        const tt1 = Date.now();
-        while (!clearStatus) {
-          const notIdleHeroCount = ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
-            var _a, _b, _c;
-            if (/^HeroUnit/i.test(ele.name)) {
-              const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
-              if (!/Idle|Gather|Move/i.test(frameName)) {
-                return true;
-              }
-            }
-            return false;
-          }).length;
-          if (notIdleHeroCount > 0) {
-            break;
-          }
-          if (Date.now() - tt1 > 500) {
-            clearStatus = true;
-            break;
-          }
-          await delay(100);
-        }
-        if (clearStatus) {
-          csl.log("附近怪物已清理完成");
-          break;
-        }
-        if (Date.now() - t1 > 15e3) {
-          csl.log("附近怪物未清理完成，超时跳过");
-          break;
-        }
-        await delay(100);
-      }
+      await waitForHerosStatus(["Idle", "Gather", "Move"]);
       await delay(200);
     }
   }
   _unsafeWindow.movePathWithMonster = movePathWithMonster;
+  function isHerosStatus(status2) {
+    const reg = new RegExp(status2.join("|"), "i");
+    return !ccFind("/Root/GameScene/GameMapCanvas/MapView/TileMap/unitLayer").children.filter((ele) => {
+      var _a, _b, _c;
+      if (/^HeroUnit/i.test(ele.name)) {
+        const frameName = (_c = (_b = (_a = ccFind("Animation/Sprite", ele)) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.Sprite)) == null ? void 0 : _b.spriteFrame) == null ? void 0 : _c.name;
+        if (!reg.test(frameName)) {
+          return true;
+        }
+      }
+      return false;
+    }).length;
+  }
+  async function waitForHerosStatus(status2, timeout = 15e3) {
+    const t1 = Date.now();
+    while (true) {
+      let flag = false;
+      const tt1 = Date.now();
+      while (!flag) {
+        if (!isHerosStatus(status2)) {
+          break;
+        }
+        if (Date.now() - tt1 >= 120) {
+          flag = true;
+          break;
+        }
+        await delay(100);
+      }
+      if (flag) {
+        csl.log(`等待英雄状态${status2}完成`);
+        break;
+      }
+      if (Date.now() - t1 > timeout) {
+        csl.error("等待英雄状态超时");
+        break;
+      }
+      await delay(30);
+    }
+  }
   function getPathStartIndex(currentPos, path) {
     let minDistance = Infinity;
     let closestSegmentIndex = -1;
@@ -1149,10 +1178,18 @@
   async function backHome() {
     const backHomeBtn = ccFind("Root/UIScene/UICanvas/Menu/MenuView/SaveArea/DownRight/BackHomeMenuIconView");
     if (backHomeBtn && backHomeBtn.active) {
+      if (moveInterrupt) {
+        moveInterrupt = false;
+        throw Error(`点击中断`);
+      }
       await nodePress(backHomeBtn);
       try {
         const confirmBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/ConfirmPopup/Popup/PanelHasTitle/Panel/BtnLay/BigButtonGreen", true, 3e3);
         await delay(200);
+        if (moveInterrupt) {
+          moveInterrupt = false;
+          throw Error(`点击中断`);
+        }
         await nodePress(confirmBtn);
         await delay(200);
       } catch (e) {
@@ -2636,7 +2673,7 @@
             magnifierRect = getNearestMagnifierRect();
           } catch (e) {
           }
-          if (magnifierRect) {
+          if (magnifierRect && isHerosStatus(["Idle", "Gather"])) {
             if (!status2.value) return;
             await rectPress(magnifierRect);
             await delay(1e3);
@@ -2766,7 +2803,7 @@
       };
     }
   });
-  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-25f73fae"]]);
+  const ChestBtn = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-ff7011a8"]]);
   const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
     __name: "RedPackBtn",
     setup(__props) {
