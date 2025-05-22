@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.1.3
+// @version      1.1.4
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -1070,6 +1070,10 @@
   async function waitForHerosStatus(status2, timeout = 15e3) {
     const t1 = Date.now();
     while (true) {
+      if (moveInterrupt) {
+        moveInterrupt = false;
+        throw Error(`点击中断`);
+      }
       let flag = false;
       const tt1 = Date.now();
       while (!flag) {
@@ -2510,8 +2514,13 @@
     __name: "DungeonBtn",
     setup(__props) {
       const status2 = vue.ref(false);
+      let intervalId = null;
+      let monitorInterrupt = false;
       const btnClick = async () => {
         status2.value = !status2.value;
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
         if (status2.value) {
           try {
             while (true) {
@@ -2519,6 +2528,10 @@
               const tapHint = ccFind("Root/UIScene/UICanvas/Popup/DungeonPassView/content/TapHint");
               if (tapHint && tapHint.active && tapHint.activeInHierarchy) {
                 csl.log(`副本结束`);
+                if (intervalId) {
+                  clearInterval(intervalId);
+                  intervalId = null;
+                }
                 if (!status2.value) return;
                 await nodePress(tapHint);
                 await delay(5e3);
@@ -2532,6 +2545,16 @@
                 await nodePress(btnEnter);
                 if (!status2.value) return;
                 let closeTipBtn = null;
+                intervalId = setInterval(() => {
+                  var _a, _b, _c, _d;
+                  const bossProc = (_b = (_a = ccFind("Root/UIScene/UICanvas/Menu/DungeonMainView/BossNode/BossCount")) == null ? void 0 : _a.getComponent(_unsafeWindow.cc.LabelComponent)) == null ? void 0 : _b.string;
+                  const monsterProc = (_d = (_c = ccFind("Root/UIScene/UICanvas/Menu/DungeonMainView/MonsterNode/MonsterCount")) == null ? void 0 : _c.getComponent(_unsafeWindow.cc.LabelComponent)) == null ? void 0 : _d.string;
+                  csl.log(`bossProc: ${bossProc}, monsterProc: ${monsterProc}`);
+                  if ("1/1" === bossProc && "80/80" === monsterProc) {
+                    monitorInterrupt = true;
+                    setMoveInterrupt();
+                  }
+                }, 500);
                 try {
                   closeTipBtn = await waitForNodeActive("Root/UIScene/UICanvas/Popup/CommonGetWayView/BigPopup/closeTip", true, 2e3);
                 } catch (e) {
@@ -2550,7 +2573,9 @@
                   csl.log(`结束复本第一层`);
                   throw new Error(`通过报错进入副本第二层`);
                 } catch (e) {
-                  if (e instanceof Error && (e.message === "中断本次移动" || e.message === "路线未找到")) throw e;
+                  if (e instanceof Error && e.message === "路线未找到") throw e;
+                  if (e instanceof Error && e.message === "中断本次移动" && !monitorInterrupt) throw e;
+                  monitorInterrupt = false;
                   if (!status2.value) return;
                   const pathId2 = await waitForPositions(ROAM_PATHS.map((paths) => paths[0]));
                   await delay(3e3);
@@ -2560,7 +2585,9 @@
                     csl.log(`开始副本第二层`);
                     await movePathWithMonster(ROAM_PATHS[pathId2], status2);
                   } catch (e2) {
-                    if (e2 instanceof Error && (e2.message === "中断本次移动" || e2.message === "路线未找到")) throw e2;
+                    if (e2 instanceof Error && e2.message === "路线未找到") throw e2;
+                    if (e2 instanceof Error && e2.message === "中断本次移动" && !monitorInterrupt) throw e2;
+                    monitorInterrupt = false;
                   }
                   csl.log(`结束复本第二层`);
                 }
