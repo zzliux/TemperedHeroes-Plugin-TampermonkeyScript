@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「百炼英雄」插件 - project
 // @namespace    zzliux/TemperedHeroes-Plugin
-// @version      1.1.4
+// @version      1.1.5
 // @author       zzliux
 // @description  百炼英雄辅助，支持抽卡、打肉、打金币、打副本、挂机领宝箱
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=boomegg.cn
@@ -960,9 +960,10 @@
     const { segmentIndex: closestSegmentIndex, minDistance } = getPathStartIndex(currentPos, path);
     let startIndex = closestSegmentIndex + 1;
     if (minDistance > 3e3) startIndex = 0;
-    setPathViewerData(path);
+    setPathViewerData(getPathViewData(startIndex, path));
     for (let i = startIndex; i < path.length; i = isCircle ? (i + 1) % path.length : i + 1) {
       const node = path[i];
+      setPathViewerData(getPathViewData(i, path));
       if (isBasicPathNode(node)) {
         await moveToXY(node.x, node.y);
       } else if (node.type === "backHome") {
@@ -975,6 +976,23 @@
     }
   }
   _unsafeWindow.movePath = movePath;
+  function getPathViewData(index, path) {
+    let left = index;
+    while (left > 0) {
+      if (!isBasicPathNode(path[left])) {
+        break;
+      }
+      left--;
+    }
+    let right = index;
+    while (right < path.length - 1) {
+      if (!isBasicPathNode(path[right])) {
+        break;
+      }
+      right++;
+    }
+    return path.slice(left, right);
+  }
   async function movePathWithMonster(path, statusRef, isCircle = false) {
     if (path.length < 2) {
       throw new Error("路径至少需要2个点");
@@ -1037,7 +1055,7 @@
       csl.log("startIndex", startIndex);
       csl.log("currentPos", currentPos);
       csl.log("nextPos", newPath[startIndex]);
-      setPathViewerData(newPath);
+      setPathViewerData(getPathViewData(startIndex, newPath));
       const node = newPath[startIndex];
       if (isBasicPathNode(node)) {
         await moveToXY(node.x, node.y);
